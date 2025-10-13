@@ -97,9 +97,8 @@ function ProfileHome() {
       ],
     };
   }, [activeMetric]);
-  // END: Chart Data Memoization
 
-  // START: Time and Icons
+  // Time and Icons
   const { date, time, notifications, settings, exit } = {
     date: currentTime.toLocaleDateString("en-US", {
       month: "short",
