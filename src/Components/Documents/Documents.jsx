@@ -1,13 +1,9 @@
-import React from "react";
-// NOTE: No dedicated CSS file is needed now.
-// The image URL remains the same for the logo.
-
 function Documents() {
   return (
     // .history_container_div
-    <div className="flex flex-col items-center justify-center w-full mx-0 py-8 bg-gray-50">
+    <div className="flex flex-col items-center justify-center w-full mx-0 py-8 bg-primary-color">
       {/* .history_top_bar_div */}
-      <div className="flex flex-row items-center w-[80%] p-4 mx-auto mb-8 bg-white rounded-md shadow-md">
+      <div className="flex flex-row items-center w-[80%] p-4 mx-auto mb-6 bg-white rounded-md shadow-sm">
         {/* .logo_icon (using a div with inline style for the image) */}
         <div
           className="mr-4 h-10 w-10 bg-cover bg-center bg-no-repeat"
