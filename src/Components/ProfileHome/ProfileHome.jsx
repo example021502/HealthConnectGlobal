@@ -139,7 +139,6 @@ function ProfileHome() {
             </a>
           ))}
         </div>
-        {/* END: Left Panel */}
 
         {/* START: Right Panel */}
         <div className="w-full h-full flex flex-col items-start justify-start bg-gradient-to-b from-gray-50 to-gray-200 rounded-tr-md overflow-y-auto relative z-10">
