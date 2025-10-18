@@ -223,7 +223,7 @@ function Charts() {
             backgroundColor: `${color}33`,
             fill: true,
             tension: 0.3,
-            pointRadius: 4,
+            pointRadius: 2,
           },
         ],
       },
@@ -242,37 +242,13 @@ function Charts() {
 
   // START: Render
   return (
-    <div className="w-full m-0 bg-gray-50 flex flex-col items-center px-2 py-6 min-h-screen border-1">
-      <div className="flex w-full items-center justify-end gap-2 bg-white rounded-lg shadow-md p-2 m-0 border-1">
-        {/* START: Date Range Selector */}
-        {DATE_RANGES.map((range) => (
-          <button
-            key={range}
+    <div className="w-full m-0 bg-gray-50 flex flex-row items-start justify-start py-6 px-4 gap-6">
+      {/* START: Left Div (Metric Cards) */}
+      <div className="p-1 flex flex-col gap-4 w-1/4 h-full">
+        {METRICS.map((metric) => (
+          <div
+            key={metric.key}
             className={`
-              px-4 py-1 rounded-md font-semibold cursor-pointer transition-all duration-200
-              text-gray-600 bg-transparent border-1 mx-4 my-2
-              hover:text-[#3a4aa4] hover:bg-blue-50
-              ${
-                range === selectedRange
-                  ? "bg-[#3a4aa4] text-black hover:bg-[#3a4aa4] hover:text-[#111c5b] border-2"
-                  : ""
-              }
-            `}
-            onClick={() => setSelectedRange(range)}
-          >
-            {range}
-          </button>
-        ))}
-      </div>
-
-      {/* START: Main Content Area */}
-      <div className="flex w-full items-start gap-4 border-1 my-4">
-        {/* START: Left Div (Metric Cards) */}
-        <div className="p-1 flex flex-col gap-4 mx-auto w-2/4 h-full">
-          {METRICS.map((metric) => (
-            <div
-              key={metric.key}
-              className={`
                 flex w-full items-center p-3 bg-white rounded-md border border-gray-200 shadow-sm cursor-pointer transition-all duration-300
                 hover:border-[#3a4aa4] hover:shadow-lg hover:translate-y-[-2px]
                 ${
@@ -281,69 +257,112 @@ function Charts() {
                     : ""
                 }
               `}
-              onClick={() => setSelectedMetric(metric.key)}
-            >
-              <i className={`${metric.icon} text-xl text-[#3a4aa4] mr-4`} />
-              <div className="flex-1 text-left">
-                <h3 className="m-0 text-base font-semibold text-gray-700">
-                  {metric.label}
-                </h3>
-                <p className="m-0 text-xs text-gray-500">
-                  {/* Highlight color based on trend direction */}
-                  {metric.summary.split(/(\+|-)/).map((part, index) => {
-                    if (part.startsWith("+")) {
-                      return (
-                        <span key={index} className="font-bold text-green-600">
-                          {part}
-                        </span>
-                      );
-                    }
-                    if (part.startsWith("-")) {
-                      return (
-                        <span key={index} className="font-bold text-red-600">
-                          {part}
-                        </span>
-                      );
-                    }
-                    return part;
-                  })}
-                </p>
-              </div>
-              <i className="ri-arrow-right-s-line text-xl text-gray-500" />
+            onClick={() => setSelectedMetric(metric.key)}
+          >
+            <i className={`${metric.icon} text-xl text-[#3a4aa4] mr-4`} />
+            <div className="flex-1 text-left">
+              <h3 className="m-0 text-sm font-semibold text-gray-700">
+                {metric.label}
+              </h3>
+              <p className="m-0 text-xs text-gray-500">
+                {/* Highlight color based on trend direction */}
+                {metric.summary.split(/(\+|-)/).map((part, index) => {
+                  if (part.startsWith("+")) {
+                    return (
+                      <span key={index} className="font-bold text-green-600">
+                        {part}
+                      </span>
+                    );
+                  }
+                  if (part.startsWith("-")) {
+                    return (
+                      <span key={index} className="font-bold text-red-600">
+                        {part}
+                      </span>
+                    );
+                  }
+                  return part;
+                })}
+              </p>
             </div>
-          ))}
+            <i className="ri-arrow-right-s-line text-xl text-gray-500" />
+          </div>
+        ))}
+      </div>
+
+      {/* Right Div (Chart & Tools) */}
+      <div className="w-2/4 flex flex-col gap-4 h-[500px] items-center justify-start">
+        <div className="bg-white rounded-xl shadow-md w-full h-full p-4">
+          <p className="text-sm font-semibold text-gray-800 mb-2 flex flex-row items-center justify-center">
+            {chartConfig.title}
+            <div className="ml-auto flex items-center justify-end">
+              {DATE_RANGES.map((range) => (
+                <button
+                  key={range}
+                  className={`
+              px-4 rounded-md text-xs cursor-pointer transition-all duration-200
+              text-gray bg-transparent
+              hover:text-[#3a4aa4] hover:bg-blue-50
+              ${
+                range === selectedRange
+                  ? "bg-[#3a4aa4] text-black hover:bg-[#3a4aa4] hover:text-[#111c5b] border-1"
+                  : ""
+              }
+            `}
+                  onClick={() => setSelectedRange(range)}
+                >
+                  {range}
+                </button>
+              ))}
+            </div>
+          </p>
+          <div className="w-full h-9/10">
+            <Line data={chartConfig.data} options={chartConfig.options} />
+          </div>
         </div>
 
-        {/* START: Right Div (Chart & Tools) */}
-        <div className="ml-auto w-full flex flex-col gap-5">
-          {/* Chart Container */}
-          <div className="bg-white rounded-xl shadow-md w-[94%] h-[500px] p-6">
-            <p className="text-xl font-semibold text-gray-800 mb-2">
-              {chartConfig.title}
-            </p>
-            <div className="w-full h-[90%]">
-              <Line data={chartConfig.data} options={chartConfig.options} />
-            </div>
-          </div>
+        {/* Tools/Actions */}
+        <div className="flex items-center justify-evenly w-full font-lighter text-sm ">
+          <p className="flex items-center text-gray-800 cursor-pointer transition-all duration-200 relative hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
+            <i className="ri-calculator-line text-[#3a4aa4] mr-1" />
+            Key Stats: Max, Min, Avg
+          </p>
+          <p className="flex items-center text-gray-800 cursor-pointer transition-all duration-200 relative hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
+            <i className="ri-edit-line text-[#3a4aa4] mr-1" />
+            Annotate & Events
+          </p>
+          <p className="flex items-center text-gray-800 cursor-pointer transition-all duration-200 relative hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
+            <i className="ri-file-pdf-line text-[#3a4aa4] mr-1" />
+            Generate Report
+          </p>
+          <p className="flex items-center  text-gray-800 cursor-pointer transition-all duration-200 relative  hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
+            <i className="ri-table-line text-[#3a4aa4] mr-1" />
+            Source Data
+          </p>
+        </div>
+      </div>
 
-          {/* Tools/Actions */}
-          <div className="flex items-center gap-6 p-3 bg-white rounded-md shadow-sm">
-            <p className="flex items-center text-sm font-medium text-gray-800 cursor-pointer transition-all duration-200 relative pb-0.5 hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-0.5 hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
-              <i className="ri-calculator-line text-xl text-[#3a4aa4] mr-1" />
-              Key Stats: Max, Min, Avg
-            </p>
-            <p className="flex items-center text-sm font-medium text-gray-800 cursor-pointer transition-all duration-200 relative pb-0.5 hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-0.5 hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
-              <i className="ri-edit-line text-xl text-[#3a4aa4] mr-1" />
-              Annotate & Events
-            </p>
-            <p className="flex items-center text-sm font-medium text-gray-800 cursor-pointer transition-all duration-200 relative pb-0.5 hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-0.5 hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
-              <i className="ri-file-pdf-line text-xl text-[#3a4aa4] mr-1" />
-              Generate Report
-            </p>
-            <p className="flex items-center text-sm font-medium text-gray-800 cursor-pointer transition-all duration-200 relative pb-0.5 hover:text-[#3a4aa4] hover:translate-y-[-2px] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-0.5 hover:after:bg-[#3a4aa4] hover:after:rounded-sm">
-              <i className="ri-table-line text-xl text-[#3a4aa4] mr-1" />
-              Source Data
-            </p>
+      {/* AI assistance */}
+      <div className="shadow-md w-1/4 h-full rounded-xl flex flex-col items-center justify-center bg-[rgba(234,231,231, 0.9)] relative">
+        <h4 className="flex flex-row items-center w-[90%] text-left m-2">
+          AI Assist
+          <img
+            src="https://i.ibb.co/tpqrZwYJ/92515a3f129dfdf488cdec621c7d5de3-removebg-preview.png"
+            alt=""
+            className="w-[20px] h-[20px]"
+          />
+          <p className="ml-auto mr-2 bg-[rgba(24,32,77,0.8)] w-[20px] h-[20px] text-white flex items-center justify-center rounded-full">
+            <i className="ri-close-line" />
+          </p>
+        </h4>
+        <div className="w-[90%] h-full mb-2 rounded-xl bg-[white] flex flex-col items-center relative">
+          <div className="absolute mx-auto w-[90%] flex flex-row items-center justify-center rounded-full pl-3 pr-2 bottom-2 left-0 right-0 border-1 border-[rgba(24,32,77,0.8)]">
+            <input
+              type="text"
+              placeholder="Type something..."
+              className="w-[90%] h-[30px] bottom-2 outline-none text-[#323132] text-sm"
+            />
+            <i className="ri-send-plane-fill bottom-3 right-5 rounded-full w-[24px] h-[24px] flex items-center justify-center text-50]" />
           </div>
         </div>
       </div>
