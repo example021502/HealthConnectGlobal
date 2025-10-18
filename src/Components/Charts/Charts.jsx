@@ -242,19 +242,19 @@ function Charts() {
 
   // START: Render
   return (
-    <div className="w-full m-0 bg-gray-50 flex flex-col items-center py-8 min-h-screen">
-      {/* START: Date Range Selector */}
-      <div className="flex w-[90%] items-center justify-end gap-2 bg-white rounded-lg shadow-md p-4 mb-6">
+    <div className="w-full m-0 bg-gray-50 flex flex-col items-center px-2 py-6 min-h-screen border-1">
+      <div className="flex w-full items-center justify-end gap-2 bg-white rounded-lg shadow-md p-2 m-0 border-1">
+        {/* START: Date Range Selector */}
         {DATE_RANGES.map((range) => (
           <button
             key={range}
             className={`
-              px-4 py-2 rounded-md font-semibold cursor-pointer transition-all duration-200
-              text-gray-600 bg-transparent border-none
+              px-4 py-1 rounded-md font-semibold cursor-pointer transition-all duration-200
+              text-gray-600 bg-transparent border-1 mx-4 my-2
               hover:text-[#3a4aa4] hover:bg-blue-50
               ${
                 range === selectedRange
-                  ? "bg-[#3a4aa4] text-white hover:bg-[#3a4aa4] hover:text-white"
+                  ? "bg-[#3a4aa4] text-black hover:bg-[#3a4aa4] hover:text-[#111c5b] border-2"
                   : ""
               }
             `}
@@ -266,9 +266,9 @@ function Charts() {
       </div>
 
       {/* START: Main Content Area */}
-      <div className="flex w-[90%] items-start justify-start gap-8">
+      <div className="flex w-full items-start gap-4 border-1 my-4">
         {/* START: Left Div (Metric Cards) */}
-        <div className="p-2 flex flex-col gap-4 w-1/4 h-full">
+        <div className="p-1 flex flex-col gap-4 mx-auto w-2/4 h-full">
           {METRICS.map((metric) => (
             <div
               key={metric.key}
@@ -283,9 +283,9 @@ function Charts() {
               `}
               onClick={() => setSelectedMetric(metric.key)}
             >
-              <i className={`${metric.icon} text-2xl text-[#3a4aa4] mr-4`} />
+              <i className={`${metric.icon} text-xl text-[#3a4aa4] mr-4`} />
               <div className="flex-1 text-left">
-                <h3 className="m-0 text-base font-semibold text-gray-800">
+                <h3 className="m-0 text-base font-semibold text-gray-700">
                   {metric.label}
                 </h3>
                 <p className="m-0 text-xs text-gray-500">
@@ -315,7 +315,7 @@ function Charts() {
         </div>
 
         {/* START: Right Div (Chart & Tools) */}
-        <div className="ml-auto w-3/4 flex flex-col gap-5">
+        <div className="ml-auto w-full flex flex-col gap-5">
           {/* Chart Container */}
           <div className="bg-white rounded-xl shadow-md w-[94%] h-[500px] p-6">
             <p className="text-xl font-semibold text-gray-800 mb-2">
