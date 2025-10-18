@@ -135,7 +135,6 @@ function ProfileHome() {
             >
               <i className={`text-lg mr-2 ${item.icon}`} />
               {expand && item.name}
-              {/* Custom Pseudo-element styles for navigation hover effect */}
             </a>
           ))}
         </div>
