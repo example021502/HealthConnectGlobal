@@ -115,11 +115,11 @@ function ProfileHome() {
 
   // Component Render
   return (
-    <div className="flex items-center justify-center m-0 bg-gradient-to-r from-bg1 to-bg2 h-screen w-full">
-      <div className="w-full h-full flex text-black">
+    <div className="flex items-center justify-center m-0 h-screen w-full bg-[white]">
+      <div className="w-full h-full flex gap-2 text-black bg-[transparent">
         {/* START: Left Panel */}
         <div
-          className={`ml-0 flex flex-col justify-center items-center text-left text-sidebar-text transition-all duration-200 ease-in-out round-t-l-xl ${
+          className={`mr-0 flex h-[96%] rounded-lg my-auto flex-col justify-center items-center shadow-lg text-left text-sidebar-text transition-all duration-200 ease-in-out ${
             expand ? "w-48" : "w-[60px]"
           }`}
         >
@@ -128,7 +128,7 @@ function ProfileHome() {
               key={item.name}
               href="#"
               onClick={() => setDisplay(item.name)}
-              className={`m-[0.4em] p-[0.2em] text-base w-[80%] tracking-wider transition-all duration-200 ease-in-out relative no-underline text-inherit hover:bg-primary-color border-b-1 border-primary-color ${
+              className={`m-[0.4em] py-[0.2em] text-sm w-[80%] h-fit tracking-wider transition-all duration-200 ease-in-out relative no-underline text-inherit before:insert-0 before:scale-0 before:transition-transform before:duration-300 before:z-[-1] hover:before:scale-100 before:bg-[rgba(37,73,43,0.6)] before:w-full before:h-full before:rounded-full before:absolute before:bottom-0 before:left-0 before:content-[""] border-b-[1px] overflow-hidden border-color-[rgba(37,73,43,0.8)] ${
                 expand ? "text-left" : "text-center"
               }
               `}
@@ -140,7 +140,7 @@ function ProfileHome() {
         </div>
 
         {/* START: Right Panel */}
-        <div className="w-full h-full flex flex-col items-start justify-start bg-gradient-to-b from-gray-50 to-gray-200 rounded-tr-md overflow-y-auto relative z-10">
+        <div className="w-full h-full flex flex-col items-start justify-start bg-[white] rounded-tr-md overflow-y-auto relative z-10">
           {/* Expand Arrow Button */}
           <i
             className={`transition-all duration-200 ease-in-out fixed left-4 top-4 flex justify-center items-center text-sidebar-text text-xl cursor-pointer ${

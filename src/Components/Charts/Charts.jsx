@@ -223,7 +223,7 @@ function Charts() {
             backgroundColor: `${color}33`,
             fill: true,
             tension: 0.3,
-            pointRadius: 2,
+            pointRadius: 0.5,
           },
         ],
       },
