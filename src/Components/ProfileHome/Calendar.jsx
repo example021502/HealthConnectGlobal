@@ -61,47 +61,40 @@ function EventForm({ day, onAdd, onClose }) {
       <h3 className="text-xs font-semibold text-gray-700 m-0">
         Add Event on {format(day, "MMM d")}
       </h3>
-      <form onSubmit={handleSubmit} className="flex gap-1 mt-1">
+      <form onSubmit={handleSubmit} className="flex gap-1 mt-1 border-1 w-full">
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Event title"
-          className="flex-grow px-1 py-0.5 border border-gray-300 rounded text-xs tracking-tight focus:border-gray-500 focus:outline-none"
+          className="flex-1 px-1 py-0.5 border border-gray-300 rounded text-sm tracking-tight focus:border-gray-500 focus:outline-none"
         />
         <button
           type="submit"
-          className="px-1.5 py-0.5 border-none rounded cursor-pointer text-2xs font-medium bg-gray-400 text-white hover:bg-gray-600 transition-colors"
-        >
-          Add
-        </button>
+          className={`ri-add-line px-2 border-none rounded cursor-pointer text-sm font-lighter bg-[rgba(37,73,43,0.8)] text-white hover:bg-[rgba(37,73,43,1)] transition-all duration-200 hover:after:content-["add"] hover:after:absolute relative hover:after:bottom-[100%] hover:after:left-[50%] hover:after:text-xs hover:after:text-[rgba(37,73,43,1)] hover:after:z-1`}
+        ></button>
         <button
           type="button"
+          title="close"
           onClick={onClose}
-          className="px-1.5 py-0.5 border-none rounded cursor-pointer text-2xs font-medium bg-gray-400 text-white hover:bg-gray-600 transition-colors"
-        >
-          Close
-        </button>
+          className="ri-close-line px-2 border-none rounded cursor-pointer text-sm font-lighter bg-[rgb(131,16,16,0.8)] text-white hover:bg-[rgb(131,16,16,1)] transition-all duration-200"
+        ></button>
       </form>
     </div>
   );
 }
-// END: EventForm Component
 
 // START: WeekCalendar Component
 export default function WeekCalendar() {
   const today = new Date();
 
-  // START: State
   const [currentWeekStart, setCurrentWeekStart] = useState(
     startOfWeek(today, { weekStartsOn: WEEK_START_DAY })
   );
 
   const [events, setEvents] = useState(getInitialEvents);
   const [selectedDay, setSelectedDay] = useState(null);
-  // END: State
 
-  // START: Effects & Memos
   useEffect(() => {
     const eventsToStore = events.map((event) => ({
       ...event,
@@ -125,7 +118,6 @@ export default function WeekCalendar() {
   const selectedDayEvents = selectedDay
     ? events.filter((event) => isSameDay(event.date, selectedDay))
     : [];
-  // END: Effects & Memos
 
   // START: Handlers
   function previousWeek() {
@@ -154,13 +146,12 @@ export default function WeekCalendar() {
       setEvents((prevEvents) => [...prevEvents, newEvent]);
     }
   };
-  // END: Handlers
 
   // START: Render
   return (
-    <div className="w-full mx-auto bg-white font-sans transition-all duration-300">
-      <div className="flex justify-between items-center mb-1 p-0">
-        <h2 className="text-xs font-semibold text-primary-green m-0">
+    <div className="w-full bg-white font-sans transition-all duration-300">
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="text-xs font-semibold text-[rgba(37,73,43,1)] m-0">
           {headerDateRange}
         </h2>
 
@@ -252,9 +243,13 @@ export default function WeekCalendar() {
               {selectedDayEvents.map((event) => (
                 <li
                   key={event.id}
-                  className="py-1 px-2 border-l-3 border-primary-green bg-green-50 text-primary-green mb-0.5 w-full font-medium"
+                  className="py-1 px-2 border-l-2 border-[rgba(37,73,43,1)] bg-green-50 text-[rgba(37,73,43,1)] mb-1 w-full font-medium flex items-center justify-start"
                 >
-                  {event.title}
+                  <span>{event.title}</span>
+                  <div className="ml-auto gap-2 flex items-center justify-center">
+                    <i className="ri-edit-line font-lighter text-sm text-[rgba(37,73,43,0.8)] hover:text-[rgba(37,73,43,1)] hover:shadow-xl hover:transform hover:translate-y-[-0.5px] duration-100 transition-all px-1 py-0.5 mx-1 rounded-full" />
+                    <i className="ri-delete-bin-line font-lighter text-sm text-[rgba(37,73,43,0.8)] hover:text-[rgba(37,73,43,1)] hover:shadow-xl hover:transform hover:translate-y-[-0.5px] duration-100 transition-all px-1 py-0.5 rounded-full" />
+                  </div>
                 </li>
               ))}
             </ul>

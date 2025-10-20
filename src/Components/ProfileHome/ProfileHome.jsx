@@ -6,6 +6,15 @@ import Documents from "../Documents/Documents";
 import Charts from "../Charts/Charts";
 import RatingStars from "../ProfileHome/RatingStars";
 
+const recipient = "manager@yourcompany.com";
+const subject = "Query Regarding Account Setup";
+const body =
+  "Dear Support Team,\n\nI am writing regarding my account. [Insert details here].\n\nThank you.";
+const cc = "musarafudesire36@gmail.com";
+const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
+  subject
+)}&body=${encodeURIComponent(body)}&cc=${encodeURIComponent(cc)}`;
+
 // START: Helper Functions
 const getCalendarEventsFromLocalStorage = () => {
   const storedEvents = localStorage.getItem("calendarEvents");
@@ -222,7 +231,7 @@ function ProfileHome() {
       >
         {/* START: Left Panel */}
         <div
-          className={`mr-0 flex z-50 shadow-lg h-screen fixed left-0 top-0 pt-[4em] flex-col justify-start items-center text-left text-sidebar-text transition-all duration-200 ease-in-out bg-transparent before:absolte before:absolute before:inset-0 before:backdrop-blur-2xl ${
+          className={`mr-0 flex z-50 shadow-sm h-screen fixed left-0 top-0 pt-[4em] flex-col justify-start items-center text-left text-sidebar-text transition-all duration-200 ease-in-out bg-transparent before:absolte before:absolute before:inset-0 before:backdrop-blur-2xl ${
             expand ? "w-48" : "w-[60px]"
           }`}
         >
@@ -231,7 +240,7 @@ function ProfileHome() {
               key={item.name}
               href="#"
               onClick={() => setDisplay(item.name)}
-              className={`m-[0.4em] ml-[1em] py-[0.1em] text-sm w-[90%] tracking-wider transition-all duration-300 relative no-underline text-inherit before:border-color-[rgba(37, 73, 43, 1)] before:inset-[100%_0_0_0] before:scale-0 before:border-b-1 hover:before:scale-100 before:h-[1px] before:content-[""] before:transition-all before:ease-in-out before:duration-300 before:absolute before:z-1 ease-in-out ${
+              className={`m-[0.6em] ml-[1em] p-[0.2em] shadow-sm text-sm w-[90%] tracking-wider transition-all duration-300 relative no-underline text-inherit before:inset-[100%_0_0_0] before:scale-0 hover:before:scale-100 before:border-b-[0.5px] before:content-[""] before:transition-all before:ease-in-out before:duration-300 before:absolute before:z-1 ease-in-out ${
                 expand ? "text-left" : "text-center"
               }
               ${
@@ -312,7 +321,7 @@ function ProfileHome() {
                       />
                     </div>
                     <div className="w-full">
-                      <h2 className="text-sm font-semibold w-full p-1 rounded-sm shadow-md tracking-wider mt-4 mb-2 text-left flex items-center">
+                      <h2 className="text-sm font-semibold w-full p-1 rounded-sm tracking-wider mt-4 mb-2 text-left flex items-center">
                         Dr. Name{" "}
                         <i className="ri-edit-line text-sm font-light ml-auto relative flex items-center justify-center transition-all duration-200 ease-in-out cursor-pointer transform hover:translate-y-[-2px]" />
                       </h2>
@@ -389,7 +398,7 @@ function ProfileHome() {
                           <button
                             key={metric}
                             onClick={() => setActiveMetric(metric)}
-                            className={`py-1 px-3 text-xs rounded-xl border border-gray-300 tracking-wider text-black transition-all duration-200 ease-in-out cursor-pointer hover:text-white hover:bg-[rgba(37,73,43,0.4)] hover:-translate-y-0.5 ${
+                            className={`py-1 px-3 text-xs rounded-xl shadow-lg border-t-[1px] border-gray-300 tracking-wider text-black transition-all duration-200 ease-in-out cursor-pointer hover:text-white hover:bg-[rgba(37,73,43,0.4)] hover:-translate-y-0.5 ${
                               activeMetric === metric
                                 ? "text-white bg-[rgb(48,99,56)]"
                                 : ""
@@ -540,23 +549,23 @@ function ProfileHome() {
                 className="ml-auto flex flex-col items-center justify-center mt-0 transition-all duration-300 ease-in-out"
                 style={{ width: expand ? "300px" : "350px" }}
               >
-                <div className="rounded-lg shadow-lg flex w-[90%] h-full m-4 flex-col justify-start items-center p-3 pt-4">
+                <div className="rounded-lg shadow-lg flex w-full h-full m-4 flex-col justify-start items-center p-3 pt-4">
                   {/* START: Far Right Top Row Buttons */}
-                  <div className="w-full flex items-center justify-center mb-3 pt-0.5 pb-0 transition-all duration-300 ease-in-out">
-                    <button className="transition-all duration-300 ease-in-out text-xs text-black py-0.5 px-3 rounded-full border border-gray-300 tracking-wider mx-1 font-sans cursor-pointer hover:bg-primary-green hover:text-white">
+                  <div className="w-full flex items-center justify-start mb-3 pb-1 px-2 transition-all duration-300 ease-in-out">
+                    <button className="transition-all duration-300 ease-in-out text-xs text-black py-1 px-4 rounded-full shadow-lg border-t-[1px] border-gray-300 tracking-wider mx-1 font-sans cursor-pointer hover:bg-[rgba(37,73,43,0.08)] hover:shadow-sm hover:text-[rgb(37,73,43)]">
                       Profile
                     </button>
-                    <button className="transition-all duration-300 ease-in-out text-xs text-black py-0.5 px-3 rounded-full border border-gray-300 tracking-wider mx-1 font-sans cursor-pointer hover:bg-primary-green hover:text-white">
+                    <button className="transition-all duration-300 ease-in-out text-xs text-black py-1 px-4 rounded-full border-t-[1px] shadow-lg border-gray-300 tracking-wider mx-1 font-sans cursor-pointer hover:bg-[rgba(37,73,43,0.08)] hover:shadow-sm hover:text-[rgb(37,73,43)]">
                       History
                     </button>
-                    <button className="transition-all duration-300 ease-in-out text-xs text-black py-0.5 px-1.5 rounded-full border border-gray-300 tracking-wider mx-1 font-sans cursor-pointer hover:bg-primary-green hover:text-white w-8 h-8 flex items-center justify-center">
+                    <button className="transition-all duration-300 ease-in-out text-xs text-black py-1 px-1 rounded-full border-t-[1px] shadow-lg border-gray-300 tracking-wider mx-1 font-sans cursor-pointer w-8 h-8 flex items-center justify-center hover:bg-[rgba(37,73,43,0.08)] hover:shadow-sm hover:text-[rgb(37,73,43)]">
                       4+
                     </button>
                   </div>
 
                   {/* START: Doc Profile Card */}
                   <div
-                    className="w-[90%] flex items-end justify-center relative h-48 border border-gray-300 rounded mb-1"
+                    className="w-full flex items-end justify-center relative h-48 border-gray-300 rounded-lg shadow-md mb-1"
                     style={{
                       backgroundImage:
                         "url('https://i.ibb.co/r2P4GKQ1/d8.jpg')",
@@ -565,9 +574,9 @@ function ProfileHome() {
                       backgroundSize: "cover",
                     }}
                   >
-                    <div className="flex items-center justify-center z-10 border border-gray-300 rounded w-[80%] p-1.5 mb-4 relative bg-white/60 backdrop-blur-sm">
+                    <div className="flex items-center justify-center z-10 border border-gray-300 rounded-lg w-full p-2 mx-4 mb-4 relative bg-white/60 backdrop-blur-xs">
                       <div className="flex flex-col items-start justify-center w-full z-10">
-                        <h1 className="text-base font-semibold m-0">
+                        <h1 className="text-[0.9em] font-semibold m-0">
                           Dr. Jackson Smith
                         </h1>
                         <p className="m-0 text-xs">
@@ -575,39 +584,74 @@ function ProfileHome() {
                           <span className="ml-1">Male</span>
                         </p>
                       </div>
-                      <i
-                        className="ri-phone-fill text-xl p-0.5 rounded-full transition-all duration-300 ease-in-out right-0.5 text-primary-green cursor-pointer border border-primary-green/40 hover:bg-primary-green hover:text-white hover:border-primary-green"
-                        title="Call"
-                      />
+                      <a
+                        href="tel:+910787246713"
+                        className="text-[rgb(37,73,43)] w-[2em] h-[2em] rounded-full font-semibold flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out no-underline hover:font-semibold hover:-translate-y-0.5"
+                      >
+                        <i
+                          className="ri-phone-fill text-xl p-0.5 rounded-full transition-all duration-300 ease-in-out right-0.5 text-[rgba(37,73,43,1)] cursor-pointer px-2 py-1 border border-primary-green/40 hover:bg-[rgba(37, 73, 43, 0.8)] hover:text-white hover:border-[rgba(37,73,43,0.8)] hover:bg-[rgba(37,73,43,0.8)]"
+                          title="Call"
+                        />
+                      </a>
                     </div>
                   </div>
 
                   {/* START: More Doc Info */}
-                  <div className="w-[90%] flex flex-col mt-1 mb-1">
-                    <p className="my-0.5 text-sm text-left text-gray-600">
+                  <div className="w-full flex flex-col my-4 px-2 py-2 shadow-lg hover:shadow-sm ease-in-out duration-300 transition-all">
+                    <p className="my-1 text-sm text-left text-gray-600">
                       5th street, Tompstone, Eden House, Gokwe
                     </p>
-                    <p className="my-0.5 text-sm text-left text-gray-600">
+                    <p className="my-1 flex gap-4 items-center justify-start w-full text-md py-2 text-left text-gray-600">
                       <a
-                        href="tel:+910787246713"
-                        className="cursor-pointer transition-all duration-300 ease-in-out text-primary-green font-medium no-underline hover:font-semibold hover:-translate-y-0.5"
+                        href={mailtoLink}
+                        className="text-[rgb(37,73,43)] w-[2em] h-[2em] rounded-full text-[1.2em] flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out no-underline shadow-lg hover:shadow-sm hover:bg-[rgba(37,73,43,0.1)]"
                       >
-                        +91 07872 46713
+                        <i className="ri-mail-send-line flex items-center justify-center p-1 w-full h-full my-0 rounded-full" />
+                      </a>
+                      <a
+                        href="https://wa.me/"
+                        className="text-[rgb(37,73,43)] w-[2em] h-[2em] rounded-full text-[1.2em] flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out no-underline shadow-lg hover:shadow-sm hover:bg-[rgba(37,73,43,0.1)]"
+                      >
+                        <i className="ri-whatsapp-line flex items-center justify-center p-1 w-full h-full my-0 rounded-full" />
+                      </a>
+                      <a
+                        href="https://twitter.com/Google"
+                        className="text-[rgb(37,73,43)] w-[2em] h-[2em] rounded-full text-[1.2em] flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out no-underline shadow-lg hover:shadow-sm hover:bg-[rgba(37,73,43,0.1)]"
+                      >
+                        <i className="ri-twitter-line flex items-center justify-center p-1 w-full h-full my-0 rounded-full" />
+                      </a>
+                      <a
+                        href="https://www.facebook.com/Meta"
+                        className="text-[rgb(37,73,43)] w-[2em] h-[2em] rounded-full text-[1.2em] flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out no-underline shadow-lg hover:shadow-sm hover:bg-[rgba(37,73,43,0.1)]"
+                      >
+                        <i className="ri-facebook-line flex items-center justify-center p-1 w-full h-full my-0 rounded-full" />
+                      </a>
+                      <a
+                        href="https://www.instagram.com/instagram"
+                        className="text-[rgb(37,73,43)] w-[2em] h-[2em] rounded-full text-[1.2em] flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out no-underline shadow-lg hover:shadow-sm hover:bg-[rgba(37,73,43,0.1)]"
+                      >
+                        <i className="ri-instagram-line flex items-center justify-center p-1 w-full h-full my-0 rounded-full" />
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/company/google"
+                        className="text-[rgb(37,73,43)] w-[2em] h-[2em] rounded-full text-[1.2em] flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out no-underline shadow-lg hover:shadow-sm hover:bg-[rgba(37,73,43,0.1)]"
+                      >
+                        <i className="ri-linkedin-line flex items-center justify-center p-1 w-full h-full my-0 rounded-full" />
                       </a>
                     </p>
-                    <p className="my-0.5 text-sm text-left text-gray-600">
+                    <p className="my-1 text-xs text-left text-gray-600">
                       Last Appointment: 14 Jun 2014
                     </p>
                   </div>
 
                   {/* START: Appointment Div (Calendar) */}
-                  <div className="m-0 p-1 flex flex-col items-center justify-start w-[90%] relative border border-gray-300 rounded-lg">
+                  <div className="m-4 py-1 px-2 flex flex-col items-center justify-start w-full relative shadow-sm border-gray-300 rounded-sm">
                     <WeekCalendar />
                   </div>
 
                   {/* START: Events List Div */}
-                  <div className="w-[90%] mt-4 pt-2 border-t border-gray-200">
-                    <h4 className="text-base font-semibold m-0 mb-1 text-left">
+                  <div className="w-full my-2">
+                    <h4 className="text-sm font-semibold mb-2 text-left">
                       Upcoming Appointments
                     </h4>
                     {allCalendarEvents.length > 0 ? (
@@ -615,7 +659,7 @@ function ProfileHome() {
                         {allCalendarEvents.slice(0, 5).map((event) => (
                           <li
                             key={event.id}
-                            className="py-1 text-sm border-l-4 border-primary-green mb-1 pl-2 flex gap-1.5 items-baseline"
+                            className="text-sm border-l-2 border-[rgba(37,73,43)] mb-2 pl-2 flex gap-2 items-baseline"
                           >
                             <span className="font-semibold text-primary-green">
                               {event.date.toLocaleDateString("en-US", {
