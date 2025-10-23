@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AuthContext } from "../Context/Context";
 
 function Signup() {
+  const { setView } = useContext(AuthContext);
   // START: State
   const [errorColor, setErrorColor] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -53,8 +55,7 @@ function Signup() {
   const handleSignupasDropDownChange = (e) => {
     e.preventDefault();
     setSelectedRole(e.target.value);
-    // Note: The original logic checked the *old* state value after setting the new one.
-    // I'm updating the logic here to check the *new* value for immediate effect.
+
     if (e.target.value === "specialist") {
       setDisable(true);
     } else {
@@ -194,6 +195,7 @@ function Signup() {
               </button>
               <button
                 type="button"
+                onClick={() => setView("home")}
                 className="flex-1 py-1 text-base rounded-md tracking-wider border-none text-white bg-red-700 transition-all duration-200 hover:bg-red-600 hover:-translate-y-0.5"
               >
                 Cancel
@@ -334,6 +336,7 @@ function Signup() {
               <div className="flex gap-4 items-center justify-center w-full mt-6">
                 <button
                   type="button"
+                  onClick={() => setView("home")}
                   className="flex-1 py-1 text-lg rounded-md tracking-wider border-none text-white bg-red-700 transition-all duration-200 hover:bg-red-600 hover:-translate-y-0.5"
                 >
                   Cancel

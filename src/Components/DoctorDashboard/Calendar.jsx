@@ -42,7 +42,6 @@ function classNames(...classes) {
 }
 
 const WEEK_START_DAY = 0; // Sunday
-// END: Helper Functions and Data
 
 // START: EventForm Component
 function EventForm({ day, onAdd, onClose }) {
@@ -61,7 +60,7 @@ function EventForm({ day, onAdd, onClose }) {
       <h3 className="text-xs font-semibold text-gray-700 m-0">
         Add Event on {format(day, "MMM d")}
       </h3>
-      <form onSubmit={handleSubmit} className="flex gap-1 mt-1 border-1 w-full">
+      <form onSubmit={handleSubmit} className="flex gap-1 mt-1 w-full">
         <input
           type="text"
           value={title}
@@ -77,7 +76,7 @@ function EventForm({ day, onAdd, onClose }) {
           type="button"
           title="close"
           onClick={onClose}
-          className="ri-close-line px-2 border-none rounded cursor-pointer text-sm font-lighter bg-[rgb(131,16,16,0.8)] text-white hover:bg-[rgb(131,16,16,1)] transition-all duration-200"
+          className={`ri-close-line px-2 border-none rounded cursor-pointer text-sm font-lighter bg-[rgb(131,16,16,0.8)] text-white hover:bg-[rgb(131,16,16,1)] transition-all duration-200 hover:after:content-["close"] hover:after:absolute relative hover:after:bottom-[100%] hover:after:left-[50%] hover:after:text-xs hover:after:text-[rgba(37,73,43,1)] hover:after:z-1`}
         ></button>
       </form>
     </div>
@@ -94,6 +93,10 @@ export default function WeekCalendar() {
 
   const [events, setEvents] = useState(getInitialEvents);
   const [selectedDay, setSelectedDay] = useState(null);
+
+  // New states for editing functionality
+  const [editingEventId, setEditingEventId] = useState(null);
+  const [newTitle, setNewTitle] = useState("");
 
   useEffect(() => {
     const eventsToStore = events.map((event) => ({
@@ -124,12 +127,14 @@ export default function WeekCalendar() {
     const newStart = add(currentWeekStart, { weeks: -1 });
     setCurrentWeekStart(newStart);
     setSelectedDay(null);
+    setEditingEventId(null); // Clear edit state on week change
   }
 
   function nextWeek() {
     const newStart = add(currentWeekStart, { weeks: 1 });
     setCurrentWeekStart(newStart);
     setSelectedDay(null);
+    setEditingEventId(null); // Clear edit state on week change
   }
 
   const isDayWithEvents = (day) => {
@@ -145,6 +150,30 @@ export default function WeekCalendar() {
       };
       setEvents((prevEvents) => [...prevEvents, newEvent]);
     }
+  };
+
+  const deleteEvent = (id) => {
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+  };
+
+  const editEventTitle = (id, title) => {
+    if (title.trim() === "") {
+      // Prevent saving an empty title
+      return;
+    }
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
+        event.id === id ? { ...event, title: title.trim() } : event
+      )
+    );
+    setEditingEventId(null); // Exit editing mode
+    setNewTitle(""); // Clear the temporary state
+  };
+
+  // Function to prepare for editing
+  const startEdit = (event) => {
+    setEditingEventId(event.id);
+    setNewTitle(event.title);
   };
 
   // START: Render
@@ -199,7 +228,10 @@ export default function WeekCalendar() {
           >
             <button
               type="button"
-              onClick={() => setSelectedDay(day)}
+              onClick={() => {
+                setSelectedDay(day);
+                setEditingEventId(null); // Close edit mode when selecting a new day
+              }}
               className={classNames(
                 "flex items-center justify-center w-5 h-5 rounded-full border-none cursor-pointer font-medium transition-colors text-gray-700 bg-transparent hover:bg-gray-100",
                 isToday(day) &&
@@ -243,13 +275,63 @@ export default function WeekCalendar() {
               {selectedDayEvents.map((event) => (
                 <li
                   key={event.id}
-                  className="py-1 px-2 border-l-2 border-[rgba(37,73,43,1)] bg-green-50 text-[rgba(37,73,43,1)] mb-1 w-full font-medium flex items-center justify-start"
+                  className="py-1 px-2 border-l-2 border-[rgba(37,73,43,1)] bg-green-50 text-[rgba(37,73,43,1)] mb-1 w-full font-medium flex flex-col justify-start"
                 >
-                  <span>{event.title}</span>
-                  <div className="ml-auto gap-2 flex items-center justify-center">
-                    <i className="ri-edit-line font-lighter text-sm text-[rgba(37,73,43,0.8)] hover:text-[rgba(37,73,43,1)] hover:shadow-xl hover:transform hover:translate-y-[-0.5px] duration-100 transition-all px-1 py-0.5 mx-1 rounded-full" />
-                    <i className="ri-delete-bin-line font-lighter text-sm text-[rgba(37,73,43,0.8)] hover:text-[rgba(37,73,43,1)] hover:shadow-xl hover:transform hover:translate-y-[-0.5px] duration-100 transition-all px-1 py-0.5 rounded-full" />
-                  </div>
+                  {editingEventId === event.id ? (
+                    // Render input for editing
+                    <div className="flex gap-1 items-center w-full">
+                      <input
+                        type="text"
+                        value={newTitle}
+                        onChange={(e) => setNewTitle(e.target.value)}
+                        className="flex-1 px-1 py-0.5 border border-gray-300 rounded text-sm tracking-tight focus:border-gray-500 focus:outline-none"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            editEventTitle(event.id, newTitle);
+                          }
+                          if (e.key === "Escape") {
+                            setEditingEventId(null);
+                            setNewTitle("");
+                          }
+                        }}
+                        autoFocus
+                      />
+                      <button
+                        type="button"
+                        title="Save"
+                        onClick={() => editEventTitle(event.id, newTitle)}
+                        className="ri-check-line text-sm px-2 py-0.5 text-green-700 hover:text-green-900"
+                      />
+                      <button
+                        type="button"
+                        title="Cancel"
+                        onClick={() => {
+                          setEditingEventId(null);
+                          setNewTitle("");
+                        }}
+                        className="ri-close-line text-sm px-2 py-0.5 text-red-700 hover:text-red-900"
+                      />
+                    </div>
+                  ) : (
+                    // Render event title and action buttons
+                    <div className="flex items-center justify-start w-full">
+                      <span>{event.title}</span>
+                      <div className="ml-auto gap-2 flex items-center justify-center">
+                        {/* Edit Button */}
+                        <i
+                          className="ri-edit-line font-lighter text-sm text-[rgba(37,73,43,0.8)] hover:text-[rgba(37,73,43,1)] hover:shadow-xl hover:transform hover:translate-y-[-0.5px] duration-100 transition-all px-1 py-0.5 mx-1 rounded-full cursor-pointer"
+                          title="Edit Event"
+                          onClick={() => startEdit(event)}
+                        />
+                        {/* Delete Button */}
+                        <i
+                          className="ri-delete-bin-line font-lighter text-sm text-[rgba(37,73,43,0.8)] hover:text-red-600 hover:shadow-xl hover:transform hover:translate-y-[-0.5px] duration-100 transition-all px-1 py-0.5 rounded-full cursor-pointer"
+                          title="Delete Event"
+                          onClick={() => deleteEvent(event.id)}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

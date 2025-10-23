@@ -1,11 +1,15 @@
-import ProfileHome from "./Components/ProfileHome/ProfileHome";
 import "remixicon/fonts/remixicon.css";
-
+import MainComponent from "./Components/MainComponent/MainComponent";
+import UserProvider from "./Components/Context/Context";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 function App() {
+  const defaultTheme = createTheme();
   return (
-    <div className="w-full flex flex-col items-center justify-center bg-gray-200">
-      <ProfileHome />
-    </div>
+    <UserProvider>
+      <ThemeProvider theme={defaultTheme}>
+        <MainComponent />
+      </ThemeProvider>
+    </UserProvider>
   );
 }
 

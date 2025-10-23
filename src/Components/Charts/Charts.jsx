@@ -242,7 +242,7 @@ function Charts() {
 
   // START: Render
   return (
-    <div className="w-full m-0 bg-gray-50 flex flex-row items-start justify-start py-6 px-4 gap-6">
+    <div className="w-full m-0 bg-gray-50 flex flex-row items-start justify-start py-6 px-4 gap-6 min-h-[90vh]">
       {/* START: Left Div (Metric Cards) */}
       <div className="p-1 flex flex-col gap-4 w-1/4 h-full">
         {METRICS.map((metric) => (

@@ -7,12 +7,10 @@ function UserProvider({ children }) {
   const [view, setView] = useState(() => {
     try {
       const storedState = sessionStorage.getItem(MY_CONTEXT_KEY);
-      return storedState
-        ? JSON.parse(storedState)
-        : { initialValue: "default" };
+      return storedState ? JSON.parse(storedState) : "home";
     } catch (error) {
       console.error("Failed to parse state from sessionStorage", error);
-      return { initialValue: "default" };
+      return "default";
     }
   });
 
