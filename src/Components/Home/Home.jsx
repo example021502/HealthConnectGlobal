@@ -1,23 +1,31 @@
-import { useState } from "react";
 import { AuthContext } from "../Context/Context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 function Home() {
-  const { setView } = useContext(AuthContext);
-  const [hover, setHover] = useState(false);
-  // START: Render
+  const { view, setView } = useContext(AuthContext);
+
+  useEffect(() => {
+    console.log("Home View State:", view);
+  }, [view]);
+
+  const handleSignin = () => {
+    setView("signin");
+  };
+  const handleSignup = () => {
+    setView("signup");
+  };
   return (
-    <div className="w-full relative flex items-center justify-center h-screen bg-[rgba(255,255,255,1)]">
+    <div className="w-full relative flex items-center justify-center h-screen bg-[rgb(0,0,0)]">
       <img
-        src="https://i.ibb.co/LLm7hT3/e38cc443-3acb-4e33-bb94-28f1e65ff5bf.jpg"
+        src="https://i.ibb.co/zVTTrXmV/b.jpg"
         alt="Welcome to InterHealthConnect"
-        className="absolute w-full h-full object-cover opacity-60"
+        className="absolute w-full h-full object-cover opacity-90"
       />
-      <div className="z-1 shadow-lg w-[90%] h-[90%] flex flex-col justify-center items-center px-4 py-2 rounded-lg overflow-y-hidden before:absolute relative before:backdrop-blur-md before:inset-0 before:z-[-1] before:bg-[rgba(255,255,255,0.5)]">
-        {/* START: Navbar */}
-        <div className="z-50 text-[#166516] flex py-1.5 px-5 bg-transparent rounded-lg w-full">
+      <div className="z-1 shadow-sm max-w-[80%] max-h-[90%] flex flex-col justify-center items-center px-6 py-4 overflow-y-hidden gap-4 rounded-2xl before:absolute relative before:backdrop-blur-xs before:inset-0 before:z-[-1] before:bg-[rgba(255,255,255,0.8)] before:rounded-2xl">
+        {/* nav bar */}
+        <div className="z-50 text-[rgb(22,101,22,0.8)] flex py-2 px-4 bg-[rgba(255,255,255,0.8)] rounded-lg shadow-2xl min-w-full">
           <div
-            className="h-10 w-20 my-2 mx-4"
+            className="min-h-10 min-w-20 my-2 mx-4"
             style={{
               backgroundImage:
                 "url('https://i.ibb.co/jZsMsxgS/Untitled-1.png')",
@@ -29,7 +37,7 @@ function Home() {
           <div className=" mx-4 flex flex-row justify-center items-center gap-4 text-xs font-lighter">
             <a
               href="#"
-              className="flex items-center transition-all duration-200 hover:text-gray-300 hover:-translate-y-px"
+              className="flex items-center transition-all duration-200 hover:text-[rgb(22,101,22)] hover:-translate-y-px"
             >
               <i className="ri-globe-line mr-1" />
               Language
@@ -37,14 +45,14 @@ function Home() {
             </a>
             <a
               href="#"
-              className="flex items-center transition-all duration-200 hover:text-gray-300 hover:-translate-y-px"
+              className="flex items-center transition-all duration-200 hover:text-[rgb(22,101,22)] hover:-translate-y-px"
             >
               Customer Support
               <i className="ri-customer-service-2-line ml-0.5" />
             </a>
             <a
               href="#"
-              className="flex items-center transition-all duration-200 hover:text-gray-300 hover:-translate-y-px"
+              className="flex items-center transition-all duration-200 hover:text-[rgb(22,101,22)] hover:-translate-y-px"
             >
               About
               <i className="ri-information-line ml-0.5" />
@@ -53,23 +61,22 @@ function Home() {
 
           <div className="tracking-wider ml-auto mr-4 flex gap-6 items-center justify-center">
             <a
-              onClick={() => setView("signup")}
-              className="text-sm transition-all duration-200 ease-in-out font-['Segoe_UI'] hover:translate-y-[-1.5px] cursor-pointer"
+              onClick={handleSignup}
+              className="text-sm bg-[rgba(35,73,43,0.09)] transition-all duration-200 ease-in-out cursor-pointer px-5 py-1 rounded-md shadow-md hover:bg-[rgb(37,73,43,0.2)]"
             >
               Sign up
             </a>
             <button
-              onClick={() => setView("signin")}
-              className="text-sm  cursor-pointer font-lighter px-4 py-1 rounded-md bg-linear-to-r from-[rgb(52,155,52)] via-[rgba(54,159,54,1)] to-[rgb(52,155,52)] text-white tracking-wider border-none transition-all duration-200 hover:to-[rgb(20,78,20,1)] hover:via-[#2c802c] hover:from-[rgb(20,78,20,1)] hover:transition-all hover:ease-in-out shadow-lg"
+              onClick={handleSignin}
+              className="text-sm bg-[rgba(37,73,43,0.09)] cursor-pointer font-lighter px-5 py-[10px] rounded-md tracking-wider transition-all duration-200 ease-in-out hover:bg-[rgb(37,73,43,0.2)] hover:transition-all hover:ease-in-out shadow-md"
             >
               Get Started
             </button>
           </div>
         </div>
-
-        {/* START: Landing Section */}
-        <div className="m-0 h-full flex items-center justify-center flex-row gap-4 w-full p-4 relative">
-          <div className="flex flex-col h-fit items-start justify-center px-10 gap-4 py-10 mr-[-4em] shadow-lg bg-[rgba(255,255,255,0.8)] z-1 rounded-lg before:absolute relative before:backdrop-blur-xm before:inset-0 before:z-[-1]">
+        {/* bottom */}
+        <div className="h-fit flex items-center justify-center flex-row w-full relative">
+          <div className="flex flex-col h-fit items-start justify-center px-10 gap-4 py-10 mr-[-4em] shadow-2xl bg-[rgba(255,255,255,1)] z-1 rounded-2xl before:absolute relative before:backdrop-blur-xm before:inset-0 before:z-[-1]">
             <p className="text-md text-primary-green font-semibold tracking-wider text-left m-0">
               Global care. Local ease.
             </p>
@@ -83,29 +90,29 @@ function Home() {
               drastically reducing diagnostic delays.
             </p>
 
-            <button className="mt-4 bg-[#369a46] text-white text-md py-0.5 px-4 rounded-lg tracking-wider text-[rgba(37,73,43,0.8 transition-all duration-200 hover:-translate-y-0.5">
+            <button className="mt-4 text-[rgb(54,154,70)] text-md py-1 px-4 rounded-md shadow-md tracking-wider text-[rgba(37,73,43,0.8 transition-all duration-200 bg-[rgb(54,154,70,0.08)] hover:bg-[rgb(54,154,70,0.2)]">
               Learn More
             </button>
 
             <div className="flex justify-start items-start gap-8 mt-4">
               <button
-                onclick={() => setView("signin")}
-                className="text-sm font-lighter font-['Segoe_UI'] border-1 border-[rgba(37,73,43,1)] text-[rgba(37,73,43,1)] rounded-md py-0.5 px-4 transition-all duration-200 hover:bg-[rgba(37,73,43,1)] hover:-translate-y-0.5"
+                onClick={handleSignin}
+                className="text-sm font-lighter bg-[rgba(37,73,43,0.08)] text-[rgba(37,73,43,1)] rounded-md py-1 px-5 transition-all duration-200 hover:bg-[rgba(37,73,43,0.2)] shadow-md"
               >
                 Sign in
               </button>
               <button
-                onclick={() => setView("signup")}
-                className="text-sm font-['Segoe_UI'] font-lighter py-0.5 px-4 border-[rgb(171,25,25)] text-[rgb(171,25,25)] rounded-md border-1 transition-all duration-200 hover:bg-[rgba(37,73,43,1)] hover:-translate-y-0.5"
+                onClick={handleSignup}
+                className="text-sm font-lighter py-1 px-5 text-[rgb(35,25,171)] bg-[rgba(35,25,171,0.08)] rounded-md transition-all duration-200 hover:bg-[rgba(35,25,171,0.2)] shadow-md"
               >
                 Sign up
               </button>
             </div>
           </div>
           <img
-            src="https://i.ibb.co/M51WP2RH/group5.jpg"
+            src="https://i.ibb.co/5WCwrkf7/interaction1.jpg"
             alt=""
-            className="rounded-lg opacity-80 h-[26em]"
+            className="rounded-lg opacity-80 m-0 max-h-[26em] min-w-[36em] object-cover"
           />
         </div>
       </div>

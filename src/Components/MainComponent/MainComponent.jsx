@@ -7,17 +7,15 @@ import DoctorDashboard from "../DoctorDashboard/DoctorDashboard";
 import PatientDashboard from "../PatientDashboard/PatientDashboard";
 
 function MainComponent() {
-  const { view, setView } = useContext(AuthContext);
-
-  console.log("Current Context View State:", view);
+  const { view } = useContext(AuthContext);
 
   return (
     <div className="w-full h-full">
       {view === "home" && <Home />}
       {view === "signin" && <Signin />}
-      {view == "signup" && <Signup />}
-      {view == "Specialist" && <DoctorDashboard />}
-      {view == "patient" && <PatientDashboard />}
+      {view === "signup" && <Signup />}
+      {view === "specialist" && <DoctorDashboard />}
+      {view === "patient" && <PatientDashboard />}
     </div>
   );
 }

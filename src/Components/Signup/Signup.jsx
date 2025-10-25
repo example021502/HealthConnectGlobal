@@ -49,33 +49,40 @@ function Signup() {
   };
 
   const handleNext = () => {
-    setNext(true);
+    setNext(!next);
   };
 
   const handleSignupasDropDownChange = (e) => {
     e.preventDefault();
     setSelectedRole(e.target.value);
 
-    if (e.target.value === "specialist") {
+    if (e.target.value !== "specialist") {
       setDisable(true);
     } else {
       setDisable(false);
     }
   };
 
+  const handleSignin = () => {
+    setView("signin");
+  };
+
   // START: Render
   return (
-    <div className="m-0 h-screen flex flex-col justify-center items-center bg-gradient-to-br from-indigo-400 to-blue-300">
+    <div className="m-0 h-screen flex flex-col justify-center items-center bg-gradient-to-br from-[rgba(255,255,255,0.7)] to-[rgba(255,255,255,1)] before:inset-0 before:backdrop-blur-sm before:z-[-1]">
+      <img
+        src="https://i.ibb.co/bj1ddtQT/e616b3cb645a76073349196dc487a018.jpg"
+        alt=""
+        className="absolute w-full h-full object-cover"
+      />
       {next ? (
         // START: Second Form (Account Details)
-        <div className="w-[80%] h-[80%] flex items-center justify-center rounded-md p-4 relative overflow-hidden bg-gradient-to-br from-blue-100 to-blue-200 transition-all duration-300">
-          <div className="absolute top-[5%] left-[10%] w-[600px] h-[600px] rounded-full backdrop-blur-sm [background-image:radial-gradient(circle,rgba(190,185,228,0.6),rgba(190,185,228,0.4),rgba(190,185,228,0),transparent,transparent)]"></div>
-
-          <div className="m-0 flex-1 flex flex-col justify-center items-start font-sans tracking-wider text-primary-green">
-            <h1 className="font-semibold text-3xl m-0 mx-auto w-[80%] text-left relative mb-1 pt-1 before:content-[''] before:absolute before:h-0.5 before:w-[90px] before:bg-primary-green before:bottom-0 before:left-0">
+        <div className="w-[74%] h-[90%] flex items-center justify-center rounded-2xl p-10 relative transition-all duration-300 ease-in-out bg-[rgba(255,255,255,0.5)]">
+          <div className="flex flex-col justify-center items-start tracking-wider max-w-[32em] h-[20em] m-auto shadow-lg p-10 pr-[5em] gap-2 transition-all ease-in-out duration-200 rounded-2xl bg-[rgba(255,255,255,1)]">
+            <h1 className="uppercase font-bold text-2xl w-full text-left text-[rgba(37,73,43,1)]">
               Sign Up
             </h1>
-            <p className="text-base leading-snug m-4 mx-auto text-left w-[80%] relative pl-4 before:content-[''] before:bg-primary-green before:absolute before:w-1 before:rounded-lg before:h-full before:top-0 before:left-0">
+            <p className="text-left w-full tracking-wide text-gray-600 text-md">
               Join now to transform your workflow and instantly expand your
               referral network. Access secure patient records and achieve true
               continuity of care with the community built by providers, for
@@ -84,140 +91,114 @@ function Signup() {
             </p>
           </div>
 
-          <form className="w-[350px] h-full flex flex-col justify-center p-6 text-primary-green relative before:content-[''] before:absolute before:w-px before:h-full before:bg-primary-green before:top-0 before:left-[-1rem]">
-            {/* Profile Image */}
-            <div className="h-[120px] w-[120px] rounded-full mx-auto flex justify-center items-center border border-gray-400 relative mb-4">
-              <img
-                src="https://i.ibb.co/8n95vXRy/signingin.jpg"
-                alt="profile image"
-                className="rounded-full w-full h-full object-cover"
-              />
-              <i className="ri-camera-fill absolute text-xl rounded-full p-0.5 top-[80%] right-2 text-primary-green cursor-pointer transition-all duration-200 hover:font-medium hover:text-green-700 hover:border hover:border-primary-green hover:-translate-y-0.5" />
-            </div>
+          <form className="w-full h-full flex flex-col justify-center items-start relative m-4 ml-[-4em] p-10 gap-3 rounded-2xl bg-[rgba(255,255,255,1)] z-10 shadow-2xl">
+            <i
+              onClick={handleNext}
+              className="ri-arrow-left-double-line flex items-center justify-center text-lg absolute top-[1em] left-[2em] p-0 text-green-700 rounded-full shadow-lg w-[3.5em] h-[1.5em] cursor-pointer transition-all ease-in-out duration-200 hover:bg-gray-500 bg-gray-100 hover:text-white"
+            >
+              <span className="text-sm">Back</span>
+            </i>
+            <input
+              type="text"
+              id="country"
+              placeholder="Country"
+              required
+              className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Home Address"
+              id="homeaddress"
+              required
+              className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+            />
 
-            <div className="flex justify-center items-center gap-4 w-full mt-2">
-              <div className="flex flex-col items-start justify-center w-full text-base font-serif tracking-wider">
-                <label className="text-sm tracking-wide">Country:</label>
-                <input
-                  type="text"
-                  id="country"
-                  required
-                  className="w-full text-sm mt-0.5 p-1 px-1.5 rounded-sm border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                />
-              </div>
-              <div className="flex flex-col items-start justify-center w-full text-base font-serif tracking-wider">
-                <label className="text-sm tracking-wide">Home Address:</label>
-                <input
-                  type="text"
-                  id="homeaddress"
-                  required
-                  className="w-full text-sm mt-0.5 p-1 px-1.5 rounded-sm border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                />
-              </div>
+            <input
+              type="password"
+              placeholder="Password"
+              id="setpassword"
+              required
+              className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              id="confirmpassword"
+              required
+              className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+            />
+            <div className="flex flex-col items-start justify-center w-full text-base font-serif tracking-wider">
+              <label className="text-xs text-gray-500 tracking-wide">
+                Signing up As:
+              </label>
+              <select
+                value={selectedRole}
+                onChange={handleSignupasDropDownChange}
+                id="signupas"
+                className="w-full text-sm py-1 px-1 rounded-md border border-gray-300 text-gray-500 transition-all duration-200 ease-in-out focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+                required
+              >
+                {SigningRoles.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
             </div>
+            <input
+              type="text"
+              id="specialty"
+              placeholder="Specialty"
+              disabled={disable}
+              className={`w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:outline-none ${
+                disable
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed border-gray-200"
+                  : "focus:border-2 focus:border-[rgba(37,73,43,0.6)]"
+              }`}
+              required
+            />
 
-            <div className="flex justify-center items-center gap-4 w-full mt-4">
-              <div className="flex flex-col items-start justify-center w-full text-base font-serif tracking-wider">
-                <label className="text-sm tracking-wide">Signing up As:</label>
-                <select
-                  value={selectedRole}
-                  onChange={handleSignupasDropDownChange}
-                  id="signupas"
-                  className="w-full text-sm mt-0.5 p-1 px-1.5 rounded-sm border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                  required
-                >
-                  {SigningRoles.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col items-start justify-center w-full text-base font-serif tracking-wider">
-                <label className="text-sm tracking-wide">Specialty:</label>
-                <input
-                  type="text"
-                  id="specialty"
-                  disabled={disable}
-                  className={`w-full text-sm mt-0.5 p-1 px-1.5 rounded-sm border border-gray-300 text-gray-700 transition-all duration-200 focus:outline-none ${
-                    disable
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed border-gray-200"
-                      : "focus:border-2 focus:border-primary-green"
-                  }`}
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center gap-4 w-full mt-4">
-              <div className="flex flex-col items-start justify-center w-full text-base font-serif tracking-wider">
-                <label className="text-sm tracking-wide">Set Password:</label>
-                <input
-                  type="password"
-                  id="setpassword"
-                  required
-                  className="w-full text-sm mt-0.5 p-1 px-1.5 rounded-sm border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                />
-              </div>
-              <div className="flex flex-col items-start justify-center w-full text-base font-serif tracking-wider">
-                <label className="text-sm tracking-wide">
-                  Confirm Password:
-                </label>
-                <input
-                  type="password"
-                  id="confirmpassword"
-                  required
-                  className="w-full text-sm mt-0.5 p-1 px-1.5 rounded-sm border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <p className="text-left text-xs font-serif tracking-wide mt-4">
+            <p className="text-left text-xs flex flex-row items-center justify-start tracking-wide w-full">
               <input
                 type="checkbox"
                 required
-                className="mr-1 accent-primary-green"
+                className="mr-1 accent-[rgba(37,73,43,0.6)]"
               />{" "}
-              I have read and understood the{" "}
+              I accept the
               <a
                 href="#"
-                className="cursor-pointer text-primary-green font-semibold relative transition-all duration-200 hover:border-b-2 hover:border-primary-green"
+                className="cursor-pointer text-[rgba(37,73,43,.6)] font-semibold relative transition-all duration-200 ml-1 hover:border-b-1 hover:border-[rgba(37,73,43,1)] hover:text-[rgba(37,73,43,1)]"
               >
                 Terms & Conditions.
               </a>
             </p>
 
-            <div className="flex gap-4 items-center justify-center w-full mt-6">
+            <div className="flex gap-4 items-center justify-center w-full mt-4">
               <button
                 type="submit"
-                className="flex-1 py-1 text-base rounded-md tracking-wider border-none text-white bg-primary-green transition-all duration-200 hover:bg-green-700 hover:-translate-y-0.5"
+                className="flex-1 py-1 text-sm rounded-md tracking-wider text-green-800 bg-[rgba(37,73,43,0.1)] transition-all duration-200 ease-in-out shadow-lg hover:bg-[rgba(37,73,43,0.2)]  hover:shadow-md"
               >
-                Create Account
+                Create
               </button>
               <button
                 type="button"
                 onClick={() => setView("home")}
-                className="flex-1 py-1 text-base rounded-md tracking-wider border-none text-white bg-red-700 transition-all duration-200 hover:bg-red-600 hover:-translate-y-0.5"
+                className="flex-1 py-1 text-sm rounded-md tracking-wider text-red-700 bg-red-100 transition-all duration-200 ease-in-out shadow-lg hover:bg-red-200  hover:shadow-md"
               >
                 Cancel
               </button>
             </div>
-
-            <i className="text-xs tracking-wide text-gray-700 mt-4 mx-auto">
-              ©copyright 2025 InterHealthCon.Pvt Ld
-            </i>
           </form>
         </div>
       ) : (
         // START: First Form (Personal Details)
-        <div className="w-[80%] h-[80%] flex items-center justify-center rounded-md p-8 relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-200 transition-all duration-300">
-          <div className="absolute top-[5%] left-[10%] w-[600px] h-[600px] rounded-full backdrop-blur-sm [background-image:radial-gradient(circle,rgba(190,185,228,0.6),rgba(190,185,228,0.4),rgba(190,185,228,0),transparent,transparent)]"></div>
-
-          <div className="flex-1 z-0 text-primary-green relative">
-            <h1 className="text-2xl font-medium font-['Arial'] text-left w-[90%] mx-auto relative pb-1 mb-4 after:content-[''] after:absolute after:h-0.5 after:w-[100px] after:bottom-0 after:left-0 after:bg-primary-green after:rounded-lg">
+        <div className="w-[74%] h-[90%] flex items-center justify-center rounded-2xl p-8 relative bg-[rgba(255,255,255,0.4)] transition-all duration-200 ease-in-out">
+          <div className="max-w-[32em] min-h-[20em] flex flex-col items-center justify-center z-0 p-6 pr-[6em] gap-4 bg-[rgba(240,239,239,1)] relative rounded-2xl shadow-lg">
+            <h1 className="text-xl uppercase font-bold text-left w-full tracking-wide text-[rgba(37,73,43,1)]">
               Let's Make it Happen <br />
               Together!
             </h1>
-            <p className="text-base font-['Arial'] w-[80%] text-left mx-auto relative pl-4 before:content-[''] before:bg-primary-green before:absolute before:w-1 before:rounded-lg before:h-full before:top-0 before:left-0">
+            <p className="text-sm w-full text-left relative tracking-wide">
               Join now to transform your workflow and instantly expand your
               referral network. Access secure patient records and achieve true
               continuity of care with the community built by providers, for
@@ -225,126 +206,133 @@ function Signup() {
             </p>
           </div>
 
-          <form className="flex-1 flex flex-col justify-center items-center relative h-full w-full m-4 p-4 text-primary-green z-10">
-            <div className="w-full flex flex-row items-center justify-center m-0">
-              <div
-                className="w-[10%] h-full bg-center bg-no-repeat bg-contain mr-3"
-                style={{
-                  backgroundImage:
-                    "url('https://i.ibb.co/jZsMsxgS/Untitled-1.png')",
-                }}
-              />
-              <p className="flex-1 text-sm font-['Times_New_Roman'] tracking-wider text-left text-green-700">
+          <form className="w-full h-fit flex flex-col justify-center items-start relative m-4 ml-[-4em] p-8 rounded-2xl bg-[rgba(255,255,255,1)] z-10 shadow-2xl">
+            <div className="w-full flex flex-col items-start gap-4 ">
+              <p className="w-full text-xs tracking-wider text-left ">
                 Already have an accont?{" "}
                 <a
-                  href="#"
-                  className="text-primary-green font-semibold transition-all duration-200 relative cursor-pointer hover:after:content-[''] hover:after:absolute hover:after:border-b-2 hover:after:border-green-700 hover:after:animate-fadeIn hover:after:bottom-0 hover:after:left-0"
+                  onClick={handleSignin}
+                  className="font-semibold transition-all duration-200 relative cursor-pointer"
                 >
-                  Sign in here!
+                  Sign in
                 </a>
               </p>
-            </div>
-
-            <div className="w-full flex flex-col items-start pt-4">
-              <h1 className="w-full text-2xl font-semibold my-0.5 font-['Times_New_Roman'] tracking-wider">
+              <h1 className="w-full text-lg font-bold uppercase tracking-wider text-[rgba(37,73,43,1)]">
                 Create An Account
               </h1>
 
-              <div className="flex my-1 justify-start items-start w-full gap-4">
-                <div className="flex flex-col items-start justify-center w-full font-['Times_New_Roman']">
-                  <label className="text-sm tracking-wider">
-                    First Name(s):
-                  </label>
-                  <input
-                    required
-                    className="w-[95%] text-base mt-0.5 p-1 px-1 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                  />
-                </div>
-                <div className="flex flex-col items-start justify-center w-full font-['Times_New_Roman']">
-                  <label className="text-sm tracking-wider">Last Name:</label>
-                  <input
-                    required
-                    className="w-[95%] text-base mt-0.5 p-1 px-1 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                  />
-                </div>
-              </div>
+              <input
+                required
+                placeholder="firstname"
+                className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+              />
+              <input
+                required
+                placeholder="lastname"
+                className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+              />
 
-              <div className="flex my-1 justify-start items-start w-full gap-4">
-                <div className="flex flex-col items-start justify-center w-full font-['Times_New_Roman']">
-                  <label className="text-sm tracking-wider">Gender:</label>
-                  <select
-                    value={selectedGender}
-                    onChange={handleGenderDropDownChange}
-                    id="gender"
-                    className="w-[98%] text-base mt-0.5 p-1 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
-                    required
-                  >
-                    {genderOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex flex-col items-start justify-center w-full font-['Times_New_Roman']">
-                  <label className="text-sm tracking-wider">Contact No:</label>
-                  <PhoneInput
-                    value={phoneNumber}
-                    onChange={handleChange}
-                    placeholder="eg. 98765 43210"
-                    defaultCountry="IN"
-                    className={`w-[95%] text-base mt-0.5 p-1 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus-within:border-2 focus-within:border-primary-green focus-within:outline-none ${
-                      errorColor ? "border-red-500 ring-1 ring-red-500" : ""
-                    }`}
-                    inputProps={{
-                      id: "phone",
-                      required: true,
-                    }}
-                  />
-                </div>
-              </div>
+              <select
+                value={selectedGender}
+                onChange={handleGenderDropDownChange}
+                id="gender"
+                className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+                required
+              >
+                {genderOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="email"
+                required
+                className="w-full text-sm py-1 px-2 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-1 focus:border-[rgba(37,73,43,0.6)] focus:outline-none"
+                placeholder="email id ~ eg: example@gmail.com"
+              />
+              <PhoneInput
+                inputStyle={{
+                  outline: "none !important",
+                  boxShadow: "none !important",
+                }}
+                value={phoneNumber}
+                onChange={handleChange}
+                placeholder="eg. 98765 43210"
+                defaultCountry="IN"
+                className={`w-full px-2 py-[5px] rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus-within:border-[rgba(37,73,43,0.6)] focus-within:border-1 focus-within:outline-none ${
+                  errorColor ? "border-red-500 ring-1 ring-red-500" : ""
+                }`}
+                inputProps={{
+                  id: "phone",
+                  required: true,
+                }}
+              />
 
-              <div className="flex my-1 justify-start items-start w-full gap-4">
-                <div className="flex flex-col items-start justify-center w-full font-['Times_New_Roman']">
-                  <label className="text-sm tracking-wider">
-                    Date of Birth:
-                  </label>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      slotProps={{
-                        textField: {
-                          size: "small",
-                          className: "w-full focus:ring-0",
+              <div className="flex flex-row items-center justify-center gap-2 w-full">
+                <label className="text-sm text-gray-500">D.O.B:</label>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    slotProps={{
+                      textField: {
+                        size: "small", // Keep for smallest standard sizing
+                        sx: {
+                          // 1. Target the Root and InputBase Container
+                          "& .MuiInputBase-root": {
+                            // Reduces the height of the border/background area
+                            padding: "0 8px",
+                          },
+
+                          // 2. Target the actual input element (for height control)
+                          "& .MuiInputBase-input": {
+                            // Adjust vertical padding to be even smaller
+                            padding: "4px 8px",
+                            // Crucially, set the line-height to control the intrinsic height
+                            lineHeight: "1.2",
+                            fontSize: "0.75rem", // A small, readable size (0.65rem might be too small)
+                          },
+
+                          // 3. Target the Input Label (If you are using one)
+                          "& .MuiInputLabel-root": {
+                            // Make the label smaller
+                            fontSize: "0.75rem",
+                            // Adjust the label position to match the reduced padding
+                            transform: "translate(14px, 5px) scale(1)",
+
+                            // For the shrink state (label is above the input)
+                            "&.MuiInputLabel-shrink": {
+                              transform: "translate(14px, -9px) scale(0.75)",
+                            },
+                          },
+
+                          // 4. Target the Calendar Icon Adornment (for vertical centering)
+                          "& .MuiInputAdornment-root": {
+                            marginTop: "0 !important", // Ensures the icon is vertically aligned
+                          },
                         },
-                      }}
-                      value={date}
-                      onChange={(value) => setDate(value)}
-                      className="w-[95%] mt-0.5"
-                    />
-                  </LocalizationProvider>
-                </div>
-                <div className="flex flex-col items-start justify-center w-full font-['Times_New_Roman']">
-                  <label className="text-sm tracking-wider">Email Id:</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-[95%] text-base mt-0.5 p-1 px-1 rounded-md border border-gray-300 text-gray-700 transition-all duration-200 focus:border-2 focus:border-primary-green focus:outline-none"
+                        // Remove 'p-2' as it conflicts with the precise 'sx' padding
+                        className: "w-full focus:ring-0 text-sm",
+                      },
+                    }}
+                    value={date}
+                    onChange={(value) => setDate(value)}
+                    className="w-full"
                   />
-                </div>
+                </LocalizationProvider>
               </div>
 
-              <div className="flex gap-4 items-center justify-center w-full mt-6">
+              <div className="flex gap-4 items-center justify-center w-full mt-4">
                 <button
                   type="button"
                   onClick={() => setView("home")}
-                  className="flex-1 py-1 text-lg rounded-md tracking-wider border-none text-white bg-red-700 transition-all duration-200 hover:bg-red-600 hover:-translate-y-0.5"
+                  className="flex-1 bg-red-100 py-1 text-sm rounded-md tracking-wider shadow-lg border-red-300 transition-all duration-200 ease-in-out hover:bg-red-200 hover:-translate-y-0.5 hover:shadow-md"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="flex-1 py-1 text-lg rounded-md tracking-wider border-none text-white bg-primary-green transition-all duration-200 hover:bg-green-700 hover:-translate-y-0.5"
+                  className="flex-1 py-1 text-sm rounded-md tracking-wider text-[rgba(37,73,43,1)] bg-[rgba(37,73,43,0.08)] transition-all duration-200 ease-in-out shadow-lg hover:bg-[rgba(37,73,43,0.2)] hover:-translate-y-0.5 hover:shadow-md"
                 >
                   Next
                 </button>

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../Context/Context";
 
 function Signin() {
-  // START: State
+  const { view, setView } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -10,7 +12,6 @@ function Signin() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // START: Handlers
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -26,17 +27,12 @@ function Signin() {
 
     try {
       console.log("Attempting to sign in with:", formData);
-      // NOTE: Using 'username' for the check, but input names are 'email'/'password'
-      if (formData.username === "user" && formData.password === "password") {
-        console.log("Sign-in successful!");
-        // setView("signed");
+      if (formData.email === "user" && formData.password === "password") {
+        console.log("Sign-in successful with email!");
+        // Example: Set view to dashboard on successful login
+        // setView("specialist");
       } else {
-        // Fallback for actual input names if the user changes the form's name properties
-        if (formData.email === "user" && formData.password === "password") {
-          console.log("Sign-in successful with email!");
-        } else {
-          throw new Error("Invalid username or password.");
-        }
+        throw new Error("Invalid email or password.");
       }
     } catch (err) {
       setError(err.message);
@@ -45,125 +41,111 @@ function Signin() {
     }
   };
 
-  const handleCancel = () => {
-    setFormData({ username: "", password: "" });
-    // setView("");
+  const handleSignup = () => {
+    setView("signup");
   };
 
-  // START: Render
+  const handleCancel = () => {
+    setFormData({ username: "", password: "" });
+    setView("home");
+  };
+
   return (
-    <div className="m-0 flex flex-col items-center justify-center h-screen relative overflow-hidden bg-gradient-to-br from-indigo-400 to-blue-300 font-sans">
-      <div className="relative flex w-[80%] h-[80%] justify-center items-center overflow-hidden z-10 rounded-md bg-gradient-to-br from-blue-50 to-blue-200 p-4">
-        <div className="h-[80%] w-[90%] flex flex-row items-center justify-center shadow-lg rounded-md z-10 p-1.5 bg-white/70 backdrop-blur-sm">
-          {/* START: Absolute Circles (Decorative Background) */}
-          <div className="absolute top-[-55%] left-0 h-[450px] w-[450px] rounded-full bg-indigo-300 opacity-30"></div>
-          <div className="absolute top-[-15%] left-[20%] h-[200px] w-[200px] rounded-full bg-indigo-300 opacity-60"></div>
-          <div className="absolute bottom-[-30%] right-[-10%] h-[600px] w-[600px] rounded-full bg-indigo-300 opacity-20 z-0"></div>
-
-          {/* START: Signin Text Section */}
-          <div className="flex-1 p-0 flex flex-col items-center justify-center gap-4">
-            <h1 className="text-4xl m-0 mt-0 text-left w-[80%] font-bold text-gray-800">
-              Sign In
-            </h1>
-            <p className="text-base text-left w-[80%] m-0 leading-relaxed tracking-wider relative before:content-[''] before:absolute before:left-[-15px] before:top-0 before:w-1.5 before:h-full before:bg-gray-700 before:rounded-lg text-gray-600 pl-4">
-              Welcome Back. Log in to instantly connect with your global care
-              network and manage your health.
-            </p>
-          </div>
-
-          {/* START: Form Section */}
+    <div className="m-0 flex flex-col items-center justify-center h-screen relative overflow-hidden bg-[rgba(0,0,0)] font-sans">
+      <img
+        src="https://i.ibb.co/cKYXHWMv/4ac8c907a861b930604dcd5f35339288.jpg"
+        alt=""
+        className="absolute w-full h-full object-cover"
+      />
+      <div className="flex flex-row-reverse w-[70%] h-[80%] items-center z-1 rounded-2xl relative before:bg-[rgba(255,255,255,0.2)] before:absolute before:inset-0 before:backdrop-blur-sm before:rounded-2xl before:shadow-2xl shadow-2xl">
+        <div className="rounded-tr-2xl rounded-br-2xl h-full w-[60%] flex justify-center items-center p-10">
           <form
             onSubmit={handleSignIn}
-            className="border border-indigo-300 ml-auto mr-8 w-[350px] h-fit flex flex-col items-center justify-start gap-4 rounded-md p-4 bg-white shadow-xl z-20"
+            className="h-full w-full flex flex-col items-center justify-center gap-6 bg-[rgba(255,255,255,1)] z-3 rounded-2xl text-[rgba(37,73,43,1)]"
           >
-            <div className="h-12 w-full flex items-center justify-center py-4 gap-4">
-              <div
-                className="h-full w-20 bg-center bg-no-repeat bg-contain"
-                style={{
-                  backgroundImage:
-                    "url('https://i.ibb.co/jZsMsxgS/Untitled-1.png')",
-                }}
+            <h1 className="text-2xl font-bold w-[60%] tracking-wider">
+              Sign in
+            </h1>
+
+            <div className="flex flex-col items-center justify-center gap-4 w-[60%]">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="email id"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="text-sm w-full px-2 py-1 rounded-md border border-gray-300 focus:outline-none focus:border-[rgba(37,73,43,0.6)]"
               />
-              <h1 className="text-xl font-semibold tracking-wider text-gray-800">
-                HealthCare
-              </h1>
-            </div>
 
-            <div className="flex flex-col items-center justify-center gap-4 w-full">
-              {/* Email Input */}
-              <div className="flex flex-wrap items-start justify-start w-[90%]">
-                <label
-                  htmlFor="email"
-                  className="w-20 text-left text-lg text-gray-700"
-                >
-                  Email Id:
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="flex-1 text-lg px-2 py-1 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-400"
-                />
-              </div>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+                className="text-sm w-full px-2 py-1 rounded-md border border-gray-300 focus:outline-none focus:border-[rgba(37,73,43,0.6)]"
+              />
 
-              {/* Password Input */}
-              <div className="flex flex-wrap items-start justify-start w-[90%]">
-                <label
-                  htmlFor="password"
-                  className="w-20 text-left text-lg text-gray-700"
-                >
-                  Password:
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                  className="flex-1 text-lg px-2 py-1 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-400"
-                />
-              </div>
-
-              {/* Error Message */}
               {error && (
-                <p className="text-red-500 text-sm w-[90%] text-center">
+                <p className="text-red-500 text-sm w-[60%] text-left">
                   {error}
                 </p>
               )}
-
-              {/* Buttons */}
-              <div className="w-[90%] flex items-center justify-center gap-4 mt-2">
-                <button
-                  type="submit"
-                  className="flex-1 text-lg py-1.5 border-none rounded-lg text-white bg-primary-green transition-all duration-200 hover:bg-green-700 hover:-translate-y-0.5"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Signing In..." : "Sign in"}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCancel}
-                  className="flex-1 text-lg py-1.5 border-none rounded-lg text-white bg-red-700 transition-all duration-200 hover:bg-red-600 hover:-translate-y-0.5"
-                >
-                  Cancel
-                </button>
-              </div>
-
-              {/* Sign Up Link */}
-              <p className="text-sm text-gray-600 mt-2">
-                Don't have an account?{" "}
-                <a
-                  href="#"
-                  className="text-primary-green font-semibold transition-all duration-200 hover:border-b-2 hover:border-green-700"
-                >
-                  Click here
-                </a>
-              </p>
             </div>
+            <div className="w-[60%] flex items-center justify-center gap-4">
+              <button
+                type="submit"
+                className="flex-1 text-sm py-1.5 shadow-lg border-t-1 border-[rgba(37,73,43,1)] rounded-md text-[rgba(37,73,43,1)] transition-all duration-200 hover:bg-[rgba(37,73,43,0.08)] hover:-translate-y-0.5 hover:shadow-md"
+                disabled={isLoading}
+              >
+                {isLoading ? "Signing In..." : "Sign in"}
+              </button>
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="flex-1 text-sm py-1.5 border-t-1 rounded-md text-red-700 border-red-700 transition-all duration-200 shadow-lg hover:bg-red-100 hover:-translate-y-0.5 hover:shadow-md"
+              >
+                Cancel
+              </button>
+            </div>
+
+            <p className="text-xs text-gray-600 mt-1 w-[60%]">
+              Don't have an account?{" "}
+              <a
+                onClick={handleSignup}
+                className="text-[rgba(37,73,43,1)] font-semibold transition-all duration-200 hover:border-b-2 hover:border-green-700"
+              >
+                Click here
+              </a>
+            </p>
           </form>
+        </div>
+
+        <div className="z-2 w-[80%] h-full relative rounded-tl-2xl rounded-bl-2xl flex items-center justify-center">
+          <img
+            src="https://i.ibb.co/0RM7X5Pz/How-To-Find-The-Right-Healthcare-App-Development-Company-For-Your-Needs.jpg"
+            alt=""
+            className="absolute w-full h-full object-cover z-3 rounded-tl-2xl rounded-bl-2xl"
+          />
+          <div className="text-[rgba(37,73,43,1)] z-4 bg-[rgba(255,255,255,0.8)] p-4 rounded-2xl h-fit w-[64%] m-auto flex shadow-2xl items-start gap-3 justify-center flex-col">
+            <h2 className="text-xl flex flex-col gap-1 font-bold tracking-wide poppins-medium uppercase">
+              <span>Welcome</span>
+              <span className="text-[0.5em] font-lighter tracking-wide">
+                Beyond the Local Search.
+                <br />
+                Your World of Care.
+              </span>
+            </h2>
+
+            <p className="text-sm">
+              World-class healthcare has no borders. We connect you securely and
+              seamlessly with top global doctors and hospitals, eliminating
+              complexity, distance, and the wait.
+            </p>
+          </div>
         </div>
       </div>
     </div>
