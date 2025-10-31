@@ -1,6 +1,7 @@
-import React, { useState, useMemo, memo } from "react";
+import React, { useState, useMemo } from "react";
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
+// Mock data for the performance summaries
 const SUMMARY_TEXTS = {
   reviews:
     "Review submissions were characterized by pronounced peaks and valleys. The metric achieved two instances of Excellent performance (Green: > 700), hitting a high of 800 on Tuesday and climbing to a peak of 850 on Friday. This success was bracketed by a sharp drop to the week's lowest point of 200 on Thursday, which fell into the Low category (Red: < 300). The remainder of the week showed steady Medium to Good performance.",
@@ -11,58 +12,81 @@ const SUMMARY_TEXTS = {
 };
 
 const SUMMARY_KEYS = Object.keys(SUMMARY_TEXTS);
+const PRIMARY_COLOR = "bg-emerald-600";
 
-function GraphSummery() {
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+/**
+ * Renders a data summary component that cycles through different performance metrics.
+ */
+export default function GraphSummery() {
   const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
   const [readmore, setReadmore] = useState(false);
 
+  // Get the current key and text based on the index
   const currentSummaryKey = SUMMARY_KEYS[currentKeyIndex];
   const currentSummaryText = SUMMARY_TEXTS[currentSummaryKey];
 
-  const shortSummary = currentSummaryText.substring(0, 150) + "...";
+  // Memoize the truncated summary for the 'read more' functionality
+  const shortSummary = useMemo(() => {
+    const maxLen = 150;
+    if (currentSummaryText.length <= maxLen) return currentSummaryText;
+    let short = currentSummaryText.substring(0, maxLen);
+    const lastSpace = short.lastIndexOf(" ");
+    return lastSpace > 0
+      ? short.substring(0, lastSpace) + "..."
+      : short + "...";
+  }, [currentSummaryText]);
 
+  // Handler to move to the next summary in the cycle
   const handleNextSummery = () => {
     setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % SUMMARY_KEYS.length);
-    setReadmore(false);
+    setReadmore(false); // Reset readmore state when changing summary
   };
 
   return (
-    <div className="p-4 border border-gray-200 rounded-lg w-full bg-white shadow-sm">
-      <h3 className="text-md font-semibold text-gray-700 mb-2 capitalize">
-        Summary: {currentSummaryKey}
+    <div className="p-4 border border-gray-100 rounded-xl w-full bg-white shadow-lg">
+      <h3 className="text-xl font-bold text-gray-800 mb-2 capitalize border-b pb-2">
+        Data Snapshot: {currentSummaryKey}
       </h3>
 
       <p className="text-sm text-gray-600 mb-3 leading-relaxed transition-all duration-200 ease-in-out">
+        {/* Display full text if readmore is true, otherwise display short summary */}
         {readmore ? currentSummaryText : shortSummary}
 
+        {/* Read More/View Less Toggle */}
         <span
-          className="ml-2 font-lighter text-sm text-blue-400 hover:text-blue-800 cursor-pointer transition-colors flex items-center gap-1"
+          className="ml-2 font-medium text-sm text-emerald-500 hover:text-emerald-700 cursor-pointer transition-colors flex items-center gap-1 mt-1"
           onClick={() => setReadmore(!readmore)}
           role="button"
         >
           {readmore ? (
             <>
               View Less{" "}
-              <ChevronDownIcon className="w-3 h-3 transform rotate-180 transition-all duration-200 ease-in-out" />
+              <ChevronDownIcon className="w-4 h-4 transform rotate-180 transition-all duration-200 ease-in-out" />
             </>
           ) : (
             <>
               Read More{" "}
-              <ChevronDownIcon className="w-3 h-3 transition-all duration-200 ease-in-out" />
+              <ChevronDownIcon className="w-4 h-4 transition-all duration-200 ease-in-out" />
             </>
           )}
         </span>
       </p>
 
+      {/* Button to cycle to the next summary metric */}
       <button
         onClick={handleNextSummery}
-        className="flex itemes-center justify-center items-center gap-1 px-3 py-1 bg-[rgba(37,73,43,0.8)] text-white text-xs font-lighter rounded hover:bg-[rgba(37,73,43,1)] transition-all duration-200 ease-in-out"
+        className={classNames(
+          PRIMARY_COLOR,
+          "flex items-center justify-center gap-1 px-4 py-2 text-white text-sm font-medium rounded-lg hover:opacity-90 transition-all duration-200 ease-in-out shadow-md hover:shadow-lg active:scale-95"
+        )}
       >
-        <span>Next</span>
+        <span>Next Summary</span>
         <ChevronRightIcon className="h-4 w-4" />
       </button>
     </div>
   );
 }
-
-export default GraphSummery;

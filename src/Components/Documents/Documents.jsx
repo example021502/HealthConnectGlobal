@@ -1,256 +1,414 @@
-function Documents() {
-  return (
-    // .history_container_div
-    <div className="flex flex-col items-center justify-center w-full mx-0 py-8 bg-primary-color">
-      {/* .history_top_bar_div */}
-      <div className="flex flex-row items-center w-[80%] p-4 mx-auto mb-6 bg-white rounded-md shadow-sm">
-        {/* .logo_icon (using a div with inline style for the image) */}
-        <div
-          className="mr-4 h-10 w-10 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url("https://i.ibb.co/pjRdgCRL/Gemini-Generated-Image-1ubt531ubt531ubt-removebg-preview.png")`,
-          }}
-        />
+import React, { useState, useCallback } from "react";
+import {
+  Settings,
+  Moon,
+  Bell,
+  User,
+  ChevronDown,
+  Save,
+  Loader,
+  AlertTriangle,
+  Lock,
+} from "lucide-react";
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  signInWithCustomToken,
+  signInAnonymously,
+} from "firebase/auth";
+import { getFirestore, doc, setDoc, onSnapshot } from "firebase/firestore";
 
-        {/* .text_search_bar_div */}
-        <div className="flex flex-col items-start justify-start mx-4">
-          <h2 className="text-xl font-semibold mb-1 text-gray-800">
-            My Documents: Secure Health Vault
-          </h2>
+// --- Utility Components ---
 
-          {/* .search_bar_div */}
-          <div className="relative w-[350px] flex items-center justify-center">
-            <input
-              type="text"
-              placeholder="Search by keyword, date, or doctor..."
-              className="flex-1 px-4 py-2 text-sm border border-gray-300 outline-none rounded-lg focus:border-blue-500"
-            />
-            {/* Search Icon */}
-            <i className="ri-search-line absolute right-4 text-base text-gray-500 z-10 cursor-pointer transition-all duration-200 hover:text-gray-700 hover:scale-110" />
-          </div>
-        </div>
+/**
+ * A reusable, styled toggle switch component.
+ */
+const ToggleSwitch = ({ label, enabled, setEnabled }) => (
+  <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700/50">
+    <span className="text-gray-700 dark:text-gray-300 font-medium">
+      {label}
+    </span>
+    <button
+      onClick={() => setEnabled((prev) => !prev)}
+      className={`${
+        enabled ? "bg-indigo-600" : "bg-gray-200 dark:bg-gray-600"
+      } relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2`}
+      role="switch"
+      aria-checked={enabled}
+    >
+      <span
+        aria-hidden="true"
+        className={`${
+          enabled ? "translate-x-5" : "translate-x-0"
+        } pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}
+      />
+    </button>
+  </div>
+);
 
-        {/* .add_document_div */}
-        <div className="ml-auto flex items-center justify-center px-4 py-2 text-sm cursor-pointer transition-all duration-200 hover:text-green-900 hover:font-bold hover:translate-y-[-2px] hover:scale-[1.02]">
-          {/* Icon */}
-          <i className="ri-add-line text-2xl text-white bg-green-700 border border-green-700 rounded-full mr-1 flex items-center justify-center transition-all duration-200 p-0.5" />
-          {/* Text */}
-          <span className="text-green-700 font-medium text-base">
-            Add Document
-          </span>
-        </div>
+/**
+ * A reusable select/dropdown component.
+ */
+const SelectInput = ({ label, value, onChange, options }) => (
+  <div className="py-3 border-b border-gray-100 dark:border-gray-700/50">
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      {label}
+    </label>
+    <div className="relative">
+      <select
+        value={value}
+        onChange={onChange}
+        className="block w-full appearance-none rounded-lg border border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 py-2 pl-3 pr-10 text-base text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm shadow-sm transition duration-150"
+      >
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+      <ChevronDown
+        className="pointer-events-none absolute inset-y-0 right-0 h-full w-5 text-gray-400 mr-3"
+        aria-hidden="true"
+      />
+    </div>
+  </div>
+);
+
+/**
+ * A reusable text input component.
+ */
+const TextInput = ({ label, value, onChange, placeholder }) => (
+  <div className="py-3">
+    <label
+      htmlFor={label.replace(/\s/g, "-")}
+      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+    >
+      {label}
+    </label>
+    <input
+      type="text"
+      id={label.replace(/\s/g, "-")}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className="block w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-3 text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm shadow-sm transition duration-150"
+    />
+  </div>
+);
+
+/**
+ * Gets the Firestore document reference for user settings.
+ * @param {import('firebase/firestore').Firestore} dbInstance
+ * @param {string} currentUserId
+ * @returns {import('firebase/firestore').DocumentReference}
+ */
+const getSettingsDocRef = (dbInstance, currentUserId) => {
+  // MANDATORY: Use __app_id for collection path
+  const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
+  // Path: /artifacts/{appId}/users/{userId}/settings/user_preferences
+  return doc(
+    dbInstance,
+    `/artifacts/${appId}/users/${currentUserId}/settings/user_preferences`
+  );
+};
+
+/**
+ * Main component wrapper for the settings panel.
+ * @returns {JSX.Element}
+ */
+const App = () => {
+  // Database and Auth States
+  const [db, setDb] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [dbError, setDbError] = useState(null);
+
+  // Settings States (Default Values)
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isEmailNotifications, setIsEmailNotifications] = useState(true);
+  const [notificationSound, setNotificationSound] = useState("chime");
+  const [profileName, setProfileName] = useState("Jane Doe");
+  const [sessionTimeout, setSessionTimeout] = useState("60"); // New setting
+
+  // UI States
+  const [statusMessage, setStatusMessage] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+
+  // --- Firebase Initialization and Data Listener ---
+  React.useEffect(() => {
+    const initFirebase = async () => {
+      try {
+        const firebaseConfig = JSON.parse(
+          typeof __firebase_config !== "undefined" ? __firebase_config : "{}"
+        );
+        if (Object.keys(firebaseConfig).length === 0) {
+          throw new Error("Firebase configuration is missing.");
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const firestoreDb = getFirestore(app);
+        const auth = getAuth(app);
+        setDb(firestoreDb);
+
+        let currentUser = null;
+        if (typeof __initial_auth_token !== "undefined") {
+          const userCredential = await signInWithCustomToken(
+            auth,
+            __initial_auth_token
+          );
+          currentUser = userCredential.user;
+        } else {
+          const userCredential = await signInAnonymously(auth);
+          currentUser = userCredential.user;
+        }
+
+        const currentUserId = currentUser?.uid || crypto.randomUUID();
+        setUserId(currentUserId);
+
+        // Setup real-time listener for user settings
+        const settingsDocRef = getSettingsDocRef(firestoreDb, currentUserId);
+        const unsubscribe = onSnapshot(
+          settingsDocRef,
+          (docSnap) => {
+            if (docSnap.exists()) {
+              const data = docSnap.data();
+              // Load settings from Firestore, falling back to current state if null
+              setIsDarkMode(data.isDarkMode ?? isDarkMode);
+              setIsEmailNotifications(
+                data.isEmailNotifications ?? isEmailNotifications
+              );
+              setNotificationSound(data.notificationSound ?? notificationSound);
+              setProfileName(data.profileName ?? profileName);
+              setSessionTimeout(data.sessionTimeout ?? sessionTimeout);
+            }
+            setIsLoading(false);
+          },
+          (err) => {
+            console.error("Firestore Listener Error:", err);
+            setDbError("Failed to load settings. Check console for details.");
+            setIsLoading(false);
+          }
+        );
+
+        return () => unsubscribe(); // Cleanup listener
+      } catch (e) {
+        console.error("Firebase Initialization Error:", e);
+        setDbError(
+          e.message || "An unknown database error occurred during setup."
+        );
+        setIsLoading(false);
+      }
+    };
+    initFirebase();
+  }, []);
+
+  // --- Dark Mode Apply Effect ---
+  React.useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  // --- Save Function ---
+  const handleSave = useCallback(async () => {
+    if (!db || !userId) {
+      setDbError("Error: Database connection failed. Cannot save.");
+      return;
+    }
+
+    setIsSaving(true);
+    setStatusMessage("Saving...");
+    setDbError(null);
+
+    const settingsToSave = {
+      isDarkMode,
+      isEmailNotifications,
+      notificationSound,
+      profileName,
+      sessionTimeout,
+      lastUpdated: new Date().toISOString(),
+    };
+
+    try {
+      const settingsDocRef = getSettingsDocRef(db, userId);
+      // Using setDoc with merge: true to avoid overwriting the entire document
+      await setDoc(settingsDocRef, settingsToSave, { merge: true });
+      setStatusMessage("Settings saved successfully!");
+    } catch (e) {
+      console.error("Save Error:", e);
+      setDbError("Failed to save settings. Please try again.");
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => {
+        setStatusMessage("");
+        setDbError(null);
+      }, 3000);
+    }
+  }, [
+    db,
+    userId,
+    isDarkMode,
+    isEmailNotifications,
+    notificationSound,
+    profileName,
+    sessionTimeout,
+  ]);
+
+  // --- Options Data ---
+  const soundOptions = [
+    { value: "none", label: "None" },
+    { value: "chime", label: "Chime (Default)" },
+    { value: "bell", label: "Ringing Bell" },
+    { value: "swoosh", label: "Swoosh" },
+  ];
+
+  const timeoutOptions = [
+    { value: "30", label: "30 Minutes" },
+    { value: "60", label: "1 Hour (Default)" },
+    { value: "240", label: "4 Hours" },
+    { value: "never", label: "Never (Not recommended)" },
+  ];
+
+  const SettingSection = ({ icon: Icon, title, children }) => (
+    <div className="mb-8 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg transition duration-300">
+      <h2 className="flex items-center text-xl font-bold text-gray-800 dark:text-white mb-4 border-b pb-3 border-gray-100 dark:border-gray-700">
+        <Icon className="w-5 h-5 mr-3 text-indigo-500" />
+        {title}
+      </h2>
+      <div className="space-y-4">{children}</div>
+    </div>
+  );
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <Loader className="w-8 h-8 animate-spin text-indigo-500 mr-3" />
+        <span className="text-gray-700 dark:text-gray-300 text-lg">
+          Loading Settings...
+        </span>
       </div>
+    );
+  }
 
-      {/* .documents_bottom_container_div */}
-      <div className="flex flex-row items-start w-[90%] p-8 gap-8 rounded-md">
-        {/* .document_bottom_left_div */}
-        <div className="flex flex-col items-center justify-center w-80 bg-white rounded-md shadow-md p-4">
-          <h2 className="text-xl font-medium tracking-wide pb-1 mb-3 mt-4 border-b border-gray-300 w-full text-center">
-            Quick Access
-          </h2>
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-8 transition duration-500 font-sans">
+      <div className="max-w-4xl mx-auto">
+        <header className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200 dark:border-gray-700">
+          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white flex items-center">
+            <Settings className="w-7 h-7 mr-3 text-indigo-600" />
+            User Settings
+          </h1>
+        </header>
 
-          {/* Latest MRI */}
-          <p className="flex items-center justify-start w-4/5 p-3 my-2 text-sm bg-white rounded-md shadow-md cursor-pointer transition-all duration-200 hover:translate-y-[-2px] hover:scale-[1.01]">
-            <i className="ri-first-aid-kit-line text-lg text-green-700 mr-2" />
-            Latest MRI
-          </p>
-
-          {/* Annual Physical Report */}
-          <p className="flex items-center justify-start w-4/5 p-3 my-2 text-sm bg-white rounded-md shadow-md cursor-pointer transition-all duration-200 hover:translate-y-[-2px] hover:scale-[1.01]">
-            <i className="ri-history-line text-lg text-green-700 mr-2" />
-            Annual Physical Report Medication List
-          </p>
-
-          {/* Urgent Data: Allergies */}
-          <ul className="flex flex-col items-center w-4/5 p-4 mt-4 bg-red-100 rounded-md shadow-md transition-all duration-200">
-            <span className="w-full text-left text-lg font-semibold text-red-700 mb-1">
-              Urgent Data: Allergies
-            </span>
-            <li className="list-none w-[90%] text-left my-0.5 text-base">
-              Pencillin
-            </li>
-            <li className="list-none w-[90%] text-left my-0.5 text-base">
-              Sheliff
-            </li>
-            <li className="list-none w-[90%] text-left my-0.5 text-base">
-              Dust Mites
-            </li>
-          </ul>
-
-          {/* Last Added Documents */}
-          <div className="flex flex-col items-center justify-center w-4/5 p-4 my-4 rounded-md shadow-md bg-white">
-            <h3 className="w-full text-sm font-semibold tracking-wider pb-1 mb-1 border-b border-gray-300 text-gray-800">
-              Last 5 Added{" "}
-              <i className="ri-history-line text-base text-green-700 ml-1" />
-            </h3>
-            <p className="w-full text-left text-xs font-light my-0.5">
-              Ootho Consult (09/28/25)
-            </p>
-            <p className="w-full text-left text-xs font-light my-0.5">
-              Dental X-Ray{" "}
-            </p>
-            <p className="w-full text-left text-xs font-light my-0.5">
-              Vaccine Record (09/15/25)
-            </p>
-            <p className="w-full text-left text-xs font-light my-0.5">
-              Insurance Card (09/10/25)
-            </p>
+        {/* --- Database Error Message --- */}
+        {dbError && (
+          <div className="flex items-center p-4 mb-6 rounded-lg bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 font-medium shadow-md">
+            <AlertTriangle className="w-5 h-5 mr-3 flex-shrink-0" />
+            <span className="text-sm">{dbError}</span>
           </div>
-        </div>
+        )}
 
-        {/* .document_bottom_right_div */}
-        <div className="flex flex-col flex-1 items-center justify-center p-4 bg-white rounded-md shadow-md gap-4">
-          {/* List 1: Clinical History */}
-          <ul className="w-[90%] rounded-md">
-            <p className="text-xl font-semibold tracking-wider w-full mb-2 text-gray-800">
-              1. My Clinical History
-            </p>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-heart-pulse-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  Complete Blood Count
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Quest Diagnosis
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                10/05/2025
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-microscope-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  Spine MRI Report
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Dr. Emily Chen
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                10/05/2025
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-mental-health-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  Psychiatric Evaluation
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Dr. Alex Johnson
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                10/05/2025
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-          </ul>
+        {/* --- Appearance Settings --- */}
+        <SettingSection icon={Moon} title="Appearance">
+          <ToggleSwitch
+            label="Enable Dark Mode"
+            enabled={isDarkMode}
+            setEnabled={setIsDarkMode}
+          />
+          <ToggleSwitch
+            label="Use System Font (Inter)"
+            enabled={true}
+            setEnabled={() => {}}
+          />
+        </SettingSection>
 
-          {/* List 2: Treatments & Medications */}
-          <ul className="w-[90%] rounded-md">
-            <p className="text-xl font-semibold tracking-wider w-full mb-2 text-gray-800">
-              2. Treatments & Medications
-            </p>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-dna-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  Current Medication List
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Vaccination Record (ibuporen)
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                10/05/2025
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-dna-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  E-Prescription Report (2024)
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Allergies: Penicillin, Shelleff
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                10/05/2025
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-          </ul>
+        {/* --- Notifications Settings --- */}
+        <SettingSection icon={Bell} title="Notifications">
+          <ToggleSwitch
+            label="Email Notifications"
+            enabled={isEmailNotifications}
+            setEnabled={setIsEmailNotifications}
+          />
+          <ToggleSwitch
+            label="In-App Popup Alerts"
+            enabled={true}
+            setEnabled={() => {}}
+          />
+          <SelectInput
+            label="Notification Sound"
+            value={notificationSound}
+            onChange={(e) => setNotificationSound(e.target.value)}
+            options={soundOptions}
+          />
+        </SettingSection>
 
-          {/* List 3: Health & Wellness Data */}
-          <ul className="w-[90%] rounded-md">
-            <p className="text-xl font-semibold tracking-wider w-full mb-2 text-gray-800">
-              3. Health & Wellness Data
-            </p>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-heart-pulse-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  Blood Pressure Log (Q3 Report)
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Physical Therapy Plan
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                10/05/2025
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-heart-pulse-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  Blood Sugar Records (Last 6 Months)
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Dietary Recommendations
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                10/05/2025
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-          </ul>
+        {/* --- Profile Settings --- */}
+        <SettingSection icon={User} title="User Profile">
+          <TextInput
+            label="Display Name"
+            value={profileName}
+            onChange={(e) => setProfileName(e.target.value)}
+            placeholder="Enter your full name"
+          />
+          <TextInput
+            label="Username (Cannot be changed)"
+            value="janedoe42"
+            onChange={() => {}} // Disabled input
+            placeholder=""
+          />
+        </SettingSection>
 
-          {/* List 4: Administrative & Legal */}
-          <ul className="w-[90%] rounded-md">
-            <p className="text-xl font-semibold tracking-wider w-full mb-2 text-gray-800">
-              4. Administrative & Legal
-            </p>
-            <li className="list-none my-4 p-4 flex items-center text-sm font-normal shadow-md bg-gray-50 rounded-md">
-              <i className="ri-bank-card-line text-2xl text-green-700 mr-3" />
-              <span className="flex flex-col items-start justify-center flex-1 text-sm">
-                <span className="font-medium text-gray-800">
-                  Insurance Card (2024)
-                </span>
-                <span className="text-xs text-gray-600 mt-0.5">
-                  Advance Healthcare Directive
-                </span>
-              </span>
-              <span className="ml-auto flex items-end justify-center text-sm text-green-700">
-                Living Will
-                <i className="ri-download-line text-lg border border-green-900 rounded-full p-0.5 ml-2 transition-all duration-200 hover:cursor-pointer hover:bg-green-700 hover:text-white hover:scale-125" />
-              </span>
-            </li>
-          </ul>
+        {/* --- Privacy & Security Settings (NEW FEATURE) --- */}
+        <SettingSection icon={Lock} title="Privacy & Security">
+          <SelectInput
+            label="Auto-Logout Session Timeout"
+            value={sessionTimeout}
+            onChange={(e) => setSessionTimeout(e.target.value)}
+            options={timeoutOptions}
+          />
+          <p className="text-sm text-gray-500 dark:text-gray-400 pt-1">
+            Your unique session ID is:{" "}
+            <code className="bg-gray-200 dark:bg-gray-700 p-1 rounded text-xs font-mono">
+              {userId || "N/A"}
+            </code>
+          </p>
+        </SettingSection>
+
+        {/* --- Save Button & Status --- */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <button
+            onClick={handleSave}
+            disabled={isSaving || !!dbError}
+            className={`w-full sm:w-auto flex items-center justify-center rounded-lg px-6 py-3 text-lg font-semibold text-white shadow-lg transition duration-150 transform active:scale-95 ${
+              isSaving || dbError
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/50 hover:scale-[1.01]"
+            }`}
+          >
+            {isSaving ? (
+              <Loader className="w-5 h-5 mr-2 animate-spin" />
+            ) : (
+              <Save className="w-5 h-5 mr-2" />
+            )}
+            {isSaving ? "Saving..." : "Save Changes"}
+          </button>
+          {(statusMessage || dbError) && (
+            <div
+              className={`text-sm font-medium p-2.5 rounded-lg transition duration-300 ${
+                dbError
+                  ? "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/50"
+                  : "text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/50"
+              }`}
+            >
+              {statusMessage || dbError}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default Documents;
+export default App;

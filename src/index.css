@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+.phone-input-override-wrapper .flag-dropdown {
+  background-color: transparent !important;
+  left: 2.5em !important;
+  border: none !important;
+}
+.phone-input-override-wrapper .flag-dropdown:hover {
+  border-bottom: 1px solid rgb(153, 161, 175, 0.2) !important;
+  border-top: 1px solid rgb(153, 161, 175, 0.2) !important;
+}
