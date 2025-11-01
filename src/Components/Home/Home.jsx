@@ -1,18 +1,18 @@
 import { AuthContext } from "../Context/Context";
 import { useContext, useEffect, useState } from "react";
-
+import { Mail } from "lucide-react";
 function ToolCard({ tool }) {
   const [hover, setHover] = useState(false);
 
   const cardClasses = `
-    transition-all cursor-pointer duration-300 ease-in-out flex flex-col items-start p-4 justify-center w-full max-w-[200px] h-fit rounded-xl relative 
+    transition-all cursor-pointer duration-300 ease-in-out flex flex-col items-start p-4 justify-center w-full max-w-[250px] h-fit rounded-xl relative 
     bg-[rgba(255,255,255,0.8)] backdrop-blur-sm shadow-md text-gray-800
     overflow-hidden
     after:absolute after:inset-0 after:z-[-1] after:rounded-xl 
     after:bg-[rgba(0,107,255,1)] 
     after:scale-x-[0] after:origin-left
     hover:after:scale-x-[1] hover:after:transition-transform hover:after:duration-300 hover:after:ease-in-out
-    hover:text-white
+    hover:text-white gap-2
   `;
 
   return (
@@ -22,16 +22,16 @@ function ToolCard({ tool }) {
       key={tool.id}
       className={cardClasses}
     >
-      <p className="text-xs font-semibold m-0 transition-colors duration-300">
+      <p className="text-md font-semibold m-0 transition-colors duration-300">
         {tool.title}
       </p>
       <i
         id="icon"
-        className={`text-[2em] w-10 h-10 flex items-center justify-center font-semibold transition-colors duration-300 ${
+        className={`text-[3em] w-10 h-10 flex items-center justify-center font-semibold transition-colors duration-300 ${
           tool.icon
         } ${hover ? "text-white" : "text-[rgba(0,107,255,1)]"}`}
       />
-      <p className="text-xs font-light tracking-wide transition-colors duration-300">
+      <p className="text-sm font-light tracking-wide transition-colors duration-300">
         {tool.description}
       </p>
     </div>
@@ -312,7 +312,7 @@ function Home() {
             />
           </div>
 
-          <div className="w-full lg:w-[50%] h-fit text-gray-800 z-4 flex flex-wrap items-center justify-center gap-4 p-4">
+          <div className="w-full lg:w-[60%] h-fit text-gray-800 z-4 flex flex-wrap items-center justify-center gap-8 p-4">
             {connection_tools.map((tool) => (
               <ToolCard key={tool.id} tool={tool} />
             ))}
@@ -320,68 +320,59 @@ function Home() {
         </div>
 
         {/* Footer */}
-        <div className="mt-10 px-6 pt-6 flex text-xs text-white bg-[rgba(0,107,255,1)] flex-col items-center justify-start w-full">
-          <div className="flex items-start flex-wrap gap-10 justify-center w-full pb-10">
-            <div className="w-56 bg-[#0467f1] h-fit shadow-md rounded-lg p-8 flex flex-col items-start justify-center gap-2">
-              <div className="flex items-center justfy-start gap-4">
-                <p
-                  className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]"
-                  onClick={handleSignin}
-                >
-                  Login
-                </p>
-                <p
-                  className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]"
-                  onClick={handleSignup}
-                >
-                  Sign up
-                </p>
-              </div>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Telehealth Consultations
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                EHR & RPM Access
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Provider Directory
-              </p>
-            </div>
-
-            <div className="w-56 bg-[#0467f1] h-fit shadow-md rounded-lg p-8 flex flex-col items-start justify-center gap-2">
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Help Center
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                FAQs
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Health Library
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Community Forum
-              </p>
-            </div>
-
-            <div className="w-56 bg-[#0467f1] h-fit shadow-md rounded-lg p-8 flex flex-col items-start justify-center gap-2">
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Privacy Policy
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Terms of Service
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                About Us
-              </p>
-              <p className="hover:font-semibold transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-[2px]">
-                Make Donation
-              </p>
-            </div>
-          </div>
-
-          <p className="font-mono text-xs font-lighter m-4 pt-4 border-t border-[rgba(255,255,255,0.2)] w-full text-center">
+        <div className="mt-10 px-6 pt-6 flex text-md text-white bg-[rgba(0,107,255,1)] flex-col items-center justify-start w-full">
+          <p className="font-mono text-xs font-lighter m-4 pb-4 border-b border-[rgba(255,255,255,0.2)] w-full text-center">
             © [2025] InterHealthConnect. All rights reserved.
           </p>
+          <div className="flex items-start flex-wrap gap-10 justify-center w-full pb-10">
+            <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
+              <h2 className="text-xl font-bold tracking-wide">Policies</h2>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full text-md rounded-sm px-2">
+                Ethics
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Information disclosure
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Permission & Licensing
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Terms of Use
+              </a>
+            </div>
+            <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
+              <h2 className="text-xl font-bold tracking-wide">About Us</h2>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full text-md rounded-sm px-2">
+                Health Library
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Frequently Asked Questions
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Community Forum
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Make a Donation
+              </a>
+            </div>
+            <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
+              <h2 className="text-xl font-bold tracking-wide">Contact Us</h2>
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                <a className="transition-all duration-300 ease-in-out cursor-pointer relative after:content['email'] after:absolute after:text-white after:top-4 after:z-4 after:left-[100%] after:bg-black">
+                  <Mail className="w-8 h-8 text-[#0467f1]" />
+                </a>
+              </div>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Frequently Asked Questions
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Community Forum
+              </a>
+              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
+                Make a Donation
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
