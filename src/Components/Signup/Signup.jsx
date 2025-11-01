@@ -161,7 +161,7 @@ function Signup() {
 
         {/* Right Panel: Form */}
         <div className="w-lg m-auto lg:w-1/2 p-8 md:p-10 md:w-1/2 flex flex-col justify-center relative">
-          <div className="mb-6 text-center lg:text-left">
+          <div className="mb-4 mt-4 text-center lg:text-left">
             <h2 className="text-[1.5em] font-bold text-gray-900 mb-2">
               {next ? "Set Account Security" : "Create Your Profile"}
             </h2>
@@ -192,10 +192,10 @@ function Signup() {
               <button
                 type="button"
                 onClick={handleBack}
-                className="lg:hidden text-indigo-600 hover:text-indigo-800 transition duration-150 flex items-center text-sm font-medium mb-4"
+                className="text-indigo-600 hover:text-indigo-800 transition duration-150 flex items-center text-sm font-medium absolute left-10 top-4 shadow-md px-4 py-2 rounded-2xl bg-gray-200"
               >
                 <ArrowLeft className="w-4 h-4 mr-1" />
-                Back to Personal Info
+                Back
               </button>
 
               {/* Country Input */}
@@ -293,13 +293,13 @@ function Signup() {
               </div>
 
               {/* Terms Checkbox */}
-              <p className="text-left text-xs flex items-start justify-start tracking-wide w-full pt-2">
+              <p className="text-left text-xs flex items-center justify-start tracking-wide w-full">
                 <input
                   type="checkbox"
                   required
-                  className="mt-1 mr-2 accent-indigo-600 rounded"
+                  className="mr-2 accent-indigo-600 rounded"
                 />{" "}
-                I accept the
+                <span>I accept the</span>
                 <a
                   href="#"
                   className="cursor-pointer text-indigo-600 font-medium ml-1 hover:text-indigo-800 transition-all duration-200 border-b border-transparent hover:border-indigo-800"
@@ -309,7 +309,7 @@ function Signup() {
               </p>
 
               {/* Buttons */}
-              <div className="flex gap-4 items-center justify-center w-full pt-4">
+              <div className="flex gap-4 items-center justify-center w-full pt-1">
                 <button
                   type="submit"
                   className="flex-1 py-3 text-sm rounded-lg tracking-wider font-semibold text-white bg-indigo-600 transition-all duration-200 ease-in-out shadow-lg hover:bg-indigo-700 hover:shadow-xl flex items-center justify-center"
