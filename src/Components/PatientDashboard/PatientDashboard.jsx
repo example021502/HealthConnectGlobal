@@ -2,9 +2,8 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { AuthContext } from "../Context/Context";
 
 import {
-  Heart,
+  History,
   Calendar,
-  Shield,
   Stethoscope,
   Clock,
   FileText,
@@ -13,10 +12,14 @@ import {
   MessageCircle,
   LogOut,
   Bell,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 // MOCK NOTIFICATION COUNT
 let noteNumber = 31;
+let HealthStatus = "Everything looks good!";
+
 const MOCK_CARE_TEAM = [
   {
     id: 1,
@@ -48,6 +51,45 @@ const UPCOMING_APPOINTMENT = {
   location: "Main Clinic, Room 302",
   reason: "Routine Consultation",
 };
+
+// MOCK HISTORY DATA
+const historydata = [
+  {
+    id: 1,
+    date: "15 Mar 2024",
+    type: "Prescription",
+    summery: "Refill of Atenolol 50mg",
+    ProviderLocation: "Dr. Smith",
+  },
+  {
+    id: 2,
+    date: "01 Mar 2024",
+    type: "Hospital Visit",
+    summery: "Emergency Room Visit",
+    ProviderLocation: "St. Jude's Medical Center",
+  },
+  {
+    id: 3,
+    date: "10 Feb 2024",
+    type: "Appointment",
+    summery: "Follow up for blood pressure",
+    ProviderLocation: "Cardiology Department",
+  },
+  {
+    id: 4,
+    date: "20 Jan 2024",
+    type: "Lab Results",
+    summery: "Cholesterol levels reviewed",
+    ProviderLocation: "Dr. Smith",
+  },
+  {
+    id: 5,
+    date: "12 Oct 2022",
+    type: "Procedure",
+    summery: "Seasonal Flu Vaccination",
+    ProviderLocation: "Pharmaco Wellness Center",
+  },
+];
 
 // DOCTORS TABLE DATA
 const LATEST_ONBOARDING = [
@@ -134,66 +176,156 @@ function RatingStars({ rate }) {
 const PatientDashboard = () => {
   const tdref = useRef(null);
   const cellWidth = 10;
-const [exiting, setExiting] = useState(false);
-
+  const [exiting, setExiting] = useState(false);
+  const [expandHistory, setExpandHistory] = useState(false);
+  const [patientName, setPatientName] = useState("");
   const { setView } = useContext(AuthContext);
-const handleExiting=()=>{
-    setExiting(true)
-   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 600) {
+        setPatientName(", Alice Johnson");
+      } else {
+        setPatientName("");
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleExiting = () => {
+    setExiting(true);
+  };
+  const handleConfirmClosing = () => {
+    setExiting(false);
+    setView("home");
+  };
+  const handleCancelClosing = () => {
+    setExiting(false);
+  };
+
+  const handleExpandHistory = () => {
+    setExpandHistory(true);
+  };
+  const handleCollapseHistory = () => {
+    setExpandHistory(false);
+  };
 
   // Main render
   return (
     <div className="flex flex-col h-screen w-full bg-gray-50 font-sans p-6 overflow-y-auto">
-      {exiting && (<div className="absolute top-0 left-0 z-10000 w-full h-full bg-[rgba(255,255,255)]">
-        <div className="w-fit h-fit p-4 flex flex-col items-center justify-center">
-          <p><span>!Warning:{" "}</span>Confirm to close</p>
-          <div className="flex flex-wrap text-sm font-bold tracking-wide gap-2 items-center">
-            <button className="w-full py-2 bg-green-200  text-white text-sm font-lighter"><Check className="w-8 h-8"/><span>Confirm</span></button>
-            <button className="w-full py-2"><i className="ri-close-line text-sm font-lighter"/><span>Cancel</span></button>
-          </div>
-        </div>
-      </div>)}
-      {/* Header */}
-      <header className="relative gap-4 pb-4 flex items-center justify-start flex-wrap">
-        <img
-          src="https://i.ibb.co/JWk99wwG/d6.jpg"
-          alt="Alice Johnson"
-          className="w-40 h-40 object-cover rounded-full"
-        />
-        <div>
-          <h1
-            className={`text-3xl font-extrabold text-indigo-700 flex items-center`}
-          >
-            <Shield className={`w-8 h-8 mr-3 relative`} />
-            Welcome, Alice Johnson
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Your Personal Health Overview — Everything looks good!
-          </p>
-        </div>
-        <div className="ml-auto absolute right-4 top-0 flex flex-row items-center justify-center gap-4 w-fit">
-          <div className={`w-fit h-fit relative`}>
-            <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] w-3.5 h-3.5 rounded-tr-full rounded-tl-full rounded-br-full text-[10px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
-              {noteNumber}
+      {exiting && (
+        <div className="absolute top-0 left-0 z-10000 w-full h-full bg-[rgba(0,0,0,0.4)] transition-all duration-200 ease-in-out flex items-center justify-center">
+          <div className="w-fit h-fit p-8 gap-8 transition-all duration-200 ease-in-out flex flex-col rounded-2xl shadow-2xl items-center justify-center before:inset-0 before:absolute relative before:bg-[rgba(255,255,255,0.8)] before:top-0 before:left-0 before:z-[-1] z-1 before:rounded-2xl ">
+            <p className="text-lg">
+              <span className="text-red-500 font-lighter">!Warning: </span>
+              Confirm to close
             </p>
-            <Bell className="w-5 h-5" />
+            <div className="flex w-full flex-wrap sm:flex-nowrap text-md text-white font-bold tracking-wide gap-2 items-center">
+              <button
+                onClick={handleConfirmClosing}
+                className="w-full py-2 px-8 rounded-xl flex items-center justify-center flex-row bg-[rgba(67,56,202,1)] hover:bg-[#2f278e] transition-all duration-200 ease-in-out"
+              >
+                <Check className="min-w-2" />
+                <span>Confirm</span>
+              </button>
+              <button
+                onClick={handleCancelClosing}
+                className="w-full py-2 px-8 rounded-xl flex items-center justify-center flex-row bg-[#821313] hover:bg-[#691212] transition-all duration ease-in-out"
+              >
+                <i className="ri-close-line font-lighter mr-1" />
+                <span>Cancel</span>
+              </button>
+            </div>
           </div>
-          <User className="w-10 h-10 rounded-full bg-white shadow-sm text-gray-700 border-2 border-indigo-200" />
-          <div className="flex flex-row w-fit h-fit transition-all duration-200 ease-in-out gap-[2px] text-sm text-indigo-700 hover:scale-[1.1]" onClick={handleExiting}>
-            <LogOut className={`w-5 h-5 text-indigo-700 relative `} />
-            <p>Exit</p>
+        </div>
+      )}
+      {/* Header */}
+      <header className="rounded-2xl relative gap-4 p-4 mb-8 flex items-center justify-start flex-wrap">
+        <img
+          src="https://i.ibb.co/Wps552Cd/back.png"
+          alt="BACKGROUND"
+          className="w-full z-1 h-full object-cover rounded-2xl repeat absolute top-0 left-0"
+        />
+
+        <img
+          src="https://i.ibb.co/KxPQ4f9L/Secure-Appointment.jpg"
+          alt="Alice Johnson"
+          className="md:w-40 z-2 md:h-40 sm:w-25 sm:h-25  w-20 h-20 object-cover shadow-2xl rounded-full border-2 border-gray-100"
+        />
+        <div className="bg-gray-50 pl-4 relative z-2 rounded-2xl shadow-2xl h-full flex flex-row flex-1 items-center justify-start">
+          <img
+            src="https://i.ibb.co/FqWLt6PL/e74f53c5f659fed2e65ccb28dcec5386-removebg-preview.png"
+            allt=""
+            className={`md:w-20 md:h-20 w-16 h-16 mr-3 sm:flex hidden`}
+          />
+          <div className="">
+            <h1
+              className={`md:text-3xl text-2xl font-extrabold text-indigo-700 flex items-center`}
+            >
+              Welcome{patientName}
+            </h1>
+            <p className="text-green-700 mt-1 text-sm md:text-md">
+              {HealthStatus}
+            </p>
+          </div>
+          <div className="z-2 absolute right-2 top-2 flex flex-row items-center justify-center gap-4 w-fit">
+            <div className={`w-fit h-fit relative`}>
+              <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] md:w-3.5 md:h-3.5 w-3 h-3 rounded-tr-full rounded-tl-full rounded-br-full text-[8px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
+                {noteNumber}
+              </p>
+              <Bell className="md:w-5 md:h-5 w-4 h-4" />
+            </div>
+            <User className="md:w-10 md:h-10 w-6 h-6 rounded-full bg-white shadow-sm text-gray-700 border-2 border-indigo-200" />
+            <div
+              className="flex flex-row w-fit h-fit transition-all duration-200 ease-in-out gap-[2px] md:text-sm text-[10px] text-indigo-700 hover:scale-[1.1]"
+              onClick={handleExiting}
+            >
+              <LogOut
+                className={`md:w-5 md:h-5 w-4 h-4 text-indigo-700 relative `}
+              />
+              <p>Exit</p>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Stats Cards */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <StatCard
-          icon={Heart}
-          title="Current Vitals"
-          value="Stable"
-          color="emerald"
-        />
+        <div
+          className={`p-4 rounded-xl shadow-lg flex items-center justify-between bg-white border-l-4 border-emerald-500 transition-shadow hover:shadow-xl`}
+        >
+          <div className="w-full flex items-center justify-between">
+            <p className="w-full display-none sm:flex text-sm font-semibold text-gray-500 uppercase">
+              Appointment History
+            </p>
+            {expandHistory ? (
+              <ChevronUp
+                onClick={handleCollapseHistory}
+                className="w-8 h-8 z-1 cursor-pointer opacity-70"
+              />
+            ) : (
+              <ChevronDown
+                onClick={handleExpandHistory}
+                className="w-8 h-8 z-1 cursor-pointer opacity-70 hover:scale-[1.1] transition-all duration-200 ease-in-out"
+              />
+            )}
+            <History className={`w-8 h-8 ml-2 text-gray-800 opacity-70`} />
+          </div>
+          {expandHistory && (
+            <div className="fl">
+              {historydata.map((data) => {
+                <p key={data.id} className=""></p>;
+              })}
+            </div>
+          )}
+        </div>
+
         <StatCard
           icon={Calendar}
           title="Next Appointment"

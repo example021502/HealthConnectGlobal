@@ -13,6 +13,7 @@ function ToolCard({ tool }) {
     after:scale-x-[0] after:origin-left
     hover:after:scale-x-[1] hover:after:transition-transform hover:after:duration-300 hover:after:ease-in-out
     hover:text-white gap-2
+    ${tool.id % 2 === 0 ? "xl:translate-y-20" : "xl:-translate-y-20"}
   `;
 
   return (
@@ -308,7 +309,7 @@ function Home() {
             <img
               src="https://i.ibb.co/S7VWM2Kh/back1.png"
               alt="Accessing Global Care with Ease"
-              className="h-full mt-8 object-contain"
+              className="xl:h-full h-100 mt-8 object-contain"
             />
           </div>
 

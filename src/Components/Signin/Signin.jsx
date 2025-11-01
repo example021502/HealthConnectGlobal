@@ -58,7 +58,7 @@ function Signin() {
   return (
     <div className="flex justify-center relative items-center w-full min-h-screen bg-gray-50 p-4">
       {closeOverlay && (
-        <div className="w-full h-full absolute top-0 left-0 z-1000 bg-[rgba(179,39,37,0.4)] flex items-center justify-center">
+        <div className="w-full h-full absolute top-0 left-0 z-1000 bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
           <div className="h-fit w-60 flex flex-col items-center justify-center gap-4 p-5 shadow-lg bg-indigo-50 rounded-2xl">
             <p className="flex flex-row text-lg gap-1">
               <span>Confirm to</span>
