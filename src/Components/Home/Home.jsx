@@ -1,6 +1,6 @@
 import { AuthContext } from "../Context/Context";
 import { useContext, useEffect, useState } from "react";
-import { Mail } from "lucide-react";
+import { Mail, HandHeart } from "lucide-react";
 function ToolCard({ tool }) {
   const [hover, setHover] = useState(false);
 
@@ -268,18 +268,18 @@ function Home() {
               key={item.id}
               className="gap-2 cursor-pointer text-sm w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)] xl:w-[20em] bg-[rgba(160,160,160,0.2)] text-[#2b2c2c] p-4 rounded-xl flex flex-col items-start justify-start shadow-inner hover:shadow-lg transition-shadow duration-300"
             >
-              <span className="mb-4 relative pb-4 before:absolute before:h-[1.5px] before:w-full before:bg-[rgba(0,0,0,0.2)] before:bottom-0 before:left-0 flex flex-col items-start justify-center">
+              <span className="mb-2 relative pb-4 before:absolute before:h-[1.5px] before:w-full before:bg-[rgba(0,0,0,0.2)] before:bottom-0 before:left-0 flex flex-col items-start justify-center">
                 <i
                   className={`mr-2 text-[3em] text-[rgba(6,83,201,1)] ${item.icon}`}
                 />
-                <span className="font-semibold uppercase text-base mt-2">
+                <span className="font-semibold uppercase text-base mt-1">
                   {item.title}
                 </span>
               </span>
-              <span className="h-10 text-sm font-medium text-[rgb(6,83,201)] transition-all duration-300 ease-in-out">
+              <span className="h-10 w-full text-sm font-medium text-[rgb(6,83,201)] transition-all duration-300 ease-in-out">
                 {item.attributes[attr_index]}
               </span>
-              <span className="text-xs tracking-wide text-gray-700 mt-2">
+              <span className="text-sm tracking-wide text-gray-700 mt-1">
                 {item.description}
               </span>
             </div>
@@ -321,7 +321,7 @@ function Home() {
 
         {/* Footer */}
         <div className="mt-10 px-6 pt-6 flex text-md text-white bg-[rgba(0,107,255,1)] flex-col items-center justify-start w-full">
-          <p className="font-mono text-xs font-lighter m-4 pb-4 border-b border-[rgba(255,255,255,0.2)] w-full text-center">
+          <p className="font-mono text-sm font-lighter m-4 pb-4 border-b border-[rgba(255,255,255,0.2)] w-full text-center">
             © [2025] InterHealthConnect. All rights reserved.
           </p>
           <div className="flex items-start flex-wrap gap-10 justify-center w-full pb-10">
@@ -357,20 +357,26 @@ function Home() {
             </div>
             <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
               <h2 className="text-xl font-bold tracking-wide">Contact Us</h2>
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <a className="transition-all duration-300 ease-in-out cursor-pointer relative after:content['email'] after:absolute after:text-white after:top-4 after:z-4 after:left-[100%] after:bg-black">
-                  <Mail className="w-8 h-8 text-[#0467f1]" />
+              <div className="flex flex-wrap w-full items-center gap-8">
+                <div
+                  className={`transition-all duration-200 ease-in-out hover:scale-[1.1] hover:bg-gray-200 cursor-pointer w-10 h-10 bg-white rounded-full flex items-center justify-center relative before:text-xs before:font-lighter before:bg-gray-200 before:px-1 before:py-0 before:tracking-wide hover:before:content-["email"] before:absolute hover:before:text-[#0467f1] before:bottom-[80%] before:left-[88%] hover:before:tansition-all before:rounded-tr-xl before:rounded-tl-xl before:rounded-br-xl hover:before:ease-in hover:before:duration-200`}
+                >
+                  <a className="transition-all duration-300 ease-in-out">
+                    <Mail className="w-8 h-8 text-[#0467f1]" />
+                  </a>
+                </div>
+                <div
+                  className={`transition-all duration-200 ease-in-out hover:scale-[1.1] hover:bg-gray-200 cursor-pointer w-10 h-10 bg-white rounded-full flex items-center justify-center relative before:text-xs before:font-lighter before:bg-gray-200 before:px-1 before:py-0 before:tracking-wide hover:before:content-["whatsApp"] before:absolute hover:before:text-[#0467f1] before:bottom-[80%] before:left-[88%] hover:before:tansition-all before:rounded-tr-xl before:rounded-tl-xl before:rounded-br-xl hover:before:ease-in hover:before:duration-200`}
+                >
+                  <a className="transition-all duration-300 ease-in-out">
+                    <i className="text-3xl text-[#0467f1] ri-whatsapp-line" />
+                  </a>
+                </div>
+                <a className="bg-[#0a5acb] hover:bg-[#084aa7] hover:text-gray-200 text-lg font-semibold text-center py-4 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out cursor-pointer w-full rounded-2xl px-2 flex flex-wrap items-center justify-center">
+                  <HandHeart className="h-10 w-10 mr-2" />
+                  <span>Make a Donation</span>
                 </a>
               </div>
-              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
-                Frequently Asked Questions
-              </a>
-              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
-                Community Forum
-              </a>
-              <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full rounded-sm px-2">
-                Make a Donation
-              </a>
             </div>
           </div>
         </div>

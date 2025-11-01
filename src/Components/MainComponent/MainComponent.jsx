@@ -14,7 +14,6 @@ import Support from "../Support/Support";
 
 function MainComponent() {
   const { view } = useContext(AuthContext);
-  console.log("The value of view is: ", view);
   return (
     <div className="w-full h-full">
       {view === "home" && <Home />}
