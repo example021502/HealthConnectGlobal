@@ -1,6 +1,6 @@
 import { AuthContext } from "../Context/Context";
 import { useContext, useEffect, useState } from "react";
-import { Mail, HandHeart } from "lucide-react";
+import { Mail, HandHeart, Facebook, X, Twitter } from "lucide-react";
 function ToolCard({ tool }) {
   const [hover, setHover] = useState(false);
 
@@ -173,7 +173,7 @@ function Home() {
     <div className="w-full min-h-screen bg-gradient-to-br from-[rgba(0,107,255,0.2)] via-[rgba(0,107,255,0.08)] to-[rgba(0,107,255,0.1)] flex items-center justify-center bg-[rgb(255,255,255)]">
       <div className="w-full max-w-7xl h-fit relative pt-2 flex flex-col items-center justify-start px-4 md:px-8">
         {/* Nav Bar */}
-        <div className="z-50 text-[rgba(255,255,255,0.8)] flex flex-wrap items-center justify-center gap-4 py-1 px-4 bg-[rgba(6,83,201,1)] rounded-full shadow-2xl w-full">
+        <div className="z-50 text-[rgba(255,255,255,0.8)] flex flex-col md:flex-row items-center justify-center gap-4 py-1 px-4 bg-[rgba(6,83,201,1)] rounded-full shadow-2xl w-full">
           <div className="flex flex-row justify-center items-center gap-6 text-md font-lighter">
             <a
               href="#"
@@ -201,7 +201,7 @@ function Home() {
           </div>
           <button
             onClick={handleSignup}
-            className="ml-auto text-lg text-[rgba(6,83,201,1)] hover:bg-[rgba(255,255,255,0.6)] bg-[rgba(255,255,255,1)] py-1 px-4 m-1 rounded-lg transition-all duration-200 ease-in-out"
+            className="md:ml-auto text-lg text-[rgba(6,83,201,1)] hover:bg-[rgba(255,255,255,0.6)] bg-[rgba(255,255,255,1)] py-1 px-4 m-1 rounded-lg transition-all duration-200 ease-in-out"
           >
             Create Account
           </button>
@@ -220,8 +220,8 @@ function Home() {
         </div>
 
         {/* Main section (Text and Image) */}
-        <div className="flex flex-col md:flex-row items-center justify-start py-12 w-full">
-          <div className="flex flex-col h-fit w-full md:w-[40%] items-start justify-center px-5 gap-2 py-5 z-1 rounded-lg">
+        <div className="flex flex-col md:flex-row items-center justify-start py-10 w-full">
+          <div className="flex relative flex-col h-fit w-full sm:pb-18 sm:mb-8 md:w-[40%] items-start justify-center px-5 gap-2 py-2 z-1 rounded-lg">
             <p className="text-lg tracking-normal text-left m-0">
               Global care. Local ease.
             </p>
@@ -239,7 +239,7 @@ function Home() {
               Learn More
             </button>
 
-            <div className="flex justify-start items-start gap-8 mt-6">
+            <div className="flex justify-start items-start gap-8 mt-6 sm:absolute bottom-0 left-5 w-full max-w-7xl">
               <button
                 onClick={handleSignin}
                 className="text-md font-medium border-2 border-[rgba(6,83,201,0.5)] text-gray-700 rounded-lg py-2 px-8 transition-all duration-200 ease-in-out hover:border-[rgba(6,83,201,1)] hover:shadow-md"
@@ -358,23 +358,34 @@ function Home() {
             </div>
             <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
               <h2 className="text-xl font-bold tracking-wide">Contact Us</h2>
-              <div className="flex flex-wrap w-full items-center gap-8">
-                <div
-                  className={`transition-all duration-200 ease-in-out hover:scale-[1.1] hover:bg-gray-200 cursor-pointer w-10 h-10 bg-white rounded-full flex items-center justify-center relative before:text-xs before:font-lighter before:bg-gray-200 before:px-1 before:py-0 before:tracking-wide hover:before:content-["email"] before:absolute hover:before:text-[#0467f1] before:bottom-[80%] before:left-[88%] hover:before:tansition-all before:rounded-tr-xl before:rounded-tl-xl before:rounded-br-xl hover:before:ease-in hover:before:duration-200`}
-                >
-                  <a className="transition-all duration-300 ease-in-out">
-                    <Mail className="w-8 h-8 text-[#0467f1]" />
-                  </a>
+              <div className="flex flex-col w-full items-center gap-8">
+                <div className="flex gap-2 w-full items-center justify-between">
+                  <div
+                    className={`transition-all duration-200 ease-in-out hover:scale-[1.1] hover:bg-gray-200 cursor-pointer w-10 h-10 bg-white rounded-full flex items-center justify-center relative before:text-xs before:font-lighter before:bg-gray-200 before:px-1 before:py-0 before:tracking-wide hover:before:content-["email"] before:absolute hover:before:text-[#0467f1] before:bottom-[80%] before:left-[88%] hover:before:tansition-all before:rounded-tr-xl before:rounded-tl-xl before:rounded-br-xl hover:before:ease-in hover:before:duration-200`}
+                  >
+                    <a className="transition-all duration-300 ease-in-out">
+                      <Mail className="w-8 h-8 text-[#0467f1]" />
+                    </a>
+                  </div>
+
+                  <div
+                    className={`transition-all duration-200 ease-in-out hover:scale-[1.1] hover:bg-gray-200 cursor-pointer w-10 h-10 bg-white rounded-full flex items-center justify-center relative before:text-xs before:font-lighter before:bg-gray-200 before:px-1 before:py-0 before:tracking-wide hover:before:content-["facebook"] before:absolute hover:before:text-[#0467f1] before:bottom-[100%] before:left-[50%] hover:before:tansition-all before:rounded-tr-xl before:rounded-tl-xl before:rounded-br-xl hover:before:ease-in hover:before:duration-200`}
+                  >
+                    <a className="transition-all duration-300 ease-in-out">
+                      <Facebook className="w-8 h-8 text-[#0467f1]" />
+                    </a>
+                  </div>
+                  <div
+                    className={`transition-all duration-200 ease-in-out hover:scale-[1.1] hover:bg-gray-200 cursor-pointer w-10 h-10 bg-white rounded-full flex items-center justify-center relative before:text-xs before:font-lighter before:bg-gray-200 before:px-1 before:py-0 before:tracking-wide hover:before:content-["whatsApp"] before:absolute hover:before:text-[#0467f1] before:bottom-[100%] before:left-[50%] hover:before:tansition-all before:rounded-tr-xl before:rounded-tl-xl before:rounded-br-xl hover:before:ease-in hover:before:duration-200`}
+                  >
+                    <a className="transition-all duration-300 ease-in-out">
+                      <i className="text-3xl text-[#0467f1] ri-whatsapp-line" />
+                    </a>
+                  </div>
                 </div>
-                <div
-                  className={`transition-all duration-200 ease-in-out hover:scale-[1.1] hover:bg-gray-200 cursor-pointer w-10 h-10 bg-white rounded-full flex items-center justify-center relative before:text-xs before:font-lighter before:bg-gray-200 before:px-1 before:py-0 before:tracking-wide hover:before:content-["whatsApp"] before:absolute hover:before:text-[#0467f1] before:bottom-[80%] before:left-[88%] hover:before:tansition-all before:rounded-tr-xl before:rounded-tl-xl before:rounded-br-xl hover:before:ease-in hover:before:duration-200`}
-                >
-                  <a className="transition-all duration-300 ease-in-out">
-                    <i className="text-3xl text-[#0467f1] ri-whatsapp-line" />
-                  </a>
-                </div>
-                <a className="bg-[#0a5acb] hover:bg-[#084aa7] hover:text-gray-200 text-lg font-semibold text-center py-4 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out cursor-pointer w-full rounded-2xl px-2 flex flex-wrap items-center justify-center">
-                  <HandHeart className="h-10 w-10 mr-2" />
+
+                <a className="bg-[#0a5acb] hover:bg-[#084aa7] hover:text-gray-200 text-lg font-semibold text-center py-4 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out cursor-pointer w-fit rounded-2xl px-2 flex flex-wrap items-center justify-center">
+                  <HandHeart className="max-h-10 max-w-10 mr-2" />
                   <span>Make a Donation</span>
                 </a>
               </div>

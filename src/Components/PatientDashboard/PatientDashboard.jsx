@@ -14,6 +14,7 @@ import {
   Bell,
   ChevronDown,
   ChevronUp,
+  Trash,
 } from "lucide-react";
 
 // MOCK NOTIFICATION COUNT
@@ -53,43 +54,77 @@ const UPCOMING_APPOINTMENT = {
 };
 
 // MOCK HISTORY DATA
-const historydata = [
+let historydata = [
   {
     id: 1,
-    date: "15 Mar 2024",
+    date: "15/03/24",
     type: "Prescription",
     summery: "Refill of Atenolol 50mg",
     ProviderLocation: "Dr. Smith",
   },
   {
     id: 2,
-    date: "01 Mar 2024",
+    date: "01/03/24",
     type: "Hospital Visit",
     summery: "Emergency Room Visit",
     ProviderLocation: "St. Jude's Medical Center",
   },
   {
     id: 3,
-    date: "10 Feb 2024",
+    date: "10/02/24",
     type: "Appointment",
     summery: "Follow up for blood pressure",
     ProviderLocation: "Cardiology Department",
   },
   {
     id: 4,
-    date: "20 Jan 2024",
+    date: "20/01/24",
     type: "Lab Results",
     summery: "Cholesterol levels reviewed",
     ProviderLocation: "Dr. Smith",
   },
   {
     id: 5,
-    date: "12 Oct 2022",
+    date: "12/02/22",
+    type: "Procedure",
+    summery: "Seasonal Flu Vaccination",
+    ProviderLocation: "Pharmaco Wellness Center",
+  },
+  {
+    id: 6,
+    date: "20/12/24",
+    type: "Lab Results",
+    summery: "Cholesterol levels reviewed",
+    ProviderLocation: "Dr. Smith",
+  },
+  {
+    id: 7,
+    date: "12/04/22",
+    type: "Procedure",
+    summery: "Seasonal Flu Vaccination",
+    ProviderLocation: "Pharmaco Wellness Center",
+  },
+  {
+    id: 8,
+    date: "20/04/24",
+    type: "Lab Results",
+    summery: "Cholesterol levels reviewed",
+    ProviderLocation: "Dr. Smith",
+  },
+  {
+    id: 9,
+    date: "12/08/22",
     type: "Procedure",
     summery: "Seasonal Flu Vaccination",
     ProviderLocation: "Pharmaco Wellness Center",
   },
 ];
+
+// History Cell Styles
+const cellStyles =
+  "text-sm pb-2 border-gray-300 pl-1 tracking-wide text-gray-600";
+const TheadStyles =
+  "text-sm text-left font-bold py-1 border-gray-300 pl-1 tracking-wide text-gray-600";
 
 // DOCTORS TABLE DATA
 const LATEST_ONBOARDING = [
@@ -146,11 +181,55 @@ const StatCard = ({ icon: Icon, title, value, color }) => (
   >
     <div>
       <p className="text-sm font-medium text-gray-500 uppercase">{title}</p>
-      <p className={`text-2xl font-bold text-${color}-700 mt-1`}>{value}</p>
+      <p className={`text-xl font-bold text-${color}-700 mt-1`}>{value}</p>
     </div>
-    <Icon className={`w-8 h-8 text-${color}-400 opacity-70`} />
+    <Icon className={`w-6 h-6 text-${color}-400 opacity-70`} />
   </div>
 );
+
+function DisplayHistory({ data, isSelected, onSelect }) {
+  let id = data.id;
+  let date = data.date;
+  let type = data.type;
+  let provider = data.ProviderLocation;
+  const [selectRecod, setSelectRecord] = useState({
+    id: "",
+    date: "",
+    description: "",
+    provider: "",
+  });
+  const handleSelect = () => {
+    setSelectRecord({
+      id: id,
+      date: date,
+      type: type,
+      provider: provider,
+    });
+  };
+  return (
+    <tr
+      key={id}
+      onClick={() => handleSelect}
+      className={`${
+        selectRecod.id === id ? "bg-[rgba(226,226,226,0.7)]" : ""
+      } gap-1 w-full hover:bg-[rgba(222,222,222,0.4)] rounded-lg transition-all ease-in-out duration-200 cursor-pointer`}
+    >
+      <td className={cellStyles}>
+        <input
+          checked={isSelected}
+          onChange={(e) => {
+            onSelect(data.id, e.target.checked);
+          }}
+          type="checkbox"
+          className="mr-1"
+        />
+      </td>
+      <td className={cellStyles}>{date}</td>
+      <td className={`${cellStyles} border-l-1 border-r-1`}>{type}</td>
+      <td className={cellStyles}>{provider}</td>
+    </tr>
+  );
+}
 
 // --- Rating Stars Component (New Addition) ---
 function RatingStars({ rate }) {
@@ -180,6 +259,16 @@ const PatientDashboard = () => {
   const [expandHistory, setExpandHistory] = useState(false);
   const [patientName, setPatientName] = useState("");
   const { setView } = useContext(AuthContext);
+
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
+
+  const handleSelectedRow = (id, isChecked) => {
+    if (isChecked) {
+      setSelectedRowIds((prevIds) => [...prevIds, id]);
+    } else {
+      setSelectedRowIds((prevIds) => prevIds.filter((rowId) => rowId !== id));
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -216,12 +305,24 @@ const PatientDashboard = () => {
     setExpandHistory(false);
   };
 
+  const handleDeleteSelected = () => {
+    if (selectedRowIds.length === 0) {
+      alert("Please select at least one row to delete.");
+      return;
+    }
+    const updatedData = historydata.filter(
+      (data) => !selectedRowIds.inclides(data.id)
+    );
+    historydata = updatedData;
+    setSelectedRowIds([]);
+  };
+
   // Main render
   return (
     <div className="flex flex-col h-screen w-full bg-gray-50 font-sans p-6 overflow-y-auto">
       {exiting && (
         <div className="absolute top-0 left-0 z-10000 w-full h-full bg-[rgba(0,0,0,0.4)] transition-all duration-200 ease-in-out flex items-center justify-center">
-          <div className="w-fit h-fit p-8 gap-8 transition-all duration-200 ease-in-out flex flex-col rounded-2xl shadow-2xl items-center justify-center before:inset-0 before:absolute relative before:bg-[rgba(255,255,255,0.8)] before:top-0 before:left-0 before:z-[-1] z-1 before:rounded-2xl ">
+          <div className="w-fit h-fit p-8 gap-8 z-10001 transition-all duration-200 ease-in-out flex flex-col rounded-2xl shadow-2xl items-center justify-center before:inset-0 before:absolute relative before:bg-[rgba(255,255,255,0.8)] before:top-0 before:left-0 before:z-[-1] before:rounded-2xl ">
             <p className="text-lg">
               <span className="text-red-500 font-lighter">!Warning: </span>
               Confirm to close
@@ -296,32 +397,100 @@ const PatientDashboard = () => {
       </header>
 
       {/* Stats Cards */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 h-30">
         <div
-          className={`p-4 rounded-xl shadow-lg flex items-center justify-between bg-white border-l-4 border-emerald-500 transition-shadow hover:shadow-xl`}
+          className={`p-4 rounded-xl relative shadow-lg flex flex-col items-center ${
+            expandHistory ? "justify-betweem mb-4 border-1" : "justify-center"
+          } bg-white border-l-4 border-emerald-500 transition-shadow hover:shadow-xl`}
         >
-          <div className="w-full flex items-center justify-between">
-            <p className="w-full display-none sm:flex text-sm font-semibold text-gray-500 uppercase">
+          <div className="w-full flex flex-row items-center justify-around z-2">
+            <p
+              className={`${
+                expandHistory ? "w-fit" : "w-full"
+              } display-none sm:flex text-sm font-semibold text-gray-500 uppercase`}
+            >
               Appointment History
             </p>
+            {/* THE SELECT AND TRASH CAN */}
+            {expandHistory && (
+              <div className="flex items-center justify-center w-fit mx-2 transition-all duration-200 ease-in-out py-1">
+                <div className="flex flex-row items-center justify-center mr-2">
+                  <input
+                    type="checkbox"
+                    className={`border-1 border-gray-500`}
+                  />
+                  <p className="text-xs ml-1 whitespace-nowrap">Select All</p>
+                </div>
+                <button
+                  onClick={handleDeleteSelected}
+                  disabled={selectedRowIds.length}
+                  className="w-fit h-fit"
+                >
+                  <Trash className="h-4 text-red-500" />
+                </button>
+              </div>
+            )}
             {expandHistory ? (
               <ChevronUp
                 onClick={handleCollapseHistory}
-                className="w-8 h-8 z-1 cursor-pointer opacity-70"
+                className={`${
+                  expandHistory ? "w-6 h-6" : "w-8 h-8"
+                } z-1 cursor-pointer opacity-70`}
               />
             ) : (
               <ChevronDown
                 onClick={handleExpandHistory}
-                className="w-8 h-8 z-1 cursor-pointer opacity-70 hover:scale-[1.1] transition-all duration-200 ease-in-out"
+                className={`${
+                  expandHistory ? "w-6 h-6" : "w-8 h-8"
+                } z-1 cursor-pointer opacity-70 hover:scale-[1.1] transition-all duration-200 ease-in-out`}
               />
             )}
-            <History className={`w-8 h-8 ml-2 text-gray-800 opacity-70`} />
+            <History
+              className={`${
+                expandHistory ? "w-6 h-6" : "w-8 h-8 ml-4"
+              } ml-2 text-gray-800 opacity-70`}
+            />
           </div>
           {expandHistory && (
-            <div className="fl">
-              {historydata.map((data) => {
-                <p key={data.id} className=""></p>;
-              })}
+            <div
+              className={`w-full h-auto bg-[rgba(255,255,255,1)] transition-all duration-200 ease-in-out z-[1] shadow-lg ${
+                expandHistory ? "absolute top-[50%] left-0" : ""
+              }`}
+            >
+              <div className="w-full px-2 py-4">
+                <table className="gap-4 w-full min-h-30 relative">
+                  <thead className="w-full rounded-lg border-gray-300">
+                    <tr className="gap-1 w-full my-4 rounded-lg bg-[rgba(177,177,177,0.5)]">
+                      <th
+                        className={`${TheadStyles} rounded-tl-lg rounded-bl-lg`}
+                      ></th>
+                      <th className={`${TheadStyles}`}>Date</th>
+                      <th className={TheadStyles}>Description</th>
+                      <th
+                        className={`${TheadStyles} rounded-tr-lg rounded-br-lg`}
+                      >
+                        Provider/Location
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {historydata.length === 0 ? (
+                      <p className="text-gray-400 absolute top-[50%] left-0 tracking-wide whitespace-nowrap text-sm md:text-lg font-semibold w-full text-center">
+                        No History
+                      </p>
+                    ) : (
+                      historydata.map((data) => (
+                        <DisplayHistory
+                          key={data.id}
+                          data={data}
+                          isSelected={selectedRowIds.includes(data.id)}
+                          onSelect={handleSelectedRow}
+                        />
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>
