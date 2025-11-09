@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../Context/Context";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import isValidPhoneNumber from "libphonenumber-js";
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -43,8 +44,6 @@ function Signup() {
   const [homeAddress, setHomeAddress] = useState("");
   const [specialty, setSpecialty] = useState("");
 
-  const isValidPhoneNumber = (value) => value && value.length >= 10;
-
   const genderOptions = [
     { label: "Select Gender", value: "" },
     { label: "Male", value: "male" },
@@ -64,11 +63,11 @@ function Signup() {
   // START: Handlers
   function handlePhoneChange(value) {
     setPhoneNumber(value);
-    if (value && !isValidPhoneNumber(value)) {
-      setErrorColor(true);
-    } else {
-      setErrorColor(false);
-    }
+    // if (value && !isValidPhoneNumber(value)) {
+    //   setErrorColor(true);
+    // } else {
+    //   setErrorColor(false);
+    // }
   }
 
   const handleGenderDropDownChange = (e) => {
@@ -77,22 +76,25 @@ function Signup() {
 
   const handleNext = (e) => {
     e.preventDefault();
-    if (
-      !firstName ||
-      !lastName ||
-      selectedGender === "" ||
-      !phoneNumber ||
-      !isValidPhoneNumber(phoneNumber) ||
-      !dateOfBirth ||
-      !email
-    ) {
-      setSignupError(
-        "Please fill out all personal details correctly before proceeding!"
-      );
-      return;
+    if (!firstName) {
+      setSignupError("Enter your first name");
+    } else if (!lastName) {
+      setSignupError("Enter your last name");
+    } else if (selectedGender === "") {
+      setSignupError("Choose gender please!");
+    } else if (!phoneNumber) {
+      setSignupError("Enter your contact number please!");
+    } else if (!isValidPhoneNumber(phoneNumber)) {
+      setErrorColor(true);
+    } else if (!dateOfBirth) {
+      setSignupError("Enter your date of birth");
+    } else if (!email) {
+      setSignupError("Enter you email Id");
     }
     setSignupError("");
+    setErrorColor(false);
     setNext(true);
+    return;
   };
 
   const handleBack = () => {
@@ -394,6 +396,7 @@ function Signup() {
                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 z-10" />
 
                 <PhoneInput
+                  required
                   international
                   country={"in"}
                   placeholder="Contact Number"
@@ -411,8 +414,7 @@ function Signup() {
 
                 {errorColor && (
                   <p className="text-red-500 text-xs mt-1 absolute right-0 -bottom-1">
-                    Invalid phone number (Min 10 characters required in E.164
-                    format)
+                    Invalid phone number
                   </p>
                 )}
               </div>
@@ -421,6 +423,7 @@ function Signup() {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={["DatePicker"]}>
                     <DatePicker
+                      required
                       size="small"
                       onChange={(val) => setDateOfBirth(val)}
                       label="Date of Birth"
@@ -442,7 +445,8 @@ function Signup() {
                             "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                               { border: "none" },
                             "& .MuiInputBase-input": {
-                              fontSize: "12px",
+                              fontSize: "5px",
+                              color: "red",
                               border: "none",
                             },
                             "& .MuiInputBase-root": {

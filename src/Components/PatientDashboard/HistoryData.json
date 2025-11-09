@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "date": "15/03/24",
+    "type": "Prescription",
+    "summery": "Refill of Atenolol 50mg",
+    "providerLocation": "Dr. Smith"
+  },
+  {
+    "id": 2,
+    "date": "01/03/24",
+    "type": "Hospital Visit",
+    "summery": "Emergency Room Visit",
+    "providerLocation": "St. Jude's Medical Center"
+  },
+  {
+    "id": 3,
+    "date": "10/02/24",
+    "type": "Appointment",
+    "summery": "Follow up for blood pressure",
+    "providerLocation": "Cardiology Department"
+  },
+  {
+    "id": 4,
+    "date": "20/01/24",
+    "type": "Lab Results",
+    "summery": "Cholesterol levels reviewed",
+    "providerLocation": "Dr. Smith"
+  },
+  {
+    "id": 5,
+    "date": "12/02/22",
+    "type": "Procedure",
+    "summery": "Seasonal Flu Vaccination",
+    "providerLocation": "Pharmaco Wellness Center"
+  },
+  {
+    "id": 6,
+    "date": "20/12/24",
+    "type": "Lab Results",
+    "summery": "Cholesterol levels reviewed",
+    "providerLocation": "Dr. Smith"
+  },
+  {
+    "id": 7,
+    "date": "12/04/22",
+    "type": "Procedure",
+    "summery": "Seasonal Flu Vaccination",
+    "providerLocation": "Pharmaco Wellness Center"
+  },
+  {
+    "id": 8,
+    "date": "20/04/24",
+    "type": "Lab Results",
+    "summery": "Cholesterol levels reviewed",
+    "providerLocation": "Dr. Smith"
+  },
+  {
+    "id": 9,
+    "date": "12/08/22",
+    "type": "Procedure",
+    "summery": "Seasonal Flu Vaccination",
+    "providerLocation": "Pharmaco Wellness Center"
+  }
+]

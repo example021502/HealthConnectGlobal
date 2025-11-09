@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { AuthContext } from "../Context/Context";
+import history_data from "./HistoryData.json";
+import HistoryDisplay from "./HistoryDisplay";
 
 import {
   History,
@@ -17,7 +19,6 @@ import {
   Trash,
 } from "lucide-react";
 
-// MOCK NOTIFICATION COUNT
 let noteNumber = 31;
 let HealthStatus = "Everything looks good!";
 
@@ -53,80 +54,9 @@ const UPCOMING_APPOINTMENT = {
   reason: "Routine Consultation",
 };
 
-// MOCK HISTORY DATA
-let historydata = [
-  {
-    id: 1,
-    date: "15/03/24",
-    type: "Prescription",
-    summery: "Refill of Atenolol 50mg",
-    ProviderLocation: "Dr. Smith",
-  },
-  {
-    id: 2,
-    date: "01/03/24",
-    type: "Hospital Visit",
-    summery: "Emergency Room Visit",
-    ProviderLocation: "St. Jude's Medical Center",
-  },
-  {
-    id: 3,
-    date: "10/02/24",
-    type: "Appointment",
-    summery: "Follow up for blood pressure",
-    ProviderLocation: "Cardiology Department",
-  },
-  {
-    id: 4,
-    date: "20/01/24",
-    type: "Lab Results",
-    summery: "Cholesterol levels reviewed",
-    ProviderLocation: "Dr. Smith",
-  },
-  {
-    id: 5,
-    date: "12/02/22",
-    type: "Procedure",
-    summery: "Seasonal Flu Vaccination",
-    ProviderLocation: "Pharmaco Wellness Center",
-  },
-  {
-    id: 6,
-    date: "20/12/24",
-    type: "Lab Results",
-    summery: "Cholesterol levels reviewed",
-    ProviderLocation: "Dr. Smith",
-  },
-  {
-    id: 7,
-    date: "12/04/22",
-    type: "Procedure",
-    summery: "Seasonal Flu Vaccination",
-    ProviderLocation: "Pharmaco Wellness Center",
-  },
-  {
-    id: 8,
-    date: "20/04/24",
-    type: "Lab Results",
-    summery: "Cholesterol levels reviewed",
-    ProviderLocation: "Dr. Smith",
-  },
-  {
-    id: 9,
-    date: "12/08/22",
-    type: "Procedure",
-    summery: "Seasonal Flu Vaccination",
-    ProviderLocation: "Pharmaco Wellness Center",
-  },
-];
-
-// History Cell Styles
-const cellStyles =
-  "text-sm pb-2 border-gray-300 pl-1 tracking-wide text-gray-600";
 const TheadStyles =
   "text-sm text-left font-bold py-1 border-gray-300 pl-1 tracking-wide text-gray-600";
 
-// DOCTORS TABLE DATA
 const LATEST_ONBOARDING = [
   {
     id: 1,
@@ -174,7 +104,6 @@ const keyValues = [
 ];
 const dataValues = LATEST_ONBOARDING;
 
-// --- Reusable Stat Card Component (Copied for consistency) ---
 const StatCard = ({ icon: Icon, title, value, color }) => (
   <div
     className={`p-5 rounded-xl shadow-lg flex items-center justify-between bg-white border-l-4 border-${color}-500 transition-shadow hover:shadow-xl`}
@@ -187,51 +116,6 @@ const StatCard = ({ icon: Icon, title, value, color }) => (
   </div>
 );
 
-function DisplayHistory({ data, isSelected, onSelect }) {
-  let id = data.id;
-  let date = data.date;
-  let type = data.type;
-  let provider = data.ProviderLocation;
-  const [selectRecod, setSelectRecord] = useState({
-    id: "",
-    date: "",
-    description: "",
-    provider: "",
-  });
-  const handleSelect = () => {
-    setSelectRecord({
-      id: id,
-      date: date,
-      type: type,
-      provider: provider,
-    });
-  };
-  return (
-    <tr
-      key={id}
-      onClick={() => handleSelect}
-      className={`${
-        selectRecod.id === id ? "bg-[rgba(226,226,226,0.7)]" : ""
-      } gap-1 w-full hover:bg-[rgba(222,222,222,0.4)] rounded-lg transition-all ease-in-out duration-200 cursor-pointer`}
-    >
-      <td className={cellStyles}>
-        <input
-          checked={isSelected}
-          onChange={(e) => {
-            onSelect(data.id, e.target.checked);
-          }}
-          type="checkbox"
-          className="mr-1"
-        />
-      </td>
-      <td className={cellStyles}>{date}</td>
-      <td className={`${cellStyles} border-l-1 border-r-1`}>{type}</td>
-      <td className={cellStyles}>{provider}</td>
-    </tr>
-  );
-}
-
-// --- Rating Stars Component (New Addition) ---
 function RatingStars({ rate }) {
   const [rating, setRating] = useState("");
   const GOLD_STAR = "★";
@@ -240,7 +124,6 @@ function RatingStars({ rate }) {
   const emptyRate = 5 - rateValue;
 
   useEffect(() => {
-    // Generate star string based on rating
     const stars = GOLD_STAR.repeat(rateValue) + LIGHT_STAR.repeat(emptyRate);
     setRating(stars);
   }, [rateValue, rate]);
@@ -260,15 +143,9 @@ const PatientDashboard = () => {
   const [patientName, setPatientName] = useState("");
   const { setView } = useContext(AuthContext);
 
-  const [selectedRowIds, setSelectedRowIds] = useState([]);
-
-  const handleSelectedRow = (id, isChecked) => {
-    if (isChecked) {
-      setSelectedRowIds((prevIds) => [...prevIds, id]);
-    } else {
-      setSelectedRowIds((prevIds) => prevIds.filter((rowId) => rowId !== id));
-    }
-  };
+  const [historyData, setHistoryData] = useState(history_data);
+  const [checkedListIds, setCheckedListIds] = useState([]);
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -287,13 +164,17 @@ const PatientDashboard = () => {
     };
   }, []);
 
+  // SETTING TH LATEST HISTORY
+  let current_history = historyData.at(0);
   const handleExiting = () => {
     setExiting(true);
   };
+
   const handleConfirmClosing = () => {
     setExiting(false);
     setView("home");
   };
+
   const handleCancelClosing = () => {
     setExiting(false);
   };
@@ -301,23 +182,61 @@ const PatientDashboard = () => {
   const handleExpandHistory = () => {
     setExpandHistory(true);
   };
+
   const handleCollapseHistory = () => {
     setExpandHistory(false);
   };
 
-  const handleDeleteSelected = () => {
-    if (selectedRowIds.length === 0) {
-      alert("Please select at least one row to delete.");
-      return;
+  const handleCheckboxSelect = () => {
+    const newCheck = !check;
+    setCheck(newCheck);
+
+    if (newCheck) {
+      const allIds = historyData.map((data) => data.id);
+      setCheckedListIds(allIds);
+    } else {
+      setCheckedListIds([]);
     }
-    const updatedData = historydata.filter(
-      (data) => !selectedRowIds.inclides(data.id)
-    );
-    historydata = updatedData;
-    setSelectedRowIds([]);
   };
 
-  // Main render
+  const handleUpdateCheckedListIds = (id, isChecked) => {
+    setCheckedListIds((prevIds) => {
+      if (isChecked) {
+        if (!prevIds.includes(id)) {
+          return [...prevIds, id];
+        }
+      } else {
+        return prevIds.filter((checkedId) => checkedId !== id);
+      }
+      return prevIds;
+    });
+
+    if (!isChecked && check) {
+      setCheck(false);
+    }
+  };
+
+  const handleDeleteSelected = () => {
+    if (checkedListIds.length === 0) {
+      alert("Please select items to delete.");
+      return;
+    }
+
+    if (
+      window.confirm(
+        `Are you sure you want to delete ${checkedListIds.length} history records?`
+      )
+    ) {
+      const newHistoryData = historyData.filter(
+        (data) => !checkedListIds.includes(data.id)
+      );
+
+      setHistoryData(newHistoryData);
+      setCheckedListIds([]);
+      setCheck(false);
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen w-full bg-gray-50 font-sans p-6 overflow-y-auto">
       {exiting && (
@@ -346,7 +265,6 @@ const PatientDashboard = () => {
           </div>
         </div>
       )}
-      {/* Header */}
       <header className="rounded-2xl relative gap-4 p-4 mb-8 flex items-center justify-start flex-wrap">
         <img
           src="https://i.ibb.co/Wps552Cd/back.png"
@@ -357,12 +275,12 @@ const PatientDashboard = () => {
         <img
           src="https://i.ibb.co/KxPQ4f9L/Secure-Appointment.jpg"
           alt="Alice Johnson"
-          className="md:w-40 z-2 md:h-40 sm:w-25 sm:h-25  w-20 h-20 object-cover shadow-2xl rounded-full border-2 border-gray-100"
+          className="md:w-40 z-2 md:h-40 sm:w-25 sm:h-25  w-20 h-20 object-cover shadow-2xl rounded-full border-2 border-gray-100"
         />
         <div className="bg-gray-50 pl-4 relative z-2 rounded-2xl shadow-2xl h-full flex flex-row flex-1 items-center justify-start">
           <img
             src="https://i.ibb.co/FqWLt6PL/e74f53c5f659fed2e65ccb28dcec5386-removebg-preview.png"
-            allt=""
+            alt=""
             className={`md:w-20 md:h-20 w-16 h-16 mr-3 sm:flex hidden`}
           />
           <div className="">
@@ -396,7 +314,6 @@ const PatientDashboard = () => {
         </div>
       </header>
 
-      {/* Stats Cards */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 h-30">
         <div
           className={`p-4 rounded-xl relative shadow-lg flex flex-col items-center ${
@@ -411,23 +328,27 @@ const PatientDashboard = () => {
             >
               Appointment History
             </p>
-            {/* THE SELECT AND TRASH CAN */}
+
             {expandHistory && (
               <div className="flex items-center justify-center w-fit mx-2 transition-all duration-200 ease-in-out py-1">
                 <div className="flex flex-row items-center justify-center mr-2">
                   <input
+                    onClick={handleCheckboxSelect}
                     type="checkbox"
-                    className={`border-1 border-gray-500`}
+                    checked={check}
+                    className={`border-1 border-gray-500 hover:scale-[1.1] transition-all duration-200 ease-in-out hover:border-[#0467f1]`}
                   />
                   <p className="text-xs ml-1 whitespace-nowrap">Select All</p>
                 </div>
-                <button
+
+                <Trash
+                  className={`h-4 ${
+                    checkedListIds.length > 0
+                      ? "text-red-500 cursor-pointer hover:scale-[1.1]"
+                      : "text-gray-400 cursor-not-allowed"
+                  }`}
                   onClick={handleDeleteSelected}
-                  disabled={selectedRowIds.length}
-                  className="w-fit h-fit"
-                >
-                  <Trash className="h-4 text-red-500" />
-                </button>
+                />
               </div>
             )}
             {expandHistory ? (
@@ -451,6 +372,15 @@ const PatientDashboard = () => {
               } ml-2 text-gray-800 opacity-70`}
             />
           </div>
+          {!expandHistory && historyData.length != 0 && (
+            <div className="w-full h-fit flex flex-col items-left justify-center">
+              <p className="text-sm text-gray-400">Most recent History:</p>
+              <p className="text-sm text-gray-400 whitespace-nowrap">
+                {current_history.date} {current_history.type}{" "}
+                {current_history.providerLocation}
+              </p>
+            </div>
+          )}
           {expandHistory && (
             <div
               className={`w-full h-auto bg-[rgba(255,255,255,1)] transition-all duration-200 ease-in-out z-[1] shadow-lg ${
@@ -473,18 +403,18 @@ const PatientDashboard = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {historydata.length === 0 ? (
+                  <tbody className="max-h-40 overflow-y-auto">
+                    {historyData.length === 0 ? (
                       <p className="text-gray-400 absolute top-[50%] left-0 tracking-wide whitespace-nowrap text-sm md:text-lg font-semibold w-full text-center">
                         No History
                       </p>
                     ) : (
-                      historydata.map((data) => (
-                        <DisplayHistory
-                          key={data.id}
+                      historyData.map((data) => (
+                        <HistoryDisplay
                           data={data}
-                          isSelected={selectedRowIds.includes(data.id)}
-                          onSelect={handleSelectedRow}
+                          key={data.id}
+                          check={check}
+                          onUpdateCheckedListIds={handleUpdateCheckedListIds}
                         />
                       ))
                     )}
@@ -509,9 +439,7 @@ const PatientDashboard = () => {
         />
       </section>
 
-      {/* Main Content: Appointment Details & Care Team (Top Grid) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 mb-8">
-        {/* Upcoming Appointment Section (2/3 width on desktop) */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-xl border border-gray-200 p-6">
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
             <Clock className="w-5 h-5 mr-2 text-indigo-600" />
@@ -548,7 +476,6 @@ const PatientDashboard = () => {
           </div>
         </div>
 
-        {/* Care Team Quick List (1/3 width on desktop) */}
         <div className="bg-white rounded-xl shadow-xl border border-gray-200 p-6">
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
             <Stethoscope className="w-5 h-5 mr-2 text-indigo-600" />
@@ -573,7 +500,6 @@ const PatientDashboard = () => {
         </div>
       </div>
 
-      {/* --- NEW: Latest Patient/Doctor Onboarding Table (Bottom Panel) --- */}
       <div className="w-full flex p-4 gap-4 items-start justify-center py-2">
         <div className="flex flex-col p-6 bg-white shadow-xl rounded-xl w-full border border-gray-200">
           <h3 className="text-xl font-semibold text-gray-600 mb-4">
@@ -751,7 +677,6 @@ const PatientDashboard = () => {
                         let length = number.length;
                         let contactNumber = record.contact;
 
-                        // Simplified truncation logic check
                         if (cellWidth > 0 && length > 15) {
                           contactNumber = number.slice(0, 12) + "...";
                         }
