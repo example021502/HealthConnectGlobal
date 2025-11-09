@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Lock, Mail, BriefcaseMedical, LogIn, Cross } from "lucide-react";
+import { Lock, Mail, BriefcaseMedical, LogIn, X } from "lucide-react";
 import { AuthContext } from "../Context/Context";
 
 function Signin() {
@@ -57,6 +57,8 @@ function Signin() {
 
   return (
     <div className="flex justify-center relative items-center w-full min-h-screen bg-gray-50 p-4">
+      <img src="https://i.ibb.co/Ng71rbX9/Gradient-ball-and-blurred-circle-imagine-layout-transparent-background-Graphics-by-Canva.jpg" alt="Health Background" className="absolute inset-0 w-full h-full object-cover opacity-50 md:hidden"/>
+      <img src="https://i.ibb.co/6cN2JsRs/signin.jpg" alt="Health Background" className="absolute inset-0 w-full h-full object-cover opacity-50 hidden md:flex"/>
       {closeOverlay && (
         <div className="w-full h-full absolute top-0 left-0 z-1000 bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
           <div className="h-fit w-60 flex flex-col items-center justify-center gap-4 p-5 shadow-lg bg-indigo-50 rounded-2xl">
@@ -86,9 +88,9 @@ function Signin() {
           id="cancel"
           type="cancel"
           onClick={handleCancel}
-          className="h-10 w-10 flex absolute top-10 right-10 rounded-full justify-center items-center border border-transparent shadow-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-200 ease-in-out transform hover:scale-[1.01] hover:rotate-[180deg] hover:shadow-sm"
+          className="h-10 w-10 flex absolute top-10 right-10 rounded-full justify-center items-center border border-transparent font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-red-500 transition duration-200 ease-in-out transform hover:scale-[1.01] hover:rotate-[180deg]"
         >
-          <Cross className="h-5 w-5 object-cover rotate-[45deg]" />
+          <X className="h-5 w-5 object-cover" />
         </button>
         <div className="text-center mb-8">
           <BriefcaseMedical className="w-12 h-12 text-indigo-600 mx-auto mb-4" />

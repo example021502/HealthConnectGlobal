@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Evelyn Reed",
+    "specialty": "Cardiology",
+    "status": "Active",
+    "nextAppt": "Dec 15"
+  },
+  {
+    "id": 2,
+    "name": "Nurse Michael Chen",
+    "specialty": "Post-Op Care",
+    "status": "Active",
+    "nextAppt": "Nov 30"
+  },
+  {
+    "id": 3,
+    "name": "Dr. Alex Lee",
+    "specialty": "Primary Care",
+    "status": "Inactive",
+    "nextAppt": "N/A"
+  }
+]

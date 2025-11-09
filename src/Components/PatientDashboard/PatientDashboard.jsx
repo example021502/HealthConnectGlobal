@@ -2,16 +2,18 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { AuthContext } from "../Context/Context";
 import history_data from "./HistoryData.json";
 import HistoryDisplay from "./HistoryDisplay";
-
+import MOCK_CARE_TEAM from "./CareTeam.json";
+import LATEST_ONBOARDING from "./HealthCareSpecialists.json";
+import "./patientDashboard.css";
 import {
   History,
   Calendar,
   Stethoscope,
   Clock,
   FileText,
-  User,
+  Mail,
   Check,
-  MessageCircle,
+  MessageSquareText,
   LogOut,
   Bell,
   ChevronDown,
@@ -19,32 +21,12 @@ import {
   Trash,
 } from "lucide-react";
 
-let noteNumber = 31;
-let HealthStatus = "Everything looks good!";
+const profileImage = "https://i.ibb.co/KxPQ4f9L/Secure-Appointment.jpg";
 
-const MOCK_CARE_TEAM = [
-  {
-    id: 1,
-    name: "Dr. Evelyn Reed",
-    specialty: "Cardiology",
-    status: "Active",
-    nextAppt: "Dec 15",
-  },
-  {
-    id: 2,
-    name: "Nurse Michael Chen",
-    specialty: "Post-Op Care",
-    status: "Active",
-    nextAppt: "Nov 30",
-  },
-  {
-    id: 3,
-    name: "Dr. Alex Lee",
-    specialty: "Primary Care",
-    status: "Inactive",
-    nextAppt: "N/A",
-  },
-];
+let noteNumber = 31;
+let mails = 12;
+let chats = 20;
+let HealthStatus = "Everything looks good!";
 
 const UPCOMING_APPOINTMENT = {
   date: "November 20, 2025",
@@ -57,42 +39,6 @@ const UPCOMING_APPOINTMENT = {
 const TheadStyles =
   "text-sm text-left font-bold py-1 border-gray-300 pl-1 tracking-wide text-gray-600";
 
-const LATEST_ONBOARDING = [
-  {
-    id: 1,
-    image: "https://placehold.co/40x40/4c7c8c/ffffff?text=DR",
-    alt: "Dr. Jane Smith",
-    name: "Dr. Jane Smith",
-    specialty: "Neurologist",
-    appointment: "Today",
-    contact: "555-123-4567",
-    status: "online",
-    rating: 5,
-  },
-  {
-    id: 2,
-    image: "https://placehold.co/40x40/00b894/ffffff?text=PT",
-    alt: "John Doe",
-    name: "John Doe",
-    specialty: "Cardiologist",
-    appointment: "N/A",
-    contact: "555-987-6543",
-    status: "offline",
-    rating: 4,
-  },
-  {
-    id: 3,
-    image: "https://placehold.co/40x40/9c67ad/ffffff?text=DR",
-    alt: "Dr. Kim Lee",
-    name: "Dr. Kim Lee",
-    specialty: "Pediatrics",
-    appointment: "Tomorrow",
-    contact: "555-333-2222",
-    status: "online",
-    rating: 4,
-  },
-];
-
 const keyValues = [
   "image",
   "name",
@@ -102,6 +48,7 @@ const keyValues = [
   "status",
   "rating",
 ];
+
 const dataValues = LATEST_ONBOARDING;
 
 const StatCard = ({ icon: Icon, title, value, color }) => (
@@ -147,23 +94,15 @@ const PatientDashboard = () => {
   const [checkedListIds, setCheckedListIds] = useState([]);
   const [check, setCheck] = useState(false);
 
+  const [wiggle, setWiggle] = useState(false);
+  const notificationsRef = useRef(null);
+
+  let User_Name = "Alice Johnson";
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 600) {
-        setPatientName(", Alice Johnson");
-      } else {
-        setPatientName("");
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+    if (User_Name) {
+      setPatientName(`, ${User_Name}`);
+    }
+  }, [User_Name]);
   // SETTING TH LATEST HISTORY
   let current_history = historyData.at(0);
   const handleExiting = () => {
@@ -237,480 +176,413 @@ const PatientDashboard = () => {
     }
   };
 
+  const startShake = () => {
+    setWiggle(true);
+    notificationsRef.current.classList.add("animate-wiggle");
+  };
+  const stopShake = () => {
+    setWiggle(false);
+    notificationsRef.current.classList.remove("animate-wiggle");
+  };
+
   return (
-    <div className="flex flex-col h-screen w-full bg-gray-50 font-sans p-6 overflow-y-auto">
-      {exiting && (
-        <div className="absolute top-0 left-0 z-10000 w-full h-full bg-[rgba(0,0,0,0.4)] transition-all duration-200 ease-in-out flex items-center justify-center">
-          <div className="w-fit h-fit p-8 gap-8 z-10001 transition-all duration-200 ease-in-out flex flex-col rounded-2xl shadow-2xl items-center justify-center before:inset-0 before:absolute relative before:bg-[rgba(255,255,255,0.8)] before:top-0 before:left-0 before:z-[-1] before:rounded-2xl ">
-            <p className="text-lg">
-              <span className="text-red-500 font-lighter">!Warning: </span>
-              Confirm to close
-            </p>
-            <div className="flex w-full flex-wrap sm:flex-nowrap text-md text-white font-bold tracking-wide gap-2 items-center">
-              <button
-                onClick={handleConfirmClosing}
-                className="w-full py-2 px-8 rounded-xl flex items-center justify-center flex-row bg-[rgba(67,56,202,1)] hover:bg-[#2f278e] transition-all duration-200 ease-in-out"
-              >
-                <Check className="min-w-2" />
-                <span>Confirm</span>
-              </button>
-              <button
-                onClick={handleCancelClosing}
-                className="w-full py-2 px-8 rounded-xl flex items-center justify-center flex-row bg-[#821313] hover:bg-[#691212] transition-all duration ease-in-out"
-              >
-                <i className="ri-close-line font-lighter mr-1" />
-                <span>Cancel</span>
-              </button>
+    <div className="flex items-center justify-center w-full h-screen bg-gray-50 overflow-y-hidden pt-14 md:pt-10">
+      <div className="flex flex-col h-full w-full bg-gray-50 font-sans p-6 overflow-y-auto">
+        {exiting && (
+          <div className="absolute top-0 left-0 z-10000 w-full h-full bg-[rgba(0,0,0,0.4)] transition-all duration-200 ease-in-out flex items-center justify-center">
+            <div className="w-fit h-fit p-8 gap-8 z-10001 transition-all duration-200 ease-in-out flex flex-col rounded-2xl shadow-2xl items-center justify-center before:inset-0 before:absolute relative before:bg-[rgba(255,255,255,0.8)] before:top-0 before:left-0 before:z-[-1] before:rounded-2xl ">
+              <p className="text-lg">
+                <span className="text-red-500 font-lighter">!Warning: </span>
+                Confirm to close
+              </p>
+              <div className="flex w-full flex-wrap sm:flex-nowrap text-md text-white font-bold tracking-wide gap-2 items-center">
+                <button
+                  onClick={handleConfirmClosing}
+                  className="w-full py-2 px-8 rounded-xl flex items-center justify-center flex-row bg-[rgba(67,56,202,1)] hover:bg-[#2f278e] transition-all duration-200 ease-in-out"
+                >
+                  <Check className="min-w-2" />
+                  <span>Confirm</span>
+                </button>
+                <button
+                  onClick={handleCancelClosing}
+                  className="w-full py-2 px-8 rounded-xl flex items-center justify-center flex-row bg-[#821313] hover:bg-[#691212] transition-all duration ease-in-out"
+                >
+                  <i className="ri-close-line font-lighter mr-1" />
+                  <span>Cancel</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      <header className="rounded-2xl relative gap-4 p-4 mb-8 flex items-center justify-start flex-wrap">
-        <img
-          src="https://i.ibb.co/Wps552Cd/back.png"
-          alt="BACKGROUND"
-          className="w-full z-1 h-full object-cover rounded-2xl repeat absolute top-0 left-0"
-        />
-
-        <img
-          src="https://i.ibb.co/KxPQ4f9L/Secure-Appointment.jpg"
-          alt="Alice Johnson"
-          className="md:w-40 z-2 md:h-40 sm:w-25 sm:h-25  w-20 h-20 object-cover shadow-2xl rounded-full border-2 border-gray-100"
-        />
-        <div className="bg-gray-50 pl-4 relative z-2 rounded-2xl shadow-2xl h-full flex flex-row flex-1 items-center justify-start">
-          <img
-            src="https://i.ibb.co/FqWLt6PL/e74f53c5f659fed2e65ccb28dcec5386-removebg-preview.png"
-            alt=""
-            className={`md:w-20 md:h-20 w-16 h-16 mr-3 sm:flex hidden`}
-          />
-          <div className="">
-            <h1
-              className={`md:text-3xl text-2xl font-extrabold text-indigo-700 flex items-center`}
+        )}
+        <header className="rounded-2xl relative gap-4 mb-8 flex items-center justify-start flex-col ">
+          <div className="z-20000 fixed flex flex-row items-center justify-center gap-6 px-4 rounded-full md:w-fit w-[90%] md:right-10 top-4 bg-indigo-700 text-[rgba(255,255,255,1)] shadow-2xl">
+            <div
+              title={`You have ${noteNumber} notifications`}
+              onMouseOver={startShake}
+              onMouseOut={stopShake}
+              className={`w-fit h-fit relative rounded-full cursor-pointer hover:scale-[1.1] transition-all ease-in duration-100 hover:bg-emerald-500 hover:p-1`}
             >
-              Welcome{patientName}
-            </h1>
-            <p className="text-green-700 mt-1 text-sm md:text-md">
-              {HealthStatus}
-            </p>
-          </div>
-          <div className="z-2 absolute right-2 top-2 flex flex-row items-center justify-center gap-4 w-fit">
-            <div className={`w-fit h-fit relative`}>
               <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] md:w-3.5 md:h-3.5 w-3 h-3 rounded-tr-full rounded-tl-full rounded-br-full text-[8px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
                 {noteNumber}
               </p>
-              <Bell className="md:w-5 md:h-5 w-4 h-4" />
+              <Bell ref={notificationsRef} className="md:w-4 md:h-4 w-5 h-5" />
             </div>
-            <User className="md:w-10 md:h-10 w-6 h-6 rounded-full bg-white shadow-sm text-gray-700 border-2 border-indigo-200" />
             <div
-              className="flex flex-row w-fit h-fit transition-all duration-200 ease-in-out gap-[2px] md:text-sm text-[10px] text-indigo-700 hover:scale-[1.1]"
-              onClick={handleExiting}
+              title={`You have ${mails} mails`}
+              className={`w-fit h-fit relative rounded-full cursor-pointer hover:scale-[1.1] transition-all ease-in duration-100 hover:bg-emerald-500 hover:p-1`}
             >
-              <LogOut
-                className={`md:w-5 md:h-5 w-4 h-4 text-indigo-700 relative `}
-              />
-              <p>Exit</p>
+              <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] md:w-3.5 md:h-3.5 w-3 h-3 rounded-tr-full rounded-tl-full rounded-br-full text-[8px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
+                {mails}
+              </p>
+              <Mail className="md:w-4 md:h-4 w-5 h-5" />
             </div>
-          </div>
-        </div>
-      </header>
 
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 h-30">
-        <div
-          className={`p-4 rounded-xl relative shadow-lg flex flex-col items-center ${
-            expandHistory ? "justify-betweem mb-4 border-1" : "justify-center"
-          } bg-white border-l-4 border-emerald-500 transition-shadow hover:shadow-xl`}
-        >
-          <div className="w-full flex flex-row items-center justify-around z-2">
-            <p
-              className={`${
-                expandHistory ? "w-fit" : "w-full"
-              } display-none sm:flex text-sm font-semibold text-gray-500 uppercase`}
+            <div
+              title={`You have ${chats} unread unread chats`}
+              className={`w-fit h-fit relative rounded-full cursor-pointer hover:scale-[1.1] transition-all ease-in duration-100 hover:bg-emerald-500 hover:p-1`}
             >
-              Appointment History
-            </p>
-
-            {expandHistory && (
-              <div className="flex items-center justify-center w-fit mx-2 transition-all duration-200 ease-in-out py-1">
-                <div className="flex flex-row items-center justify-center mr-2">
-                  <input
-                    onClick={handleCheckboxSelect}
-                    type="checkbox"
-                    checked={check}
-                    className={`border-1 border-gray-500 hover:scale-[1.1] transition-all duration-200 ease-in-out hover:border-[#0467f1]`}
-                  />
-                  <p className="text-xs ml-1 whitespace-nowrap">Select All</p>
-                </div>
-
-                <Trash
-                  className={`h-4 ${
-                    checkedListIds.length > 0
-                      ? "text-red-500 cursor-pointer hover:scale-[1.1]"
-                      : "text-gray-400 cursor-not-allowed"
-                  }`}
-                  onClick={handleDeleteSelected}
-                />
-              </div>
-            )}
-            {expandHistory ? (
-              <ChevronUp
-                onClick={handleCollapseHistory}
-                className={`${
-                  expandHistory ? "w-6 h-6" : "w-8 h-8"
-                } z-1 cursor-pointer opacity-70`}
-              />
-            ) : (
-              <ChevronDown
-                onClick={handleExpandHistory}
-                className={`${
-                  expandHistory ? "w-6 h-6" : "w-8 h-8"
-                } z-1 cursor-pointer opacity-70 hover:scale-[1.1] transition-all duration-200 ease-in-out`}
-              />
-            )}
-            <History
-              className={`${
-                expandHistory ? "w-6 h-6" : "w-8 h-8 ml-4"
-              } ml-2 text-gray-800 opacity-70`}
+              <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] md:w-3.5 md:h-3.5 w-3 h-3 rounded-tr-full rounded-tl-full rounded-br-full text-[8px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
+                {chats}
+              </p>
+              <MessageSquareText className="md:w-4 md:h-4 w-5 h-5" />
+            </div>
+            <img
+              src={profileImage}
+              alt="profile"
+              title="profile"
+              className="md:w-8 md:h-8 w-10 h-10 rounded-full bg-white border-1 border-indigo-200 cursor-pointer hover:scale-[1.1] transition-all ease-in duration-100"
             />
-          </div>
-          {!expandHistory && historyData.length != 0 && (
-            <div className="w-full h-fit flex flex-col items-left justify-center">
-              <p className="text-sm text-gray-400">Most recent History:</p>
-              <p className="text-sm text-gray-400 whitespace-nowrap">
-                {current_history.date} {current_history.type}{" "}
-                {current_history.providerLocation}
-              </p>
-            </div>
-          )}
-          {expandHistory && (
             <div
-              className={`w-full h-auto bg-[rgba(255,255,255,1)] transition-all duration-200 ease-in-out z-[1] shadow-lg ${
-                expandHistory ? "absolute top-[50%] left-0" : ""
-              }`}
+              className="flex flex-row w-fit h-fit transition-all duration-100 ease-in-out gap-[2px] md:text-4 text-[10px] hover:scale-[1.1] cursor-pointer hover:bg-emerald-500 rounded-full hover:p-1"
+              onClick={handleExiting}
+              title="log out"
             >
-              <div className="w-full px-2 py-4">
-                <table className="gap-4 w-full min-h-30 relative">
-                  <thead className="w-full rounded-lg border-gray-300">
-                    <tr className="gap-1 w-full my-4 rounded-lg bg-[rgba(177,177,177,0.5)]">
-                      <th
-                        className={`${TheadStyles} rounded-tl-lg rounded-bl-lg`}
-                      ></th>
-                      <th className={`${TheadStyles}`}>Date</th>
-                      <th className={TheadStyles}>Description</th>
-                      <th
-                        className={`${TheadStyles} rounded-tr-lg rounded-br-lg`}
-                      >
-                        Provider/Location
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="max-h-40 overflow-y-auto">
-                    {historyData.length === 0 ? (
-                      <p className="text-gray-400 absolute top-[50%] left-0 tracking-wide whitespace-nowrap text-sm md:text-lg font-semibold w-full text-center">
-                        No History
-                      </p>
-                    ) : (
-                      historyData.map((data) => (
-                        <HistoryDisplay
-                          data={data}
-                          key={data.id}
-                          check={check}
-                          onUpdateCheckedListIds={handleUpdateCheckedListIds}
-                        />
-                      ))
-                    )}
-                  </tbody>
-                </table>
+              <LogOut className={`md:w-4 md:h-4 w-5 h-5 relative `} />
+            </div>
+          </div>
+
+          <div className="w-full flex flex-row items-center justify-start gap-4">
+            <img
+              src={profileImage}
+              alt="Alice Johnson"
+              className="md:w-30 z-2 md:h-30 sm:w-24 sm:h-24 w-20 h-20 object-cover shadow-2xl rounded-full border-2 border-gray-100"
+            />
+            <div className="relative md:bg-transparent shadow-sm border-1 border-indigo-200 px-4 py-2 z-2 rounded-2xl h-full w-full flex flex-row items-center justify-start">
+              <img
+                src="https://i.ibb.co/FqWLt6PL/e74f53c5f659fed2e65ccb28dcec5386-removebg-preview.png"
+                alt=""
+                className={`md:w-20 md:h-20 w-16 h-16 mr-3 sm:flex hidden`}
+              />
+              <div>
+                <h1
+                  className={`md:text-3xl text-xl font-extrabold text-indigo-700 flex items-center`}
+                >
+                  Welcome{patientName}
+                </h1>
+                <p className="text-green-700 mt-1 text-sm md:text-md">
+                  {HealthStatus}
+                </p>
               </div>
             </div>
-          )}
-        </div>
-
-        <StatCard
-          icon={Calendar}
-          title="Next Appointment"
-          value="Nov 20"
-          color="indigo"
-        />
-        <StatCard
-          icon={FileText}
-          title="Unread Records"
-          value="1 New"
-          color="amber"
-        />
-      </section>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 mb-8">
-        <div className="lg:col-span-2 bg-white rounded-xl shadow-xl border border-gray-200 p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-            <Clock className="w-5 h-5 mr-2 text-indigo-600" />
-            Your Next Appointment
-          </h2>
-          <div className="p-6 bg-indigo-50 rounded-lg border-l-4 border-indigo-500 flex justify-between items-center">
-            <div>
-              <p className="text-2xl font-bold text-indigo-800">
-                {UPCOMING_APPOINTMENT.date}
-              </p>
-              <p className="text-lg text-indigo-600 mt-1">
-                {UPCOMING_APPOINTMENT.time} with {UPCOMING_APPOINTMENT.doctor}
-              </p>
-              <p className="text-sm text-gray-600 mt-1">
-                Reason: {UPCOMING_APPOINTMENT.reason}
-              </p>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
-                Add to Calendar
-              </button>
-              <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                Reschedule
-              </button>
-            </div>
           </div>
-          <div className="mt-6 flex space-x-4">
-            <button className="flex-1 px-4 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors flex items-center justify-center">
-              <FileText className="w-5 h-5 mr-2" /> Request Prescription Refill
-            </button>
-            <button className="flex-1 px-4 py-3 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 transition-colors flex items-center justify-center">
-              <MessageCircle className="w-5 h-5 mr-2" /> Message Your Care Team
-            </button>
-          </div>
-        </div>
+        </header>
 
-        <div className="bg-white rounded-xl shadow-xl border border-gray-200 p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-            <Stethoscope className="w-5 h-5 mr-2 text-indigo-600" />
-            Your Care Team
-          </h2>
-          <ul className="space-y-3">
-            {MOCK_CARE_TEAM.map((member) => (
-              <li
-                key={member.id}
-                className="flex justify-between items-center py-2 border-b last:border-b-0"
-              >
-                <div className="flex-1">
-                  <p className="font-medium text-gray-900">{member.name}</p>
-                  <p className="text-xs text-gray-500">{member.specialty}</p>
-                </div>
-                <button className="ml-4 text-sm px-3 py-1 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition-colors">
-                  Contact
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 mb-8">
+          <div className=" bg-white rounded-xl shadow-xl border border-gray-200 p-6">
+            <h2 className="md:text-xl text-lg font-bold text-gray-600 mb-4 flex items-center">
+              <Clock className="md:w-5 md:h-5 w-4 h-4 mr-2 text-indigo-600" />
+              Your Next Appointment
+            </h2>
+            <div className="p-4 bg-indigo-50 space-y-4 rounded-lg border-l-4 border-indigo-500 flex flex-wrap justify-between items-start">
+              <div className="w-full">
+                <p className="md:text-xl text-lg font-bold text-indigo-800">
+                  {UPCOMING_APPOINTMENT.date}
+                </p>
+                <p className="md:text-md text:sm text-indigo-600 mt-1">
+                  {UPCOMING_APPOINTMENT.time} with {UPCOMING_APPOINTMENT.doctor}
+                </p>
+                <p className="md:text-sm text-xs text-gray-600 mt-1">
+                  Reason: {UPCOMING_APPOINTMENT.reason}
+                </p>
+              </div>
+              <div className="flex flex-col md:space-y-2 space-y-3 w-full">
+                <button className="md:px-4 md:py-2 p-2 bg-indigo-600 text-white text-sm md:text-lg rounded-lg font-semibold hover:bg-indigo-700 transition-all ease-in duration-100">
+                  Check Calendar
                 </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+                <button className="md:px-4 md:py-2 p-2 bg-gray-300 text-gray-600 text-sm md:text-lg rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                  Reschedule
+                </button>
+              </div>
+            </div>
+            <div className="mt-6 flex space-x-4">
+              <button className="flex-1 px-4 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors flex items-center justify-center">
+                <FileText className="w-5 h-5 mr-2" /> Request Prescription
+                Refill
+              </button>
+              <button className="flex-1 px-4 py-3 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 transition-colors flex items-center justify-center">
+                <MessageSquareText className="w-5 h-5 mr-2" /> Message Your Care
+                Team
+              </button>
+            </div>
+          </div>
 
-      <div className="w-full flex p-4 gap-4 items-start justify-center py-2">
-        <div className="flex flex-col p-6 bg-white shadow-xl rounded-xl w-full border border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-600 mb-4">
-            Available Specialists
-          </h3>
-          <div className="flex justify-center items-start text-sm w-full flex-1 overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-gray-300">
-                  {keyValues.map((key) => (
-                    <th
-                      key={key}
-                      className="text-left py-3 px-1 font-lighter text-gray-600 uppercase text-xs"
-                    >
-                      {key === "specialty"
-                        ? "Specialty"
-                        : key === "appointment"
-                        ? "Appt. Status"
-                        : key === "contact"
-                        ? "Contact No."
-                        : key.charAt(0).toUpperCase() + key.slice(1)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {dataValues.map((record) => (
-                  <tr
-                    key={record.id}
-                    className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                  >
-                    {keyValues.map((key) => {
-                      const refProp = key === "contact" ? { ref: tdref } : {};
-                      const cellClasses =
-                        "py-1 whitespace-nowrap max-w-16 px-1 overflow-hidden align-middle text-gray-800";
-
-                      if (key === "image") {
-                        return (
-                          <td key={key} className={cellClasses}>
-                            <img
-                              src={record.image}
-                              alt={record.alt}
-                              className="h-10 w-10 rounded-full object-cover shadow-sm"
-                            />
-                          </td>
-                        );
-                      }
-
-                      if (key === "status") {
-                        let isOnline = record.status === "online";
-                        return (
-                          <td key={key} className={cellClasses}>
-                            <span
-                              className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                                isOnline
-                                  ? "bg-green-100 text-green-700"
-                                  : "bg-red-100 text-red-700"
-                              }`}
-                            >
-                              {record.status}
-                            </span>
-                          </td>
-                        );
-                      }
-
-                      if (key === "contact") {
-                        let number = record.contact.replace(/\s/g, "");
-                        let length = number.length;
-                        let contactNumber = record.contact;
-
-                        if (length > cellWidth) {
-                          contactNumber =
-                            number.slice(0, cellWidth - 2) + "...";
-                        }
-
-                        return (
-                          <td
-                            key={key}
-                            className={cellClasses}
-                            {...(record.id === dataValues[0].id ? refProp : {})}
-                          >
-                            {contactNumber}
-                          </td>
-                        );
-                      }
-
-                      if (key === "rating") {
-                        let rate = record.rating;
-                        return (
-                          <td key={key} className={cellClasses}>
-                            <RatingStars rate={rate} />
-                          </td>
-                        );
-                      }
-
-                      return (
-                        <td key={key} className={cellClasses}>
-                          {record[key]}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="bg-white rounded-xl shadow-xl border border-gray-200 p-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+              <Stethoscope className="w-5 h-5 mr-2 text-indigo-600" />
+              Your Care Team
+            </h2>
+            <ul className="space-y-3">
+              {MOCK_CARE_TEAM.map((member) => (
+                <li
+                  key={member.id}
+                  className="flex justify-between items-center py-2 border-b last:border-b-0"
+                >
+                  <div className="flex-1">
+                    <p className="font-medium text-gray-900">{member.name}</p>
+                    <p className="text-xs text-gray-500">{member.specialty}</p>
+                  </div>
+                  <button className="ml-4 text-sm px-3 py-1 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition-colors">
+                    Contact
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="flex flex-col p-6 bg-white shadow-xl rounded-xl w-full border border-gray-200">
-          <h3 className="text-xl font-bold text-gray-800 mb-4">
-            Available Hospitals
-          </h3>
-          <div className="flex justify-center items-start text-sm w-full flex-1 overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-gray-300">
-                  {keyValues.map((key) => (
-                    <th
-                      key={key}
-                      className="text-left py-3 px-1 font-semibold text-gray-600 uppercase text-xs"
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 h-30">
+          <div
+            className={`p-4 rounded-xl relative shadow-lg flex flex-col items-center ${
+              expandHistory ? "justify-betweem mb-4 border-1" : "justify-center"
+            } bg-white border-l-4 border-emerald-500 transition-shadow hover:shadow-xl`}
+          >
+            <div className="w-full flex flex-row items-center justify-around z-2">
+              <p
+                className={`${
+                  expandHistory ? "w-fit" : "w-full"
+                } display-none sm:flex text-sm font-semibold text-gray-500 uppercase`}
+              >
+                Appointment History
+              </p>
+
+              {expandHistory && (
+                <div className="flex items-center justify-center w-fit mx-2 transition-all duration-200 ease-in-out py-1">
+                  <div className="flex flex-row items-center justify-center mr-2">
+                    <input
+                      onClick={handleCheckboxSelect}
+                      type="checkbox"
+                      checked={check}
+                      className={`border-1 border-gray-500 hover:scale-[1.1] transition-all duration-200 ease-in-out hover:border-[#0467f1]`}
+                    />
+                    <p className="text-xs ml-1 whitespace-nowrap">Select All</p>
+                  </div>
+
+                  <Trash
+                    className={`h-4 ${
+                      checkedListIds.length > 0
+                        ? "text-red-500 cursor-pointer hover:scale-[1.1]"
+                        : "text-gray-400 cursor-not-allowed"
+                    }`}
+                    onClick={handleDeleteSelected}
+                  />
+                </div>
+              )}
+              {expandHistory ? (
+                <ChevronUp
+                  onClick={handleCollapseHistory}
+                  className={`${
+                    expandHistory ? "w-6 h-6" : "w-8 h-8"
+                  } z-1 cursor-pointer opacity-70`}
+                />
+              ) : (
+                <ChevronDown
+                  onClick={handleExpandHistory}
+                  className={`${
+                    expandHistory ? "w-6 h-6" : "w-8 h-8"
+                  } z-1 cursor-pointer opacity-70 hover:scale-[1.1] transition-all duration-200 ease-in-out`}
+                />
+              )}
+              <History
+                className={`${
+                  expandHistory ? "w-6 h-6" : "w-8 h-8 ml-4"
+                } ml-2 text-gray-800 opacity-70`}
+              />
+            </div>
+            {!expandHistory && historyData.length != 0 && (
+              <div className="w-full h-fit flex flex-col items-left justify-center">
+                <p className="text-sm text-gray-400">Most recent History:</p>
+                <p className="text-sm text-gray-400 whitespace-nowrap">
+                  {current_history.date} {current_history.type}{" "}
+                  {current_history.providerLocation}
+                </p>
+              </div>
+            )}
+            {expandHistory && (
+              <div
+                className={`w-full h-auto bg-[rgba(255,255,255,1)] transition-all duration-200 ease-in-out z-[1] shadow-lg ${
+                  expandHistory ? "absolute top-[50%] left-0" : ""
+                }`}
+              >
+                <div className="w-full px-2 py-4">
+                  <table className="gap-4 w-full min-h-30 relative">
+                    <thead className="w-full rounded-lg border-gray-300">
+                      <tr className="gap-1 w-full my-4 rounded-lg bg-[rgba(177,177,177,0.5)]">
+                        <th
+                          className={`${TheadStyles} rounded-tl-lg rounded-bl-lg`}
+                        ></th>
+                        <th className={`${TheadStyles}`}>Date</th>
+                        <th className={TheadStyles}>Description</th>
+                        <th
+                          className={`${TheadStyles} rounded-tr-lg rounded-br-lg`}
+                        >
+                          Provider/Location
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="max-h-40 overflow-y-auto">
+                      {historyData.length === 0 ? (
+                        <p className="text-gray-400 absolute top-[50%] left-0 tracking-wide whitespace-nowrap text-sm md:text-lg font-semibold w-full text-center">
+                          No History
+                        </p>
+                      ) : (
+                        historyData.map((data) => (
+                          <HistoryDisplay
+                            data={data}
+                            key={data.id}
+                            check={check}
+                            onUpdateCheckedListIds={handleUpdateCheckedListIds}
+                          />
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <StatCard
+            icon={Calendar}
+            title="Next Appointment"
+            value="Nov 20"
+            color="indigo"
+          />
+          <StatCard
+            icon={FileText}
+            title="Unread Records"
+            value="1 New"
+            color="amber"
+          />
+        </section>
+
+        <div className="w-full flex p-4 gap-4 items-start justify-center py-2">
+          <div className="flex flex-col p-6 bg-white shadow-xl rounded-xl w-full border border-gray-200">
+            <h3 className="text-xl font-semibold text-gray-600 mb-4">
+              Available Specialists
+            </h3>
+            <div className="flex justify-center items-start text-sm w-full flex-1 overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-300">
+                    {keyValues.map((key) => (
+                      <th
+                        key={key}
+                        className="text-left py-3 px-1 font-lighter text-gray-600 uppercase text-xs"
+                      >
+                        {key === "specialty"
+                          ? "Specialty"
+                          : key === "appointment"
+                          ? "Appt. Status"
+                          : key === "contact"
+                          ? "Contact No."
+                          : key.charAt(0).toUpperCase() + key.slice(1)}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {dataValues.map((record) => (
+                    <tr
+                      key={record.id}
+                      className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
                     >
-                      {key === "specialty"
-                        ? "Role/Specialty"
-                        : key === "appointment"
-                        ? "Appt. Status"
-                        : key === "contact"
-                        ? "Contact No."
-                        : key.charAt(0).toUpperCase() + key.slice(1)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {dataValues.map((record) => (
-                  <tr
-                    key={record.id}
-                    className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                  >
-                    {keyValues.map((key) => {
-                      const refProp = key === "contact" ? { ref: tdref } : {};
-                      const cellClasses =
-                        "py-3 px-1 align-middle text-gray-800";
+                      {keyValues.map((key) => {
+                        const refProp = key === "contact" ? { ref: tdref } : {};
+                        const cellClasses =
+                          "py-1 whitespace-nowrap max-w-16 px-1 overflow-hidden align-middle text-gray-800";
 
-                      if (key === "image") {
-                        return (
-                          <td key={key} className={cellClasses}>
-                            <img
-                              src={record.image}
-                              alt={record.alt}
-                              className="h-10 w-10 rounded-full object-cover shadow-sm"
-                            />
-                          </td>
-                        );
-                      }
+                        if (key === "image") {
+                          return (
+                            <td key={key} className={cellClasses}>
+                              <img
+                                src={record.image}
+                                alt={record.alt}
+                                className="h-10 w-10 rounded-full object-cover shadow-sm"
+                              />
+                            </td>
+                          );
+                        }
 
-                      if (key === "status") {
-                        let isOnline = record.status === "online";
-                        return (
-                          <td key={key} className={cellClasses}>
-                            <span
-                              className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                                isOnline
-                                  ? "bg-green-100 text-green-700"
-                                  : "bg-red-100 text-red-700"
-                              }`}
+                        if (key === "status") {
+                          let isOnline = record.status === "online";
+                          return (
+                            <td key={key} className={cellClasses}>
+                              <span
+                                className={`text-xs font-semibold px-3 py-1 rounded-full ${
+                                  isOnline
+                                    ? "bg-green-100 text-green-700"
+                                    : "bg-red-100 text-red-700"
+                                }`}
+                              >
+                                {record.status}
+                              </span>
+                            </td>
+                          );
+                        }
+
+                        if (key === "contact") {
+                          let number = record.contact.replace(/\s/g, "");
+                          let length = number.length;
+                          let contactNumber = record.contact;
+
+                          if (length > cellWidth) {
+                            contactNumber =
+                              number.slice(0, cellWidth - 2) + "...";
+                          }
+
+                          return (
+                            <td
+                              key={key}
+                              className={cellClasses}
+                              {...(record.id === dataValues[0].id
+                                ? refProp
+                                : {})}
                             >
-                              {record.status}
-                            </span>
-                          </td>
-                        );
-                      }
+                              {contactNumber}
+                            </td>
+                          );
+                        }
 
-                      if (key === "contact") {
-                        let number = record.contact.replace(/\s/g, "");
-                        let length = number.length;
-                        let contactNumber = record.contact;
-
-                        if (cellWidth > 0 && length > 15) {
-                          contactNumber = number.slice(0, 12) + "...";
+                        if (key === "rating") {
+                          let rate = record.rating;
+                          return (
+                            <td key={key} className={cellClasses}>
+                              <RatingStars rate={rate} />
+                            </td>
+                          );
                         }
 
                         return (
-                          <td
-                            key={key}
-                            className={cellClasses}
-                            {...(record.id === dataValues[0].id ? refProp : {})}
-                          >
-                            {contactNumber}
-                          </td>
-                        );
-                      }
-
-                      if (key === "rating") {
-                        let rate = record.rating;
-                        return (
                           <td key={key} className={cellClasses}>
-                            <RatingStars rate={rate} />
+                            {record[key]}
                           </td>
                         );
-                      }
-
-                      return (
-                        <td key={key} className={cellClasses}>
-                          {record[key]}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

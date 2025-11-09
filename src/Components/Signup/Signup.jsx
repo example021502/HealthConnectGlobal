@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../Context/Context";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 
 function Signup() {
+  const [checkingAuthentication, setCheckAuthentication] = useState(false);
   const { setView } = useContext(AuthContext);
   const [errorColor, setErrorColor] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -132,15 +133,17 @@ function Signup() {
       setSignupError("Please specify your specialty.");
       return;
     }
-
-    console.log("Attempting to create account...");
-    const targetView = selectedRole === "patient" ? "patient" : "specialist";
-    setView(targetView);
+    
+    console.log("Creating account...")
+    console.log("Please wait...")
+    setView("signin")
   };
+
 
   // START: Render
   return (
     <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 p-2 font-sans">
+    
       <div className="flex w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden min-h-[450px] transition-all duration-500 ease-in-out">
         {/* Left Panel: Messaging / Branding */}
         <div className="hidden md:flex flex-col justify-center p-5 w-1/2 bg-indigo-600 text-white transition-opacity duration-500">
@@ -162,13 +165,13 @@ function Signup() {
         </div>
 
         {/* Right Panel: Form */}
-        <div className="w-lg m-auto lg:w-1/2 p-8 md:p-10 md:w-1/2 flex flex-col justify-center relative">
-          <div className="mb-4 mt-4 text-center lg:text-left">
+        <div className={`w-lg m-auto lg:w-1/2 p-6 md:p-10 md:w-1/2 flex flex-col items-start justify-center relative ${next ? "transition-opacity duration-500 pt-12" : ""}`}>
+          <div className="mb-4 mt-4 text-left">
             <h2 className="text-[1.5em] font-bold text-gray-900 mb-2">
               {next ? "Set Account Security" : "Create Your Profile"}
             </h2>
-            <p className="text-sm text-gray-500 flex items-center justify-center lg:justify-start">
-              Already have an account?{" "}
+            <p className="text-sm text-gray-500 flex items-start justify-center lg:justify-start">
+              <span>Already have an account?</span>
               <button
                 type="button"
                 onClick={handleSignin}
@@ -190,14 +193,14 @@ function Signup() {
 
           {next ? (
             // START: Second Form (Account Details)
-            <form onSubmit={handleCreateAccount} className="space-y-4">
+            <form onSubmit={handleCreateAccount} className="space-y-4 w-full">
               <button
                 type="button"
                 onClick={handleBack}
-                className="text-indigo-600 hover:text-indigo-800 transition duration-150 flex items-center text-sm font-medium absolute left-10 top-4 shadow-md px-4 py-2 rounded-2xl bg-gray-200"
+                className="text-indigo-600 hover:text-white hover:bg-indigo-600 transition-all ease-in hover:duration-100 duration-150 flex items-center justify-center text-sm font-medium absolute md:left-10 md:top-4 top-4 shadow-md px-4 py-2 rounded-2xl bg-gray-200"
               >
                 <ArrowLeft className="w-4 h-4 mr-1" />
-                Back
+                <span>Back</span>
               </button>
 
               {/* Country Input */}
@@ -276,7 +279,7 @@ function Signup() {
               </div>
 
               {/* Specialty Input (Conditional) */}
-              <div className="relative">
+              <div className={`relative ${disable ? "hidden" : "flex"}  `}>
                 <GraduationCap className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <input
                   type="text"
@@ -330,7 +333,7 @@ function Signup() {
               </div>
             </form>
           ) : (
-            <form className="space-y-4" onSubmit={handleNext}>
+            <form className="space-y-4 w-full" onSubmit={handleNext}>
               {/* First Name Input */}
               <div className="relative">
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />

@@ -5,7 +5,7 @@ function ToolCard({ tool }) {
   const [hover, setHover] = useState(false);
 
   const cardClasses = `
-    transition-all cursor-pointer duration-300 ease-in-out flex flex-col items-start p-4 justify-center w-full max-w-[250px] h-fit rounded-xl relative 
+    transition-all cursor-pointer duration-300 ease-in-out flex flex-col items-start p-4 justify-center w-full md:max-w-[250px] max-w-full h-fit rounded-xl relative 
     bg-[rgba(255,255,255,0.8)] backdrop-blur-sm shadow-md text-gray-800
     overflow-hidden
     after:absolute after:inset-0 after:z-[-1] after:rounded-xl 
@@ -32,7 +32,7 @@ function ToolCard({ tool }) {
           tool.icon
         } ${hover ? "text-white" : "text-[rgba(0,107,255,1)]"}`}
       />
-      <p className="text-sm font-light tracking-wide transition-colors duration-300">
+      <p className="text-md font-light tracking-wide transition-colors duration-300">
         {tool.description}
       </p>
     </div>
@@ -173,13 +173,13 @@ function Home() {
     <div className="w-full min-h-screen bg-gradient-to-br from-[rgba(0,107,255,0.2)] via-[rgba(0,107,255,0.08)] to-[rgba(0,107,255,0.1)] flex items-center justify-center bg-[rgb(255,255,255)]">
       <div className="w-full max-w-7xl h-fit relative pt-2 flex flex-col items-center justify-start px-4 md:px-8">
         {/* Nav Bar */}
-        <div className="z-50 text-[rgba(255,255,255,0.8)] flex flex-col md:flex-row items-center justify-center gap-4 py-1 px-4 bg-[rgba(6,83,201,1)] rounded-full shadow-2xl w-full">
-          <div className="flex flex-row justify-center items-center gap-6 text-md font-lighter">
+        <div className="z-50 text-[rgba(255,255,255,0.8)] flex flex-col md:flex-row items-center justify-center gap-4 py-1 md:px-4 md:bg-[rgba(6,83,201,1)] rounded-full md:shadow-2xl w-full">
+          <div className="flex flex-row justify-center items-center gap-2 md:gap-6 text-sm md:text-md font-lighter bg-[rgba(6,83,201,1)] md:bg-trnasparent rounded-full w-full md:w-fit">
             <a
               href="#"
               className="flex items-center justify-center transition-all duration-200 ease-in-out hover:text-[rgba(255,255,255,1)] hover:bg-[rgba(255,255,255,0.1)] p-1 m-1 rounded-lg"
             >
-              <i className="ri-globe-line mr-1" />
+              <i className="ri-globe-line md:mr-1" />
               <span>Language</span>
               <i className="ri-expand-up-down-fill ml-0.5 hover:scale-[1.1]" />
             </a>
@@ -201,7 +201,7 @@ function Home() {
           </div>
           <button
             onClick={handleSignup}
-            className="md:ml-auto text-lg text-[rgba(6,83,201,1)] hover:bg-[rgba(255,255,255,0.6)] bg-[rgba(255,255,255,1)] py-1 px-4 m-1 rounded-lg transition-all duration-200 ease-in-out"
+            className="md:ml-auto text-md md:flex hidden text-[rgba(6,83,201,1)] hover:bg-[rgba(255,255,255,0.5)] hover:text-white bg-[rgba(255,255,255,1)] py-1 px-4 m-1 rounded-full transition-all duration-200 ease-in"
           >
             Create Account
           </button>
@@ -225,7 +225,7 @@ function Home() {
             <p className="text-lg tracking-normal text-left m-0">
               Global care. Local ease.
             </p>
-            <h1 className="text-3xl text-left font-extrabold text-[rgb(6,83,201)]">
+            <h1 className="md:text-3xl text-2xl text-left font-extrabold text-[rgb(6,83,201)]">
               We are here for your Care
             </h1>
             <p className="text-md tracking-normal text-left text-gray-600">
@@ -263,24 +263,24 @@ function Home() {
         </div>
 
         {/* Services Grid */}
-        <div className="flex flex-wrap items-stretch gap-4 m-4 justify-center w-full">
+        <div className="flex flex-wrap items-stretch gap-8 m-4 justify-center w-full">
           {services.map((item) => (
             <div
               key={item.id}
-              className="gap-2 cursor-pointer text-sm w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)] xl:w-[20em] bg-[rgba(160,160,160,0.2)] text-[#2b2c2c] p-4 rounded-xl flex flex-col items-start justify-start shadow-inner hover:shadow-lg transition-shadow duration-300"
+              className="gap-2 cursor-pointer text-sm w-[90%] md:w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)] xl:w-[24em] bg-[rgba(6,83,201,0.2)] text-[#2b2c2c] p-4 rounded-xl flex flex-col items-start justify-start shadow-inner hover:shadow-lg transition-shadow duration-300"
             >
               <span className="mb-2 relative pb-4 before:absolute before:h-[1.5px] before:w-full before:bg-[rgba(0,0,0,0.2)] before:bottom-0 before:left-0 flex flex-col items-start justify-center">
                 <i
-                  className={`mr-2 text-[3em] text-[rgba(6,83,201,1)] ${item.icon}`}
+                  className={`mr-2 text-[2em] md:text-[3em] text-[rgba(6,83,201,1)] ${item.icon}`}
                 />
-                <span className="font-semibold uppercase text-base mt-1">
+                <span className="font-semibold uppercase text-sm tracking-wide mt-1">
                   {item.title}
                 </span>
               </span>
-              <span className="h-10 w-full text-sm font-medium text-[rgb(6,83,201)] transition-all duration-300 ease-in-out">
+              <span className="h-8 w-full text-sm font-medium text-[rgb(6,83,201)] transition-all duration-300 ease-in-out">
                 {item.attributes[attr_index]}
               </span>
-              <span className="text-sm tracking-wide text-gray-700 mt-1">
+              <span className="text-sm w-full tracking-wide text-gray-700 mt-1">
                 {item.description}
               </span>
             </div>
@@ -288,16 +288,16 @@ function Home() {
         </div>
 
         {/* Connected Services/Tools Section */}
-        <div className="w-full relative rounded-[2em] flex flex-col lg:flex-row items-center justify-center my-20 px-4 gap-4 py-20 text-white z-3 bg-[rgba(0,107,255,1)] overflow-hidden">
+        <div className="w-full relative rounded-[2em] flex flex-col lg:flex-row items-center justify-center my-20 px-4 gap-4 md:py-20 py-0 z-3 md:bg-[rgba(0,107,255,1)] overflow-hidden">
           <img
             src="https://i.ibb.co/Wps552Cd/back.png"
             alt="World of Specialists"
-            className="absolute w-full h-full z-0 object-cover top-0 left-0 rounded-[2em] opacity-30"
+            className="absolute md:flex hidden w-full h-full z-0 object-cover top-0 left-0 rounded-[2em] opacity-80 "
           />
 
           <div className="flex z-1 flex-col w-full lg:w-[50%] items-center justify-center p-4">
             <div className="w-full flex flex-col items-start justify-center">
-              <h4 className="text-[2em] font-light leading-tight">
+              <h4 className="md:text-[2em] text-2xl font-bold leading-tight text-[rgb(6,83,201)] md:text-white">
                 World-Class Healthcare
                 <br />
                 Services for You and Your
@@ -313,7 +313,7 @@ function Home() {
             />
           </div>
 
-          <div className="w-full lg:w-[60%] h-fit text-gray-800 z-4 flex flex-wrap items-center justify-center gap-8 p-4">
+          <div className="w-full lg:w-[90%] h-fit text-gray-800 z-4 flex flex-wrap items-center justify-center gap-8 md:p-4">
             {connection_tools.map((tool) => (
               <ToolCard key={tool.id} tool={tool} />
             ))}
@@ -326,7 +326,7 @@ function Home() {
             © [2025] InterHealthConnect. All rights reserved.
           </p>
           <div className="flex items-start flex-wrap gap-10 justify-center w-full pb-10">
-            <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
+            <div className="md:w-fit w-full h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
               <h2 className="text-xl font-bold tracking-wide">Policies</h2>
               <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full text-md rounded-sm px-2">
                 Ethics
@@ -341,7 +341,7 @@ function Home() {
                 Terms of Use
               </a>
             </div>
-            <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
+            <div className="md:w-fit w-full h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
               <h2 className="text-xl font-bold tracking-wide">About Us</h2>
               <a className="hover:bg-[#084aa7] transition-all duration-300 ease-in-out cursor-pointer w-full text-md rounded-sm px-2">
                 Health Library
@@ -356,7 +356,7 @@ function Home() {
                 Make a Donation
               </a>
             </div>
-            <div className="w-fit h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
+            <div className="md:w-fit w-full h-fit rounded-lg p-8 flex flex-col items-start justify-center gap-2">
               <h2 className="text-xl font-bold tracking-wide">Contact Us</h2>
               <div className="flex flex-col w-full items-center gap-8">
                 <div className="flex gap-2 w-full items-center justify-between">
@@ -384,7 +384,7 @@ function Home() {
                   </div>
                 </div>
 
-                <a className="bg-[#0a5acb] hover:bg-[#084aa7] hover:text-gray-200 text-lg font-semibold text-center py-4 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out cursor-pointer w-fit rounded-2xl px-2 flex flex-wrap items-center justify-center">
+                <a className="bg-[#0a5acb] hover:bg-[#084aa7] hover:text-gray-200 text-lg font-semibold text-center py-4 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out cursor-pointer w-fit rounded-2xl px-8 flex flex-wrap items-center justify-center">
                   <HandHeart className="max-h-10 max-w-10 mr-2" />
                   <span>Make a Donation</span>
                 </a>
