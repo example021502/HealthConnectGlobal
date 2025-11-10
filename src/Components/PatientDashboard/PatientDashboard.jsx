@@ -51,15 +51,21 @@ const keyValues = [
 
 const dataValues = LATEST_ONBOARDING;
 
-const StatCard = ({ icon: Icon, title, value, color }) => (
+const StatCard = ({ Icon, title, value, color }) => (
   <div
-    className={`p-5 rounded-xl shadow-lg flex items-center justify-between bg-white border-l-4 border-${color}-500 transition-shadow hover:shadow-xl`}
+    style={{
+      color: `rgba(${color},1)`,
+      "--shadow-color": `${color}`,
+    }}
+    className={`p-4 rounded-xl flex items-start justify-between transition-shadow duration-200 shadow-[0_0_4px_rgba(var(--shadow-color),0.5)] hover:shadow-[0_0_8px_rgba(var(--shadow-color),0.6)]`}
   >
     <div>
-      <p className="text-sm font-medium text-gray-500 uppercase">{title}</p>
-      <p className={`text-xl font-bold text-${color}-700 mt-1`}>{value}</p>
+      <p className="text-xs font-medium text-gray-500 uppercase">{title}</p>
+      <p style={{ color: color }} className={`text-lg font-bold mt-1`}>
+        {value}
+      </p>
     </div>
-    <Icon className={`w-6 h-6 text-${color}-400 opacity-70`} />
+    <Icon style={{ color: color }} className={`ml-2 w-8 h-8 opacity-100`} />
   </div>
 );
 
@@ -287,8 +293,8 @@ const PatientDashboard = () => {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 mb-8">
-          <div className=" bg-white rounded-xl shadow-xl border border-gray-200 p-6">
+        <div className="flex md:flex-row flex-col gap-6 w-full flex-1 mb-8">
+          <div className=" bg-white rounded-xl md:max-w-1/4 shadow-xl border border-gray-200 p-6">
             <h2 className="md:text-xl text-lg font-bold text-gray-600 mb-4 flex items-center">
               <Clock className="md:w-5 md:h-5 w-4 h-4 mr-2 text-indigo-600" />
               Your Next Appointment
@@ -309,54 +315,49 @@ const PatientDashboard = () => {
                 <button className="md:px-4 md:py-2 p-2 bg-indigo-600 text-white text-sm md:text-lg rounded-lg font-semibold hover:bg-indigo-700 transition-all ease-in duration-100">
                   Check Calendar
                 </button>
-                <button className="md:px-4 md:py-2 p-2 bg-gray-300 text-gray-600 text-sm md:text-lg rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                <button className="md:px-4 md:py-2 p-2 bg-gray-300 text-gray-600 text-sm md:text-lg rounded-lg font-semibold hover:bg-gray-400 transition-colors">
                   Reschedule
                 </button>
               </div>
             </div>
-            <div className="mt-6 flex space-x-4">
-              <button className="flex-1 px-4 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors flex items-center justify-center">
-                <FileText className="w-5 h-5 mr-2" /> Request Prescription
-                Refill
-              </button>
-              <button className="flex-1 px-4 py-3 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 transition-colors flex items-center justify-center">
-                <MessageSquareText className="w-5 h-5 mr-2" /> Message Your Care
-                Team
-              </button>
-            </div>
           </div>
-
-          <div className="bg-white rounded-xl shadow-xl border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-              <Stethoscope className="w-5 h-5 mr-2 text-indigo-600" />
-              Your Care Team
-            </h2>
-            <ul className="space-y-3">
-              {MOCK_CARE_TEAM.map((member) => (
-                <li
-                  key={member.id}
-                  className="flex justify-between items-center py-2 border-b last:border-b-0"
-                >
-                  <div className="flex-1">
-                    <p className="font-medium text-gray-900">{member.name}</p>
-                    <p className="text-xs text-gray-500">{member.specialty}</p>
-                  </div>
-                  <button className="ml-4 text-sm px-3 py-1 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition-colors">
-                    Contact
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className=" bg-white rounded-xl w-full flex-1 shadow-xl border border-gray-200 p-6"></div>
         </div>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 h-30">
+        <section className="flex flex-col md:flex-row gap-6 mb-8 h-fit">
+          <div className="flex flex-wrap justify-between transition-all duration-200 ease-in flex-col md:flex-row gap-6 flex-1 h-full">
+            <StatCard
+              Icon={Calendar}
+              title="Next Appointment"
+              value="Nov 20"
+              color="255,118,74"
+            />
+            <StatCard
+              Icon={Calendar}
+              title="Next Appointment"
+              value="Nov 20"
+              color="75,0,130"
+            />
+            <StatCard
+              Icon={FileText}
+              title="Unread Records"
+              value="1 New"
+              color="255,184,73"
+            />
+            <StatCard
+              Icon={FileText}
+              title="Unread Records"
+              value="1 New"
+              color="168,0,116"
+            />
+          </div>
+
           <div
-            className={`p-4 rounded-xl relative shadow-lg flex flex-col items-center ${
-              expandHistory ? "justify-betweem mb-4 border-1" : "justify-center"
-            } bg-white border-l-4 border-emerald-500 transition-shadow hover:shadow-xl`}
+            className={`md:w-3/10 w-full h-full p-4 rounded-xl relative shadow-lg flex flex-col items-center ${
+              expandHistory ? "justify-betweem mb-2 border-1" : "justify-center"
+            } bg-white border-1 border-emerald-100 not-only-of-type:not-visited: shadow-md transition-shadow hover:shadow-xl`}
           >
-            <div className="w-full flex flex-row items-center justify-around z-2">
+            <div className="w-full relative flex flex-row items-center justify-around z-2">
               <p
                 className={`${
                   expandHistory ? "w-fit" : "w-full"
@@ -460,25 +461,13 @@ const PatientDashboard = () => {
               </div>
             )}
           </div>
-
-          <StatCard
-            icon={Calendar}
-            title="Next Appointment"
-            value="Nov 20"
-            color="indigo"
-          />
-          <StatCard
-            icon={FileText}
-            title="Unread Records"
-            value="1 New"
-            color="amber"
-          />
         </section>
 
         <div className="w-full flex p-4 gap-4 items-start justify-center py-2">
           <div className="flex flex-col p-6 bg-white shadow-xl rounded-xl w-full border border-gray-200">
-            <h3 className="text-xl font-semibold text-gray-600 mb-4">
-              Available Specialists
+            <h3 className="text-xl flex font-semibold text-gray-600 mb-4">
+              <Stethoscope className="w-5 h-5 mr-2 text-indigo-600" />
+              <span>Available Specialists</span>
             </h3>
             <div className="flex justify-center items-start text-sm w-full flex-1 overflow-x-auto">
               <table className="w-full border-collapse">
