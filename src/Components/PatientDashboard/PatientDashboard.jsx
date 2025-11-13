@@ -51,21 +51,19 @@ const keyValues = [
 
 const dataValues = LATEST_ONBOARDING;
 
-const StatCard = ({ Icon, title, value, color }) => (
+const StatCard = ({ Icon, title, value, color1, color2 }) => (
   <div
     style={{
-      color: `rgba(${color},1)`,
-      "--shadow-color": `${color}`,
+      "--bg-right": `rgba(${color2},0.6)`,
+      "--bg-left": `rgba(${color1},0.4)`,
     }}
-    className={`p-4 rounded-xl flex items-start justify-between transition-shadow duration-200 shadow-[0_0_4px_rgba(var(--shadow-color),0.5)] hover:shadow-[0_0_8px_rgba(var(--shadow-color),0.6)]`}
+    className={`min-w-1/5 p-4 rounded-xl flex items-center justify-between transition-shadow duration-200, bg-gradient-to-r from-[var(--bg-left)] to-[var(--bg-right)] shadow-md `}
   >
     <div>
       <p className="text-xs font-medium text-gray-500 uppercase">{title}</p>
-      <p style={{ color: color }} className={`text-lg font-bold mt-1`}>
-        {value}
-      </p>
+      <p className={`text-lg font-bold mt-1 text-white`}>{value}</p>
     </div>
-    <Icon style={{ color: color }} className={`ml-2 w-8 h-8 opacity-100`} />
+    <Icon style={{ color1: color1 }} className={`ml-2 w-8 h-8 opacity-100`} />
   </div>
 );
 
@@ -192,7 +190,7 @@ const PatientDashboard = () => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full h-screen bg-gray-50 overflow-y-hidden pt-14 md:pt-10">
+    <div className="flex items-center justify-center w-full h-screen bg-gray-50 overflow-y-hidden md:pt-10">
       <div className="flex flex-col h-full w-full bg-gray-50 font-sans p-6 overflow-y-auto">
         {exiting && (
           <div className="absolute top-0 left-0 z-10000 w-full h-full bg-[rgba(0,0,0,0.4)] transition-all duration-200 ease-in-out flex items-center justify-center">
@@ -220,8 +218,8 @@ const PatientDashboard = () => {
             </div>
           </div>
         )}
-        <header className="rounded-2xl relative gap-4 mb-8 flex items-center justify-start flex-col ">
-          <div className="z-20000 fixed flex flex-row items-center justify-center gap-6 px-4 rounded-full md:w-fit w-[90%] md:right-10 top-4 bg-indigo-700 text-[rgba(255,255,255,1)] shadow-2xl">
+        <header className="rounded-2xl relative gap-4 mb-8 flex items-center justify-start flex-col">
+          <div className="z-20000 fixed flex flex-row items-center md:justify-center justify-around gap-6 px-4 py-2 md:py-0 md:rounded-full md:w-fit w-full md:right-10 bottom-0 md:bottom-auto md:top-4 bg-indigo-700 text-[rgba(255,255,255,1)] shadow-2xl">
             <div
               title={`You have ${noteNumber} notifications`}
               onMouseOver={startShake}
@@ -231,7 +229,7 @@ const PatientDashboard = () => {
               <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] md:w-3.5 md:h-3.5 w-3 h-3 rounded-tr-full rounded-tl-full rounded-br-full text-[8px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
                 {noteNumber}
               </p>
-              <Bell ref={notificationsRef} className="md:w-4 md:h-4 w-5 h-5" />
+              <Bell ref={notificationsRef} className="md:w-5 md:h-5 w-6 h-6" />
             </div>
             <div
               title={`You have ${mails} mails`}
@@ -240,7 +238,7 @@ const PatientDashboard = () => {
               <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] md:w-3.5 md:h-3.5 w-3 h-3 rounded-tr-full rounded-tl-full rounded-br-full text-[8px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
                 {mails}
               </p>
-              <Mail className="md:w-4 md:h-4 w-5 h-5" />
+              <Mail className="md:w-5 md:h-5 w-6 h-6" />
             </div>
 
             <div
@@ -250,20 +248,20 @@ const PatientDashboard = () => {
               <p className="bg-red-500 tracking-tighter absolute bottom-[100%] left-[50%] md:w-3.5 md:h-3.5 w-3 h-3 rounded-tr-full rounded-tl-full rounded-br-full text-[8px] font-bold text-white flex items-center justify-center z-2 transition-all duration-200 ease-in-out">
                 {chats}
               </p>
-              <MessageSquareText className="md:w-4 md:h-4 w-5 h-5" />
+              <MessageSquareText className="md:w-5 md:h-5 w-6 h-6" />
             </div>
             <img
               src={profileImage}
               alt="profile"
               title="profile"
-              className="md:w-8 md:h-8 w-10 h-10 rounded-full bg-white border-1 border-indigo-200 cursor-pointer hover:scale-[1.1] transition-all ease-in duration-100"
+              className="md:w-10 md:h-10 w-12 h-12 rounded-full bg-white border-1 border-indigo-200 cursor-pointer hover:scale-[1.1] transition-all ease-in duration-100 object-cover"
             />
             <div
               className="flex flex-row w-fit h-fit transition-all duration-100 ease-in-out gap-[2px] md:text-4 text-[10px] hover:scale-[1.1] cursor-pointer hover:bg-emerald-500 rounded-full hover:p-1"
               onClick={handleExiting}
               title="log out"
             >
-              <LogOut className={`md:w-4 md:h-4 w-5 h-5 relative `} />
+              <LogOut className={`md:w-5 md:h-5 w-6 h-6 `} />
             </div>
           </div>
 
@@ -324,37 +322,10 @@ const PatientDashboard = () => {
           <div className=" bg-white rounded-xl w-full flex-1 shadow-xl border border-gray-200 p-6"></div>
         </div>
 
-        <section className="flex flex-col md:flex-row gap-6 mb-8 h-fit">
-          <div className="flex flex-wrap justify-between transition-all duration-200 ease-in flex-col md:flex-row gap-6 flex-1 h-full">
-            <StatCard
-              Icon={Calendar}
-              title="Next Appointment"
-              value="Nov 20"
-              color="255,118,74"
-            />
-            <StatCard
-              Icon={Calendar}
-              title="Next Appointment"
-              value="Nov 20"
-              color="75,0,130"
-            />
-            <StatCard
-              Icon={FileText}
-              title="Unread Records"
-              value="1 New"
-              color="255,184,73"
-            />
-            <StatCard
-              Icon={FileText}
-              title="Unread Records"
-              value="1 New"
-              color="168,0,116"
-            />
-          </div>
-
+        <section className="flex items-start flex-col md:flex-row gap-6 mb-8 h-fit">
           <div
-            className={`md:w-3/10 w-full h-full p-4 rounded-xl relative shadow-lg flex flex-col items-center ${
-              expandHistory ? "justify-betweem mb-2 border-1" : "justify-center"
+            className={`md:w-fit w-full h-fit px-6 py-2 rounded-xl relative shadow-lg flex flex-col items-center ${
+              expandHistory ? "justify-between mb-2 border-1" : "justify-center"
             } bg-white border-1 border-emerald-100 not-only-of-type:not-visited: shadow-md transition-shadow hover:shadow-xl`}
           >
             <div className="w-full relative flex flex-row items-center justify-around z-2">
@@ -460,6 +431,37 @@ const PatientDashboard = () => {
                 </div>
               </div>
             )}
+          </div>
+
+          <div className="flex border-1 items-start justify-around transition-all duration-200 ease-in flex-wrap md:flex-row gap-4 flex-1 h-fit">
+            <StatCard
+              Icon={`ri-heart-fill`}
+              title="Overal Health"
+              value="Perfect"
+              color1="255,118,74"
+              color2="255,118,74"
+            />
+            <StatCard
+              Icon={`ri-lightning-bolt-fill`}
+              title="Next Appointment"
+              value="Nov 20"
+              color1="75,0,130"
+              color2="75,0,130"
+            />
+            <StatCard
+              Icon={`ri-user-community-fill`}
+              title="Community"
+              value="1 New"
+              color1="255,184,73"
+              color2="255,184,73"
+            />
+            <StatCard
+              Icon={FileText}
+              title="Unread Records"
+              value="1 New"
+              color1="168,0,116"
+              color2="168,0,116"
+            />
           </div>
         </section>
 
