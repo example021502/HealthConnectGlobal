@@ -62,7 +62,7 @@ function PatientDashboard() {
       </section>
 
       {/* footer section */}
-      <section className="relative px-7 py-2 bg-[#0f4a38] text-white w-full flex items-center justify-center">
+      <section className="px-7 h-18 bg-[#0f4a38] text-white w-full flex items-center justify-center">
         <div className="transition-all duration-100 ease-in flex items-center justify-center w-fit h-fit py-2 px-6 gap-4">
           <a
             href="#"
@@ -89,10 +89,15 @@ function PatientDashboard() {
             Terms
           </a>
         </div>
-        <div className="absolute flex items-center justify-end right-7 top-0 bottom-0 border-1 gap-2">
-          <i className="ri-whatsapp-fill hover:scale-[1.1] text-[1.8em]" />
-          <i className="ri-instagram-fill hover:scale-[1.1] text-[1.8em]" />
-          <i className="ri-twitter-fill hover:scale-[1.1] text-[1.8em]" />
+        {/* contact icons */}
+        <div className="flex items-center justify-center gap-2 h-fit px-1">
+          <i className="ri-whatsapp-fill hover:scale-[1.1] text-[1.8em] rounded-full bg-[rgba(255,255,255,0.4)] h-10 w-10 flex items-center justify-center transition-all duration-100 ease-in" />
+          <i className="ri-instagram-fill hover:scale-[1.1] text-[1.8em] rounded-full bg-[rgba(255,255,255,0.4)] h-10 w-10 flex items-center justify-center transition-all duration-100 ease-in" />
+          <i className="ri-twitter-fill hover:scale-[1.1] text-[1.8em] rounded-full h-10 w-10 bg-[rgba(255,255,255,0.4)] flex items-center justify-center" />
+          <p>
+          <i className="ri-global-line hover:scale-[1.1] text-[1.8em] rounded-full h-10 w-10 bg-[rgba(255,255,255,0.4)] flex items-center justify-center" />
+<span>Languages</span>
+          </p>
         </div>
       </section>
     </div>
