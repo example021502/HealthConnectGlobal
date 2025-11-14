@@ -1,0 +1,50 @@
+{
+  "Diet Score": {
+    "labels": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "data": [68, 75, 72, 65, 78, 88, 81]
+  },
+  "Meds Score Rate": {
+    "labels": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "data": [85, 92, 90, 88, 95, 98, 96]
+  },
+  "Dose Miss Rate": {
+    "labels": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "data": [15, 12, 18, 9, 5, 10, 3]
+  },
+  "Exercises Score": {
+    "labels": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "data": [55, 62, 70, 68, 75, 82, 90]
+  }
+}
