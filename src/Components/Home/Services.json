@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Access to global Health Network",
+    "icon": "ri-shield-user-line",
+    "description1": "Appointment Booking",
+    "description2": "Personal Health Records"
+  },
+  {
+    "id": 2,
+    "title": "Expand your reach",
+    "icon": "ri-briefcase-2-line",
+    "description1": "Patient Management tools",
+    "description2": "Collaborations"
+  },
+  {
+    "id": 3,
+    "title": "Streamlined referrals",
+    "icon": "ri-community-line",
+    "description1": "Integrated patient data",
+    "description2": "Global presence"
+  }
+]

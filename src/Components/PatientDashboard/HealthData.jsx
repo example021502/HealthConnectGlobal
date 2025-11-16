@@ -14,6 +14,8 @@ function HealthData() {
     graph_buttons[0]?.name || ""
   );
 
+  const [switching, setSwitching] = useState("");
+
   const handleSelect = (name) => {
     setSelectedName(name);
   };
@@ -39,6 +41,13 @@ function HealthData() {
       </button>
     );
   }
+
+  const handleSwitchWeekly = () => {
+    setSwitching("weekly");
+  };
+  const handleSwitchMonthly = () => {
+    setSwitching("monthly");
+  };
 
   return (
     <div className="flex flex-col overflow-y-auto h-full w-full rounded-xl shadow-2xl p-4 gap-2">
@@ -90,6 +99,30 @@ function HealthData() {
               onSelect={handleSelect}
             />
           ))}
+          <div className="w-full text-[#274364] flex items-center justify-center">
+            <button
+              onClick={handleSwitchWeekly}
+              className={`flex-1 rounded-full p-1 text-sm font-semibold hover:scale-[1.02] transition-all duration-100 ease-in-out ${
+                switching === "weekly"
+                  ? "bg-[#549056] text-white"
+                  : "bg-gray-300"
+              }`}
+            >
+              Weekly
+            </button>
+            <button className="h-2 w-2 m-[-2px] rounded-full bg-gray-300"></button>
+
+            <button
+              onClick={handleSwitchMonthly}
+              className={`flex-1 rounded-full p-1 text-sm font-semibold hover:scale-[1.02] transition-all duration-100 ease-in-out ${
+                switching === "monthly"
+                  ? "bg-[#549056] text-white"
+                  : "bg-gray-300"
+              }`}
+            >
+              Monthly
+            </button>
+          </div>
         </div>
         <div className="w-3/4 h-full px-4">
           <Graphs key={selectedName} graphType={selectedName} />

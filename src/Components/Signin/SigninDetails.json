@@ -1,0 +1,36 @@
+{
+  "patients": [
+    {
+      "username": "desire",
+      "email": "example@gmail.com",
+      "password": "desire"
+    },
+    {
+      "username": "simon",
+      "email": "example@gmail.com",
+      "password": "simon"
+    },
+    {
+      "username": "brian",
+      "email": "example@gmail.com",
+      "password": "brian"
+    }
+  ],
+  "specialists": [
+    {
+      "username": "desire2",
+      "email": "example@gmail.com",
+      "password": "desire2"
+    },
+    {
+      "username": "simon2",
+      "email": "example@gmail.com",
+      "password": "simon2"
+    },
+    {
+      "username": "brian2",
+      "email": "example@gmail.com",
+      "password": "brian2"
+    }
+  ]
+}

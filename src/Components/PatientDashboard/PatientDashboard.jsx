@@ -100,16 +100,16 @@ function PatientDashboard() {
           InterHealthConnect
         </h1>
         <div className="ml-auto border-1 flex flex-row gap-4 text-white items-center justify-center w-fit">
-          <div className="relative w-fit hover:scale-[1.1] transition-all ease-in duration-100 p-1 rounded-full">
+          <div className="relative w-fit hover:scale-[1.1] transition-all ease-in duration-100 p-1 rounded-full cursor-pointer">
             <p className="absolute p-1 bottom-[80%] text-[0.6em] w-4 h-4 flex items-center justify-center rounded-full bg-[#2e6d49] text-white font-semibold right-0">
               {noteNumber}
             </p>
             <Bell className="w-6 h-6 p-1 bg-[#2e6d49] rounded-full" />
           </div>
-          <User className="w-10 h-10 rounded-full p-1 bg-[#2e6d49] transition-all duration-100 ease-in hover:scale-[1.1]" />
+          <User className="w-10 h-10 rounded-full p-1 bg-[#2e6d49] transition-all duration-100 ease-in hover:scale-[1.1] cursor-pointer" />
           <LogOut
             onClick={() => setExiting(true)}
-            className="w-6 h-6 p-1 bg-[#2e6d49] rounded-full hover:scale-[1.1] transition-all ease-in duration-100"
+            className="w-6 h-6 p-1 bg-[#2e6d49] rounded-full hover:scale-[1.1] transition-all ease-in duration-100 cursor-pointer"
           />
         </div>
       </section>
