@@ -1,9 +1,24 @@
 import React from "react";
 import { Chart as ChartJS, registerables } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Line, Doughnut } from "react-chartjs-2";
 import ChartData from "./ChartData/ChartData.json";
 
 ChartJS.register(...registerables);
+
+const getDistinctColor = (type) => {
+  switch (type) {
+    case "Meds Score Rate":
+      return "rgb(31,56,84)";
+    case "Exercises Score":
+      return "rgb(19,194,194)";
+    case "Diet Score":
+      return "rgb(185,54,54)";
+    case "Dose Miss Rate":
+      return "rgb(0,125,83)";
+    default:
+      return "rgb(100, 100, 100)";
+  }
+};
 
 const getColor = (type) => {
   switch (type) {
@@ -22,36 +37,49 @@ const getColor = (type) => {
 
 function Graphs({ graphType }) {
   const getGraphData = (graphType) => {
-    const dataObject = ChartData[graphType];
-
-    if (!dataObject && graphType !== "Summery") {
+    if (!ChartData[graphType] && graphType !== "Summery") {
       return { labels: [], datasets: [] };
     }
 
     if (graphType === "Summery") {
-      const allKeys = Object.keys(ChartData);
-
-      const overallDatasets = allKeys.map((type) => {
-        const dataset = ChartData[type];
-        const color = getColor(type);
-
-        return {
-          label: type,
-          data: dataset.data.slice(0, dataset.labels.length),
-          borderColor: color.replace("0.2", "0.6"),
-          backgroundColor: color.replace("0.2)", "0.1)"),
-          tension: 0.2,
-          borderWidth: 2,
-          fill: true,
-        };
-      });
-
-      return {
-        labels: ChartData["Diet Score"].labels,
-        datasets: overallDatasets,
+      const medsAndDoseLabels = ["Meds Score Rate", "Dose Miss Rate"];
+      const medsAndDoseData = {
+        labels: medsAndDoseLabels,
+        datasets: [
+          {
+            data: [
+              ChartData["Meds Score Rate"].data.slice(-1)[0],
+              ChartData["Dose Miss Rate"].data.slice(-1)[0],
+            ],
+            backgroundColor: medsAndDoseLabels.map(getDistinctColor),
+            borderColor: "white",
+            borderWidth: 2,
+            hoverOffset: 4,
+          },
+        ],
       };
+
+      const exercisesAndDietLabels = ["Exercises Score", "Diet Score"];
+      const exercisesAndDietData = {
+        labels: exercisesAndDietLabels,
+        datasets: [
+          {
+            data: [
+              ChartData["Exercises Score"].data.slice(-1)[0],
+              ChartData["Diet Score"].data.slice(-1)[0],
+            ],
+            backgroundColor: exercisesAndDietLabels.map(getDistinctColor),
+            borderColor: "white",
+            borderWidth: 2,
+            hoverOffset: 4,
+          },
+        ],
+      };
+
+      return { medsAndDoseData, exercisesAndDietData };
     }
 
+    const dataObject = ChartData[graphType];
     const color = getColor(graphType);
 
     return {
@@ -64,14 +92,77 @@ function Graphs({ graphType }) {
           backgroundColor: color.replace("0.2)", "0.1)"),
           tension: 0.2,
           fill: true,
-          borderWidth: 1,
+          borderWidth: 2,
         },
       ],
     };
   };
 
   const chartData = getGraphData(graphType);
-  return <Line data={chartData} />;
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+        labels: {
+          boxWidth: 40,
+          boxHeight: 20,
+          font: {
+            size: 16,
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: graphType === "Summery" ? "" : graphType,
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let label = context.label || "";
+            if (label) {
+              label += ": ";
+            }
+            if (context.parsed !== null) {
+              label += `${context.parsed}%`;
+            }
+            return label;
+          },
+        },
+      },
+    },
+    animation: {
+      duration: 1500,
+      animateRotate: true,
+      animateScale: true,
+    },
+  };
+
+  if (graphType === "Summery") {
+    const { medsAndDoseData, exercisesAndDietData } = chartData;
+
+    return (
+      <div className="w-full h-[400px] flex justify-around items-center p-4">
+        <div className="w-1/2 h-full flex flex-col items-center">
+          <h3 className="text-lg font-semibold">Medication Summary</h3>
+          <Doughnut data={medsAndDoseData} options={options} />
+        </div>
+
+        <div className="w-1/2 h-full flex flex-col items-center">
+          <h3 className="text-lg font-semibold">Lifestyle Summary</h3>
+          <Doughnut data={exercisesAndDietData} options={options} />
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="w-full h-full">
+        <Line data={chartData} options={options} />
+      </div>
+    );
+  }
 }
 
 export default Graphs;

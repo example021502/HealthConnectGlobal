@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Bell, User, LogOut } from "lucide-react";
-import HealthData from "./HealthData";
-import Performance from "./Performance";
+import Dashboard from "./Dashboard";
+import Documents from "./Documents";
 import Appointments from "./Appointments";
 import FindCare from "./FindCare";
 import Messages from "./Messages";
@@ -10,8 +10,8 @@ import Settings from "./Settings";
 import { AuthContext } from "../Context/Context";
 
 const nav_buttons = [
-  { name: "My Health Data", icon: "ri-heart-fill" },
-  { name: "Performance", icon: "ri-dashboard-2-fill" },
+  { name: "Dashboard", icon: "ri-heart-fill" },
+  { name: "Documents", icon: "ri-dashboard-2-fill" },
   { name: "Appointments", icon: "ri-calendar-event-fill" },
   { name: "Find Care", icon: "ri-search-eye-fill" },
   { name: "Messages", icon: "ri-wechat-fill" },
@@ -38,7 +38,7 @@ function PatientDashboard() {
         onClick={() => onSelect(button.name)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className={`text-gray-50 cursor-pointer font-lighter tracking-wide gap-2 hover:bg-[#549056] flex items-center justify-start px-3 py-1 rounded-full w-full transition-all ease-in duration-100 hover:-translate-y-1 
+        className={`text-gray-50 cursor-pointer font-lighter tracking-wide gap-2 hover:bg-[#549056] flex items-center justify-start px-3 py-2 rounded-full w-full transition-all ease-in duration-100 hover:-translate-y-1 
         
           ${
             isSelected
@@ -47,13 +47,13 @@ function PatientDashboard() {
           }
           ${
             hovered
-              ? "after:absolute relative after:bg-[#549056] after:top-[40%] after:bottom-[45%] after:left-[102%] after:w-3 after:h-4 after:rounded-tl-full after:rounded-bl-full after:rounded-tr-full after:rounded-br-full"
+              ? "after:absolute relative after:bg-white after:top-[40%] after:bottom-[45%] after:left-[102%] after:w-3 after:h-4 after:rounded-tl-full after:rounded-bl-full after:rounded-tr-full after:rounded-br-full"
               : ""
           }
         `}
       >
         <i
-          className={`${button.icon} w-10 h-10 flex items-center justify-center text-2xl rounded-full bg-[rgba(255,255,255,1)] text-[#549056]`}
+          className={`${button.icon} w-12 h-12 flex items-center justify-center text-3xl rounded-full bg-[rgba(255,255,255,1)] text-[#549056]`}
         />
         <span>{button.name}</span>
       </button>
@@ -94,9 +94,9 @@ function PatientDashboard() {
         <img
           src="https://i.ibb.co/jZsMsxgS/Untitled-1.png"
           alt=""
-          className="h-10 w-10 object-contain mr-2"
+          className="h-12 w-12 object-contain mr-2"
         />
-        <h1 className="text-2xl font-bold text-[#549056]">
+        <h1 className="text-4xl font-bold text-[#549056]">
           InterHealthConnect
         </h1>
         <div className="ml-auto border-1 flex flex-row gap-4 text-white items-center justify-center w-fit">
@@ -129,13 +129,15 @@ function PatientDashboard() {
         </div>
 
         {/* right div */}
-        <div className="bg-gray-100 h-full w-4/5 p-4 flex items-center justify-center">
-          {selectedName === "My Health Data" && <HealthData />}
-          {selectedName === "Performance" && <Performance />}
-          {selectedName === "Appointments" && <Appointments />}
-          {selectedName === "Find Care" && <FindCare />}
-          {selectedName === "Messages" && <Messages />}
-          {selectedName === "Settings" && <Settings />}
+        <div className="bg-gray-100 relative h-full w-4/5 p-4 flex items-center justify-center">
+          <div className="w-full h-full z-1">
+            {selectedName === "Dashboard" && <Dashboard />}
+            {selectedName === "Documents" && <Documents />}
+            {selectedName === "Appointments" && <Appointments />}
+            {selectedName === "Find Care" && <FindCare />}
+            {selectedName === "Messages" && <Messages />}
+            {selectedName === "Settings" && <Settings />}
+          </div>
         </div>
       </section>
 
