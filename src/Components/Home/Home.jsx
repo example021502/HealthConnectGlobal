@@ -4,6 +4,7 @@ import Testimonials from "./Testimonials.json";
 import Services from "./Services.json";
 import { Mail, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
+import "./Home.css";
 
 const InterHealthConnectData = [
   {
@@ -119,18 +120,11 @@ function Home() {
                 <p className="-m-0.5 text-xs text-left">Personal & Caring</p>
               </div>
             </div>
-            <section className="w-full h-full gap-4 md:gap-0 px-4 md:pb-8 md:pl-8 md:-mt-8 md:pr-8 md:pt-0 pt-4 grid grid-cols-1 relative md:flex items-center justify-center">
+            <section className="w-full h-full gap-4 md:gap-4 px-4 md:pb-8 md:pl-8 md:-mt-8 md:pr-8 md:pt-0 pt-4 grid grid-cols-1 relative md:flex flex-wrap lg:flex-nowrap  items-center justify-center">
               {/* logo */}
               <div className="gap-4 w-fit h-full rounded-xl flex flex-col items-center justify-center ">
                 <div className="flex flex-col gap-4">
-                  <h2
-                    style={{
-                      fontFamily: "poppins",
-                      fontWeight: "600",
-                      fontStyle: "normal",
-                    }}
-                    className="text-gray-800 text-3xl leading-7"
-                  >
+                  <h2 className="poppins-semibold text-gray-800 text-3xl leading-7">
                     LIFE <span className="text-[#549056]">OPTIMIZED !</span>
                   </h2>
                   <h3 className="text-lg font-medium text-gray-700">
@@ -250,37 +244,52 @@ function Home() {
                 className="object-cover w-full md:h-full h-60 rounded-lg"
               />
             </div>
-            <div className="gap-4 flex flex-col p-6 bg-gray-50 rounded-lg">
-              <h1 className="text-[#549056] uppercase">InterHealthConnect</h1>
-              <h3 className="text-lg text-gray-700">
+            <div className="gap-2 flex flex-col p-6 bg-gray-50 rounded-lg">
+              <h3 className="poppins-semibold text-sm text-[#549056] uppercase tracking-wide">
                 What is InterHealthConnect?
               </h3>
-              <p>
-                To move healthcare beyond reactive treatment by leveraging
-                technology to predict illness and unify global medical expertise
-                for every patient.
+              <h1 className="poppins-semibold text-gray-700 uppercase text-xl tracking-wide">
+                <span className="">
+                  Inter
+                  <span className="text-[#549056]">Health</span>
+                  <span>Connect</span>
+                </span>
+              </h1>
+              <p className="poppins-regular text-md text-gray-700 font-lighter tracking-wide">
+                It is about moving healthcare beyond reactive treatment by
+                leveraging technology to predict illness and unify global
+                medical expertise for every patient.
               </p>
-              <p className="flex flex-col gap-4">
-                <span className="font-semibold">Key Differentiators:</span>
-                <span className="">
-                  🌐 Global Health Connectivity: Access your health records and
-                  consult with accredited specialists and hospitals worldwide.
-                  Our system ensures your complete medical history is instantly
-                  and securely available to providers, eliminating geographical
-                  barriers to quality care.
+              <p className="poppins-light flex flex-col gap-2 text-gray-600 text-sm tracking-tight">
+                <span className="poppins-semibold">Key Differentiators:</span>
+                <span className="flex flex-row gap-1">
+                  <span>🌐</span>
+                  <span>
+                    Global Health Connectivity: Access your health records and
+                    consult with accredited specialists and hospitals worldwide.
+                    Our system ensures your complete medical history is
+                    instantly and securely available to providers, eliminating
+                    geographical barriers to quality care.
+                  </span>
                 </span>
-                <span className="">
-                  🧠 Predictive Wellness Engine (PWE): Our proprietary AI
-                  analyzes your data (biometrics, history, lifestyle) to predict
-                  potential health risks before symptoms appear. We provide
-                  personalized, proactive intervention recommendations to keep
-                  you healthy.
+                <span className="flex flex-row gap-1">
+                  <span>🧠</span>
+                  <span>
+                    Predictive Wellness Engine (PWE): Our proprietary AI
+                    analyzes your data (biometrics, history, lifestyle) to
+                    predict potential health risks before symptoms appear. We
+                    provide personalized, proactive intervention recommendations
+                    to keep you healthy.
+                  </span>
                 </span>
-                <span className="">
-                  📱 Seamless Digital Access: Enjoy 24/7 virtual consultations,
-                  instant messaging with your care team, and rapid
-                  e-prescriptions. We offer streamlined, intuitive health
-                  management always available on your device.
+                <span className="flex flex-row gap-1">
+                  <span>📱</span>
+                  <span>
+                    Seamless Digital Access: Enjoy 24/7 virtual consultations,
+                    instant messaging with your care team, and rapid
+                    e-prescriptions. We offer streamlined, intuitive health
+                    management always available on your device.
+                  </span>
                 </span>
               </p>
             </div>
