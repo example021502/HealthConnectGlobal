@@ -28,6 +28,7 @@
     "react": "^19.2.0",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.0",
+    "react-hook-form": "^7.66.1",
     "react-phone-input-2": "^2.15.1",
     "react-phone-number-input": "^3.4.13",
     "remix": "^2.17.2",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/vite": "^4.1.14",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",

@@ -1,50 +1,3220 @@
 {
-  "Diet Score": {
-    "labels": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    "data": [68, 75, 72, 65, 78, 88, 81]
-  },
-  "Meds Score Rate": {
-    "labels": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    "data": [85, 92, 90, 88, 95, 98, 96]
-  },
-  "Dose Miss Rate": {
-    "labels": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    "data": [15, 12, 18, 9, 5, 10, 3]
-  },
-  "Exercises Score": {
-    "labels": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    "data": [55, 62, 70, 68, 75, 82, 90]
+  "2025": {
+    "January": {
+      "Week_1": {
+        "start_date": "06",
+        "end_date": "12",
+        "days": [
+          {
+            "date": "06",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 55
+          },
+          {
+            "date": "07",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 62
+          },
+          {
+            "date": "08",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 18,
+            "Exercises Score": 70
+          },
+          {
+            "date": "09",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 68
+          },
+          {
+            "date": "10",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 75
+          },
+          {
+            "date": "11",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 82
+          },
+          {
+            "date": "12",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 90
+          }
+        ]
+      },
+      "Week_2": {
+        "start_date": "13",
+        "end_date": "19",
+        "days": [
+          {
+            "date": "13",
+            "day_name": "Monday",
+            "Diet Score": 64,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 61
+          },
+          {
+            "date": "14",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "15",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "16",
+            "day_name": "Thursday",
+            "Diet Score": 60,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 55
+          },
+          {
+            "date": "17",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 78
+          },
+          {
+            "date": "18",
+            "day_name": "Saturday",
+            "Diet Score": 85,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 88
+          },
+          {
+            "date": "19",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 85
+          }
+        ]
+      },
+      "Week_3": {
+        "start_date": "20",
+        "end_date": "26",
+        "days": [
+          {
+            "date": "20",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 60
+          },
+          {
+            "date": "21",
+            "day_name": "Tuesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 65
+          },
+          {
+            "date": "22",
+            "day_name": "Wednesday",
+            "Diet Score": 69,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 62
+          },
+          {
+            "date": "23",
+            "day_name": "Thursday",
+            "Diet Score": 62,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 58
+          },
+          {
+            "date": "24",
+            "day_name": "Friday",
+            "Diet Score": 74,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 72
+          },
+          {
+            "date": "25",
+            "day_name": "Saturday",
+            "Diet Score": 83,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 80
+          },
+          {
+            "date": "26",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 78
+          }
+        ]
+      },
+      "Week_4": {
+        "start_date": "27",
+        "end_date": "02",
+        "days": [
+          {
+            "date": "27",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 59
+          },
+          {
+            "date": "28",
+            "day_name": "Tuesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 67
+          },
+          {
+            "date": "29",
+            "day_name": "Wednesday",
+            "Diet Score": 68,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 61
+          },
+          {
+            "date": "30",
+            "day_name": "Thursday",
+            "Diet Score": 61,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 57
+          },
+          {
+            "date": "31",
+            "day_name": "Friday",
+            "Diet Score": 73,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 71
+          },
+          {
+            "date": "01",
+            "day_name": "Saturday",
+            "Diet Score": 82,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 79
+          },
+          {
+            "date": "02",
+            "day_name": "Sunday",
+            "Diet Score": 77,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 76
+          }
+        ]
+      }
+    },
+    "February": {
+      "Week_5": {
+        "start_date": "03",
+        "end_date": "09",
+        "days": [
+          {
+            "date": "03",
+            "day_name": "Monday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 58
+          },
+          {
+            "date": "04",
+            "day_name": "Tuesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 66
+          },
+          {
+            "date": "05",
+            "day_name": "Wednesday",
+            "Diet Score": 67,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 60
+          },
+          {
+            "date": "06",
+            "day_name": "Thursday",
+            "Diet Score": 60,
+            "Meds Score Rate": 83,
+            "Dose Miss Rate": 17,
+            "Exercises Score": 56
+          },
+          {
+            "date": "07",
+            "day_name": "Friday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 74
+          },
+          {
+            "date": "08",
+            "day_name": "Saturday",
+            "Diet Score": 84,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 81
+          },
+          {
+            "date": "09",
+            "day_name": "Sunday",
+            "Diet Score": 78,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 77
+          }
+        ]
+      },
+      "Week_6": {
+        "start_date": "10",
+        "end_date": "16",
+        "days": [
+          {
+            "date": "10",
+            "day_name": "Monday",
+            "Diet Score": 63,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 57
+          },
+          {
+            "date": "11",
+            "day_name": "Tuesday",
+            "Diet Score": 69,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 65
+          },
+          {
+            "date": "12",
+            "day_name": "Wednesday",
+            "Diet Score": 66,
+            "Meds Score Rate": 83,
+            "Dose Miss Rate": 17,
+            "Exercises Score": 59
+          },
+          {
+            "date": "13",
+            "day_name": "Thursday",
+            "Diet Score": 59,
+            "Meds Score Rate": 82,
+            "Dose Miss Rate": 18,
+            "Exercises Score": 54
+          },
+          {
+            "date": "14",
+            "day_name": "Friday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 73
+          },
+          {
+            "date": "15",
+            "day_name": "Saturday",
+            "Diet Score": 83,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 80
+          },
+          {
+            "date": "16",
+            "day_name": "Sunday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 75
+          }
+        ]
+      },
+      "Week_7": {
+        "start_date": "17",
+        "end_date": "23",
+        "days": [
+          {
+            "date": "17",
+            "day_name": "Monday",
+            "Diet Score": 64,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 58
+          },
+          {
+            "date": "18",
+            "day_name": "Tuesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 66
+          },
+          {
+            "date": "19",
+            "day_name": "Wednesday",
+            "Diet Score": 67,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 60
+          },
+          {
+            "date": "20",
+            "day_name": "Thursday",
+            "Diet Score": 60,
+            "Meds Score Rate": 83,
+            "Dose Miss Rate": 17,
+            "Exercises Score": 55
+          },
+          {
+            "date": "21",
+            "day_name": "Friday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 74
+          },
+          {
+            "date": "22",
+            "day_name": "Saturday",
+            "Diet Score": 84,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 81
+          },
+          {
+            "date": "23",
+            "day_name": "Sunday",
+            "Diet Score": 78,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 77
+          }
+        ]
+      },
+      "Week_8": {
+        "start_date": "24",
+        "end_date": "02",
+        "days": [
+          {
+            "date": "24",
+            "day_name": "Monday",
+            "Diet Score": 63,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 57
+          },
+          {
+            "date": "25",
+            "day_name": "Tuesday",
+            "Diet Score": 69,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 65
+          },
+          {
+            "date": "26",
+            "day_name": "Wednesday",
+            "Diet Score": 66,
+            "Meds Score Rate": 83,
+            "Dose Miss Rate": 17,
+            "Exercises Score": 59
+          },
+          {
+            "date": "27",
+            "day_name": "Thursday",
+            "Diet Score": 59,
+            "Meds Score Rate": 82,
+            "Dose Miss Rate": 18,
+            "Exercises Score": 54
+          },
+          {
+            "date": "28",
+            "day_name": "Friday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 73
+          },
+          {
+            "date": "01",
+            "day_name": "Saturday",
+            "Diet Score": 83,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 80
+          },
+          {
+            "date": "02",
+            "day_name": "Sunday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 75
+          }
+        ]
+      }
+    },
+    "March": {
+      "Week_9": {
+        "start_date": "03",
+        "end_date": "09",
+        "days": [
+          {
+            "date": "03",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 62
+          },
+          {
+            "date": "04",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 70
+          },
+          {
+            "date": "05",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 68
+          },
+          {
+            "date": "06",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 60
+          },
+          {
+            "date": "07",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 75
+          },
+          {
+            "date": "08",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 85
+          },
+          {
+            "date": "09",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_10": {
+        "start_date": "10",
+        "end_date": "16",
+        "days": [
+          {
+            "date": "10",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "11",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "12",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "13",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "14",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "15",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "16",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_11": {
+        "start_date": "17",
+        "end_date": "23",
+        "days": [
+          {
+            "date": "17",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "18",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "19",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "20",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "21",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "22",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "23",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_12": {
+        "start_date": "24",
+        "end_date": "30",
+        "days": [
+          {
+            "date": "24",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "25",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "26",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "27",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "28",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "29",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "30",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_13": {
+        "start_date": "31",
+        "end_date": "06",
+        "days": [
+          {
+            "date": "31",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "01",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "02",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "03",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "04",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "05",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "06",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      }
+    },
+    "April": {
+      "Week_14": {
+        "start_date": "07",
+        "end_date": "13",
+        "days": [
+          {
+            "date": "07",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "08",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "09",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "10",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "11",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "12",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "13",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_15": {
+        "start_date": "14",
+        "end_date": "20",
+        "days": [
+          {
+            "date": "14",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "15",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "16",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "17",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "18",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "19",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "20",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_16": {
+        "start_date": "21",
+        "end_date": "27",
+        "days": [
+          {
+            "date": "21",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "22",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "23",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "24",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "25",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "26",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "27",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_17": {
+        "start_date": "28",
+        "end_date": "04",
+        "days": [
+          {
+            "date": "28",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "29",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "30",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "01",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "02",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "03",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "04",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      }
+    },
+    "May": {
+      "Week_18": {
+        "start_date": "05",
+        "end_date": "11",
+        "days": [
+          {
+            "date": "05",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "06",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "07",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "08",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "09",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "10",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "11",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_19": {
+        "start_date": "12",
+        "end_date": "18",
+        "days": [
+          {
+            "date": "12",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "13",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "14",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "15",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "16",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "17",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "18",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_20": {
+        "start_date": "19",
+        "end_date": "25",
+        "days": [
+          {
+            "date": "19",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "20",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "21",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "22",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "23",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "24",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "25",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_21": {
+        "start_date": "26",
+        "end_date": "01",
+        "days": [
+          {
+            "date": "26",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "27",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "28",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "29",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "30",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "31",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "01",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      }
+    },
+    "June": {
+      "Week_22": {
+        "start_date": "02",
+        "end_date": "08",
+        "days": [
+          {
+            "date": "02",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "03",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "04",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "05",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "06",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "07",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "08",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_23": {
+        "start_date": "09",
+        "end_date": "15",
+        "days": [
+          {
+            "date": "09",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "10",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "11",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "12",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "13",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "14",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "15",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_24": {
+        "start_date": "16",
+        "end_date": "22",
+        "days": [
+          {
+            "date": "16",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "17",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "18",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "19",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "20",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "21",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "22",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_25": {
+        "start_date": "23",
+        "end_date": "29",
+        "days": [
+          {
+            "date": "23",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "24",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "25",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "26",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "27",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "28",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "29",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_26": {
+        "start_date": "30",
+        "end_date": "06",
+        "days": [
+          {
+            "date": "30",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "01",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "02",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "03",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "04",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "05",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "06",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      }
+    },
+    "July": {
+      "Week_27": {
+        "start_date": "07",
+        "end_date": "13",
+        "days": [
+          {
+            "date": "07",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "08",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "09",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "10",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "11",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "12",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "13",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_28": {
+        "start_date": "14",
+        "end_date": "20",
+        "days": [
+          {
+            "date": "14",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "15",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "16",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "17",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "18",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "19",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "20",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_29": {
+        "start_date": "21",
+        "end_date": "27",
+        "days": [
+          {
+            "date": "21",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "22",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "23",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "24",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "25",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "26",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "27",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_30": {
+        "start_date": "28",
+        "end_date": "03",
+        "days": [
+          {
+            "date": "28",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "29",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "30",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "31",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "01",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "02",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "03",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      }
+    },
+    "August": {
+      "Week_31": {
+        "start_date": "04",
+        "end_date": "10",
+        "days": [
+          {
+            "date": "04",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "05",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "06",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "07",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "08",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "09",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "10",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_32": {
+        "start_date": "11",
+        "end_date": "17",
+        "days": [
+          {
+            "date": "11",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "12",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "13",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "14",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "15",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "16",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "17",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_33": {
+        "start_date": "18",
+        "end_date": "24",
+        "days": [
+          {
+            "date": "18",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "19",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "20",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "21",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "22",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "23",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "24",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_34": {
+        "start_date": "25",
+        "end_date": "31",
+        "days": [
+          {
+            "date": "25",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "26",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "27",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "28",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "29",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "30",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "31",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      }
+    },
+    "September": {
+      "Week_35": {
+        "start_date": "01",
+        "end_date": "07",
+        "days": [
+          {
+            "date": "01",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "02",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "03",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "04",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "05",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "06",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "07",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_36": {
+        "start_date": "08",
+        "end_date": "14",
+        "days": [
+          {
+            "date": "08",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "09",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "10",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "11",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "12",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "13",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "14",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_37": {
+        "start_date": "15",
+        "end_date": "21",
+        "days": [
+          {
+            "date": "15",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "16",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "17",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "18",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "19",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "20",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "21",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_38": {
+        "start_date": "22",
+        "end_date": "28",
+        "days": [
+          {
+            "date": "22",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "23",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "24",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "25",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "26",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "27",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "28",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_39": {
+        "start_date": "29",
+        "end_date": "05",
+        "days": [
+          {
+            "date": "29",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "30",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "01",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "02",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "03",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "04",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "05",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      }
+    },
+    "October": {
+      "Week_40": {
+        "start_date": "06",
+        "end_date": "12",
+        "days": [
+          {
+            "date": "06",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "07",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "08",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "09",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "10",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "11",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "12",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_41": {
+        "start_date": "13",
+        "end_date": "19",
+        "days": [
+          {
+            "date": "13",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "14",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "15",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "16",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "17",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "18",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "19",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_42": {
+        "start_date": "20",
+        "end_date": "26",
+        "days": [
+          {
+            "date": "20",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "21",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "22",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "23",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "24",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "25",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "26",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_43": {
+        "start_date": "27",
+        "end_date": "02",
+        "days": [
+          {
+            "date": "27",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "28",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "29",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "30",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "31",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "01",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "02",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      }
+    },
+    "November": {
+      "Week_44": {
+        "start_date": "03",
+        "end_date": "09",
+        "days": [
+          {
+            "date": "03",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "04",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "05",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "06",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "07",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "08",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "09",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_45": {
+        "start_date": "10",
+        "end_date": "16",
+        "days": [
+          {
+            "date": "10",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "11",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "12",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "13",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "14",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "15",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "16",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_46": {
+        "start_date": "17",
+        "end_date": "23",
+        "days": [
+          {
+            "date": "17",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "18",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "19",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "20",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "21",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "22",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "23",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_47": {
+        "start_date": "24",
+        "end_date": "30",
+        "days": [
+          {
+            "date": "24",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "25",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "26",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "27",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "28",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "29",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "30",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      }
+    },
+    "December": {
+      "Week_48": {
+        "start_date": "01",
+        "end_date": "07",
+        "days": [
+          {
+            "date": "01",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "02",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "03",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "04",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "05",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "06",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "07",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_49": {
+        "start_date": "08",
+        "end_date": "14",
+        "days": [
+          {
+            "date": "08",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "09",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "10",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          },
+          {
+            "date": "11",
+            "day_name": "Thursday",
+            "Diet Score": 63,
+            "Meds Score Rate": 84,
+            "Dose Miss Rate": 16,
+            "Exercises Score": 58
+          },
+          {
+            "date": "12",
+            "day_name": "Friday",
+            "Diet Score": 76,
+            "Meds Score Rate": 92,
+            "Dose Miss Rate": 8,
+            "Exercises Score": 73
+          },
+          {
+            "date": "13",
+            "day_name": "Saturday",
+            "Diet Score": 86,
+            "Meds Score Rate": 97,
+            "Dose Miss Rate": 3,
+            "Exercises Score": 83
+          },
+          {
+            "date": "14",
+            "day_name": "Sunday",
+            "Diet Score": 79,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 80
+          }
+        ]
+      },
+      "Week_50": {
+        "start_date": "15",
+        "end_date": "21",
+        "days": [
+          {
+            "date": "15",
+            "day_name": "Monday",
+            "Diet Score": 67,
+            "Meds Score Rate": 88,
+            "Dose Miss Rate": 12,
+            "Exercises Score": 61
+          },
+          {
+            "date": "16",
+            "day_name": "Tuesday",
+            "Diet Score": 74,
+            "Meds Score Rate": 90,
+            "Dose Miss Rate": 10,
+            "Exercises Score": 69
+          },
+          {
+            "date": "17",
+            "day_name": "Wednesday",
+            "Diet Score": 71,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 67
+          },
+          {
+            "date": "18",
+            "day_name": "Thursday",
+            "Diet Score": 64,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 59
+          },
+          {
+            "date": "19",
+            "day_name": "Friday",
+            "Diet Score": 77,
+            "Meds Score Rate": 93,
+            "Dose Miss Rate": 7,
+            "Exercises Score": 74
+          },
+          {
+            "date": "20",
+            "day_name": "Saturday",
+            "Diet Score": 87,
+            "Meds Score Rate": 98,
+            "Dose Miss Rate": 2,
+            "Exercises Score": 84
+          },
+          {
+            "date": "21",
+            "day_name": "Sunday",
+            "Diet Score": 80,
+            "Meds Score Rate": 95,
+            "Dose Miss Rate": 5,
+            "Exercises Score": 81
+          }
+        ]
+      },
+      "Week_51": {
+        "start_date": "22",
+        "end_date": "28",
+        "days": [
+          {
+            "date": "22",
+            "day_name": "Monday",
+            "Diet Score": 68,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 62
+          },
+          {
+            "date": "23",
+            "day_name": "Tuesday",
+            "Diet Score": 75,
+            "Meds Score Rate": 91,
+            "Dose Miss Rate": 9,
+            "Exercises Score": 70
+          },
+          {
+            "date": "24",
+            "day_name": "Wednesday",
+            "Diet Score": 72,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 68
+          },
+          {
+            "date": "25",
+            "day_name": "Thursday",
+            "Diet Score": 65,
+            "Meds Score Rate": 86,
+            "Dose Miss Rate": 14,
+            "Exercises Score": 60
+          },
+          {
+            "date": "26",
+            "day_name": "Friday",
+            "Diet Score": 78,
+            "Meds Score Rate": 94,
+            "Dose Miss Rate": 6,
+            "Exercises Score": 75
+          },
+          {
+            "date": "27",
+            "day_name": "Saturday",
+            "Diet Score": 88,
+            "Meds Score Rate": 99,
+            "Dose Miss Rate": 1,
+            "Exercises Score": 85
+          },
+          {
+            "date": "28",
+            "day_name": "Sunday",
+            "Diet Score": 81,
+            "Meds Score Rate": 96,
+            "Dose Miss Rate": 4,
+            "Exercises Score": 82
+          }
+        ]
+      },
+      "Week_52": {
+        "start_date": "29",
+        "end_date": "04",
+        "days": [
+          {
+            "date": "29",
+            "day_name": "Monday",
+            "Diet Score": 66,
+            "Meds Score Rate": 87,
+            "Dose Miss Rate": 13,
+            "Exercises Score": 60
+          },
+          {
+            "date": "30",
+            "day_name": "Tuesday",
+            "Diet Score": 73,
+            "Meds Score Rate": 89,
+            "Dose Miss Rate": 11,
+            "Exercises Score": 68
+          },
+          {
+            "date": "31",
+            "day_name": "Wednesday",
+            "Diet Score": 70,
+            "Meds Score Rate": 85,
+            "Dose Miss Rate": 15,
+            "Exercises Score": 66
+          }
+        ]
+      }
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Lock, Mail, BriefcaseMedical, LogIn, X } from "lucide-react";
+import { Lock, Mail, BriefcaseMedical, LogIn, MoveLeft } from "lucide-react";
 import { AuthContext } from "../Context/Context";
 import signinDetails from "./SigninDetails.json";
 
@@ -11,7 +11,6 @@ function Signin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [sucessful, setSuccessfull] = useState("");
-  const [closeOverlay, setCloseOverlay] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -44,78 +43,148 @@ function Signin() {
     setView("signup");
   };
 
-  const handleCancel = () => {
-    setCloseOverlay(true);
-  };
-
-  const handleConfirmed = () => {
+  const handleBack = () => {
     setView("home");
-    setCloseOverlay(false);
   };
 
   return (
-    <div className="flex justify-center relative items-center w-full min-h-screen bg-gray-50 p-4">
-      <img
-        src="https://i.ibb.co/6cN2JsRs/signin.jpg"
-        alt="Health Background"
-        className="absolute inset-0 w-full h-full object-cover opacity-20 hidden md:flex"
-      />
-      {closeOverlay && (
-        <div className="w-full h-full absolute top-0 left-0 z-1000 bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
-          <div className="h-fit w-60 flex flex-col items-center justify-center gap-4 p-5 shadow-lg bg-indigo-50 rounded-2xl">
-            <p className="flex flex-row text-lg gap-1">
-              <span>Confirm to</span>
-              <span className="text-red-600 font-bold">Close</span>
-            </p>
-            <div className="flex items-center justify-center gap-4 w-full">
-              <button
-                onClick={handleConfirmed}
-                className="p-1 w-full text-sm flex items-center justify-center rounded-2xl font-semibold bg-indigo-500 text-white"
+    <div className="flex justify-center relative items-center w-full h-dvh bg-gray-50">
+      {/* desktop signin */}
+      <div className="hidden md:flex w-full h-full items-center justify-center">
+        <div className="absolute inset-0 z-1 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
+        <div className="z-10 w-full h-full items-center justify-center flex">
+          <div className="w-full max-w-2xl relative bg-gray-200 p-8 md:p-10 rounded-xl transition-all duration-300 hover:shadow-3xl">
+            <button
+              id="cancel"
+              type="cancel"
+              onClick={handleBack}
+              className="h-10 w-10 flex absolute top-10 left-10 rounded-full justify-center items-center border border-transparent font-medium text-white bg-[rgba(68,24,186,0.8)] hover:bg-[rgba(68,24,186,1)] focus:outline-none focus:ring-1 focus:ring-offset-2 transition duration-200 ease-in-out transform hover:scale-[1.01] "
+            >
+              <MoveLeft className="h-5 w-5 object-cover hover:animate-pulse" />
+            </button>
+            <div className="text-center mb-8">
+              {/* <BriefcaseMedical className="w-16 h-16 text-[rgba(68,24,186,1)] mx-auto mb-2 animate-pulse" /> */}
+              {/* <img
+                src="https://i.ibb.co/jZsMsxgS/Untitled-1.png"
+                alt="InterHealthConnect"
+                className="w-20 h-20 object-contain cursor-pointer mx-auto"
+              /> */}
+
+              <h1 className="text-4xl font-extrabold text-[rgba(68,24,186,1)]">
+                InterHealthConnect
+              </h1>
+
+              <p className="text-gray-500">
+                Log in to access your secure health portal.
+              </p>
+            </div>
+
+            {error && (
+              <div
+                className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg"
+                role="alert"
               >
-                Yes
-              </button>
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="space-y-6">
+              {/* Email Input */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email address
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="appearance-none block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#549056] focus:border-[#549056] text-base"
+                    placeholder="you@health.com"
+                  />
+                </div>
+              </div>
+
+              {/* Password Input */}
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="appearance-none block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#549056] focus:border-[#549056] text-base"
+                    placeholder="••••••••"
+                  />
+                </div>
+              </div>
+              {/* Submit Button */}
+
               <button
-                onClick={() => setCloseOverlay(false)}
-                className="p-1 w-full rounded-2xl flex items-center justify-center text-sm text-white font-semibold bg-red-500"
+                id="login"
+                type="submit"
+                className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-[rgba(68,24,186,0.9)] hover:bg-[rgba(68,24,186,1)] focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-200 ease-in-out transform hover:scale-[1.01]"
               >
-                No
+                <LogIn className="w-5 h-5 mr-2" />
+                Sign In
               </button>
+            </form>
+
+            {/* Sign Up Link */}
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600 tracking-wider">
+                Don't have an account yet?{" "}
+                <button
+                  type="button"
+                  onClick={navigateToSignup}
+                  className="font-medium text-[rgba(68,24,186,0.9)] hover:text-[rgba(68,24,186,1)] hover:scale-[1.01] transition duration-150"
+                >
+                  Sign Up
+                </button>
+              </p>
             </div>
           </div>
         </div>
-      )}
-      <div className="w-full max-w-lg relative bg-[rgba(255,255,255,0.5)] p-8 md:p-10 rounded-xl shadow-2xl border border-gray-100 transition-all duration-300 hover:shadow-3xl">
-        <button
-          id="cancel"
-          type="cancel"
-          onClick={handleCancel}
-          className="h-10 w-10 flex absolute top-10 right-10 rounded-full justify-center items-center border border-transparent font-medium text-white bg-[#549056] hover:bg-[#4d824e] focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-red-500 transition duration-200 ease-in-out transform hover:scale-[1.01] hover:rotate-[180deg]"
-        >
-          <X className="h-5 w-5 object-cover" />
-        </button>
-        <div className="text-center mb-8">
-          <BriefcaseMedical className="w-12 h-12 text-[#549056] mx-auto mb-4" />
-          <h1 className="text-3xl font-extrabold text-[#1f3854]">Sign In</h1>
-          <p className="text-gray-500 mt-2">
-            Log in to access your secure health portal.
-          </p>
-        </div>
+      </div>
 
+      {/* Mobile section */}
+      <section className="w-full md:hidden h-dvh flex flex-col relative items-center justify-center">
+        <div className="absolute inset-0 z-1 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
         {error && (
           <div
-            className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg"
+            className="p-3 z-10 mb-4 text-sm text-red-700 bg-red-100 rounded-lg"
             role="alert"
           >
             {error}
           </div>
         )}
-
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form
+          onSubmit={handleLogin}
+          className="space-y-6 w-full z-10 p-4 gap-4 flex flex-col"
+        >
           {/* Email Input */}
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-400 mb-1"
             >
               Email address
             </label>
@@ -129,7 +198,7 @@ function Signin() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#549056] focus:border-[#549056] text-base"
+                className="appearance-none text-gray-200 tracking-wide block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-100 focus:border-[#549056] text-base"
                 placeholder="you@health.com"
               />
             </div>
@@ -139,7 +208,7 @@ function Signin() {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-400 mb-1"
             >
               Password
             </label>
@@ -153,7 +222,7 @@ function Signin() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#549056] focus:border-[#549056] text-base"
+                className="appearance-none tracking-wide text-gray-200 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#549056] focus:border-[#549056] text-base"
                 placeholder="••••••••"
               />
             </div>
@@ -163,27 +232,21 @@ function Signin() {
           <button
             id="login"
             type="submit"
-            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-[#549056] hover:bg-[#549056] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#549056] transition duration-200 ease-in-out transform hover:scale-[1.01]"
+            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-gray-200 bg-[rgba(68,24,186,0.5)] hover:bg-[rgba(68,24,186,0.8)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#549056] transition duration-200 ease-in-out transform hover:scale-[1.01]"
           >
-            <LogIn className="w-5 h-5 mr-2" />
             Sign In
           </button>
         </form>
-
-        {/* Sign Up Link */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Don't have an account?{" "}
-            <button
-              type="button"
-              onClick={navigateToSignup}
-              className="font-medium text-[#549056] hover:text-[#4d824e] transition duration-150"
-            >
-              Sign Up
-            </button>
-          </p>
-        </div>
-      </div>
+        <p className="text-white z-10 text-sm font-light tracking-wider mt-4 w-full p-4 text-left leading-6">
+          Don't have an account yet?{" "}
+          <span
+            onClick={navigateToSignup}
+            className=" text-base font-semibold text-[#549056] hover:text-[#549056] hover:border-b-1 cursor-pointer"
+          >
+            Create Account
+          </span>
+        </p>
+      </section>
     </div>
   );
 }
