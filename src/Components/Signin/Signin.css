@@ -1,0 +1,24 @@
+@media (max-width: 400px) {
+  .header {
+    font-size: 2em;
+  }
+  .image {
+    height: 4.2em;
+  }
+}
+@media (max-width: 350px) {
+  .header {
+    font-size: 1.6em;
+  }
+  .image {
+    height: 3.8em;
+  }
+}
+@media (max-width: 300px) {
+  .header {
+    font-size: 1.4em;
+  }
+  .image {
+    height: 3.6em;
+  }
+}

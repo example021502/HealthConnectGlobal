@@ -1,23 +1,23 @@
 [
   {
     "id": 1,
-    "title": "Access to global Health Network",
+    "title": "Global Healthcare Passport",
     "icon": "ri-shield-user-line",
-    "description1": "Appointment Booking",
-    "description2": "Personal Health Records"
+    "description1": "Accelerated Booking for Global Patients",
+    "description2": "Unified & Compliant Patient Health Records (PHR)"
   },
   {
     "id": 2,
-    "title": "Expand your reach",
+    "title": "Boost Practice Growth & Efficiency",
     "icon": "ri-briefcase-2-line",
-    "description1": "Patient Management tools",
-    "description2": "Collaborations"
+    "description1": "Centralized Patient Management Dashboard",
+    "description2": "Expand Network via Global Peer Collaboration"
   },
   {
     "id": 3,
-    "title": "Streamlined referrals",
+    "title": "Seamless Cross-Border Referrals",
     "icon": "ri-community-line",
-    "description1": "Integrated patient data",
-    "description2": "Global presence"
+    "description1": "Instant, Context-Rich Data Transfer",
+    "description2": "Strategically Grow Your Global Clinical Footprint"
   }
 ]

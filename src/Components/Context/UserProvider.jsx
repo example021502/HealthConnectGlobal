@@ -1,43 +1,47 @@
 import { useState, useEffect } from "react";
-import { AuthContext, MY_CONTEXT_KEY } from "./Context";
+import { AuthContext } from "./Context";
+
 function UserProvider({ children }) {
+  const My_View_key = "myViewState";
+  const My_userName_key = "myUserNameState";
   const [view, setView] = useState(() => {
     try {
-      const ViewState = sessionStorage.getItem(MY_CONTEXT_KEY);
+      const ViewState = sessionStorage.getItem(My_View_key);
       return ViewState ? JSON.parse(ViewState).view : "home";
     } catch {
       return "home";
     }
   });
-  const [UserName, setUserName] = useState(() => {
+
+  useEffect(() => {
     try {
-      const UserState = sessionStorage.getItem(MY_CONTEXT_KEY);
-      return UserState ? JSON.parse(UserState).view : "";
+      sessionStorage.setItem(My_View_key, JSON.stringify({ view }));
+    } catch (error) {
+      console.error("Failed to save state to sessionStorage", error);
+    }
+  }, [view]);
+
+  const [userName, setUserName] = useState(() => {
+    try {
+      const UserState = sessionStorage.getItem(My_userName_key);
+      return UserState ? JSON.parse(UserState).userName : "undefined";
     } catch {
-      return "";
+      return "undefined";
     }
   });
 
   useEffect(() => {
     try {
-      sessionStorage.setItem(
-        MY_CONTEXT_KEY,
-        JSON.stringify({ view, UserName })
-      );
+      sessionStorage.setItem(My_userName_key, JSON.stringify({ userName }));
     } catch (error) {
       console.error("Failed to save state to sessionStorage", error);
     }
-  }, [view, UserName]);
-
-  const contextValue = {
-    view,
-    setView,
-    UserName,
-    setUserName,
-  };
+  }, [userName]);
 
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ view, setView, userName, setUserName }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
 
