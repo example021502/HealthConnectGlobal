@@ -1,31 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/Context";
-
-const userDetails = {
-  BrianMusarafu: {
-    age: 20,
-    address: "Chinhoyi Caves",
-    specialty: "Cardiologist",
-    email: "brian2@gmail.com",
-  },
-  SimonMusarafu: {
-    age: 15,
-    address: "Great Zimbabwe Ruins",
-    specialty: "Neurologist",
-    email: "simon2@gmail.com",
-  },
-  DesireMusarafu: {
-    age: 30,
-    address: "Nyasco",
-    specialty: "Dentist",
-    email: "desire2@gmail.com",
-  },
-};
+import { Users } from "lucide-react";
 
 function DoctorDashboard() {
   const [exitOverlay, setExitOverlay] = useState(false);
   const [profileExpand, setProfileExpand] = useState(false);
   const [todayDate, setTodayDate] = useState(new Date());
+  const [selectedItem, setSelectedItem] = useState("Overview");
+
+  const [searchKey, setSearchKey] = useState("");
 
   const current_time = todayDate.toLocaleDateString("en-US", {
     year: "numeric",
@@ -48,7 +31,7 @@ function DoctorDashboard() {
     setExitOverlay(false);
   };
 
-  const { setView, view, userName } = useContext(AuthContext);
+  const { setView, users, userName } = useContext(AuthContext);
 
   const handleExpandProfile = () => {
     setProfileExpand(!profileExpand);
@@ -78,23 +61,32 @@ function DoctorDashboard() {
     ],
   };
 
-  const DisplayButtons = ({ button }) => {
-    const [selected, setSelected] = useState("");
-    const [click, setClick] = useState(false);
+  const handleSelecting = (btn_name) => {
+    setSelectedItem(btn_name);
+    if (btn_name === "Logout") {
+      setExitOverlay(true);
+    }
+  };
 
-    const handleClick = (button) => {
-      setSelected(button);
-      setClick(!click);
-    };
-
+  const DisplayButtons = ({ button, onSelect, isActive }) => {
     return (
       <button
-        onClick={(button) => handleClick(button)}
+        onClick={() => onSelect(button.name)}
         title={button.name}
-        className={`flex text-sm flex-row items-center justify-start px-2 ml-2 py-1 rounded-lg gap-2`}
+        className={`flex w-full text-sm flex-row cursor-pointer items-center justify-start px-2 ml-2 py-1 rounded-lg gap-2 ${
+          isActive
+            ? "bg-[rgba(46,132,100,1)]"
+            : "hover:bg-[rgba(46,132,100,0.2)]"
+        }`}
       >
-        <i className={`${button.icon} w-fit h-fit`} />
-        <span className="">{button.name}</span>
+        <i
+          className={`${button.icon}    
+          text-[#13521d]        
+           w-6 h-6 flex text-sm items-center justify-center bg-gray-100 rounded-full`}
+        />
+        <span className={`${isActive ? "text-gray-100" : "text-[#13521d]"}`}>
+          {button.name}
+        </span>
       </button>
     );
   };
@@ -123,96 +115,120 @@ function DoctorDashboard() {
         </div>
       )}
       {/* desktop view */}
-      <div className="hidden md:flex flex-row gap-2 relative h-full w-full">
-        <section
-          className={`text-gray-700 bg-gray-300 flex flex-col h-full w-2/11`}
-        >
-          <img
-            src="https://i.ibb.co/jZsMsxgS/Untitled-1.png"
-            alt=""
-            title=""
-            className={`w-18 h-18 object-contain mx-auto py-4 text-2xl flex items-center justify-center`}
-          />
-          <div className="flex flex-col items-center justify-start gap-4 px-2 h-full w-full">
-            {Object.keys(navButtons).map((category, index) => {
-              const cat = navButtons[category];
-              return (
-                <div
-                  key={index}
-                  className="rounded-xl flex flex-col items-start justify-center px-4 w-full gap-1"
-                >
-                  <h2 className=" border-b-1 w-full border-gray-500 pb-1">
-                    {category}
-                  </h2>
-                  {cat.map((button, index) => {
-                    return <DisplayButtons button={button} key={index} />;
-                  })}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-        <div className="grid grid-cols-1 flex-1 items-start justify-start">
-          <section className="bg-gray-200 rounded-xl py-4 px-2 flex items-center justify-start">
-            <div className="flex w-full items-center justify-center gap-4 transition-all ease-in-out duration-200">
-              <h2
-                className={`flex items-center justify-start gap-2 text-gray-700`}
-              >
-                <span className="font-semibold text-lg text-gray-600">
-                  Welcome{" "}
-                </span>
-                <span className="font-bold text-xl">{userName}</span>
-              </h2>
-              <div className="flex flex-1 gap-2 items-center justify-center text-sm text-gray-600 tracking-wide font-lighter">
-                <p>{current_date}</p>
-                <p>{current_time}</p>
-              </div>
-              <div className="flex relative flex-row items-center justify-center gap-2 ml-auto">
-                <img
-                  src="https://i.ibb.co/KxPQ4f9L/Secure-Appointment.jpg"
-                  alt=""
-                  className="object-cover h-8 w-8 border-1 border-[#569054] rounded-full"
-                />
-                <h2 className="text-xs text-gray-700 tracking-wide">
-                  {userName}
-                </h2>
-                <i
-                  onClick={handleExpandProfile}
-                  className={`transition-all text-lg text-gray-700 hover:scale-[1.1] ease-in-out duration-200 ${
-                    profileExpand
-                      ? "ri-arrow-up-double-line"
-                      : "ri-arrow-down-double-line"
-                  }`}
-                />
-                {profileExpand &&
-                  Object.keys(userDetails).map((itemObject, index) => {
-                    if (itemObject === comparison) {
+      <div className="hidden md:flex flex-row items-center justify-center gap-2 relative h-full w-full">
+        <div
+          className={`absolute inset-0 z-1 w-full [background:radial-gradient(125%_125%_at_50%_10%,rgba(84,144,86,0.2)_30%,rgba(46,132,100,0)_100%)]`}
+        ></div>
+        <div className="w-full h-full z-10 flex flex-row">
+          <section
+            className={`text-gray-700 bg-[rgba(46,132,100,0.4)] flex flex-col h-full w-2/11`}
+          >
+            <div className="flex items-center justify-start mx-6 gap-1 my-2">
+              <img
+                src="https://i.ibb.co/jZsMsxgS/Untitled-1.png"
+                alt=""
+                title=""
+                className={`w-fit h-10 object-cover py-2 text-2xl flex items-center justify-center`}
+              />
+              <h2 className="text-md font-semibold">InterHealthConnect</h2>
+            </div>
+            <div className="flex flex-col items-center justify-start gap-2 px-2 h-full w-full">
+              {Object.keys(navButtons).map((category, index) => {
+                const cat = navButtons[category];
+                return (
+                  <div
+                    key={index}
+                    className="rounded-xl flex flex-col items-start justify-center px-4 w-full gap-1"
+                  >
+                    <h2 className=" border-b-1 w-full text-[#13521d] font-semibold border-[#13521d] pb-0.5">
+                      {category}
+                    </h2>
+                    {cat.map((button, index) => {
                       return (
-                        <div
+                        <DisplayButtons
                           key={index}
-                          className="w-50 absolute top-full right-full flex flex-col items-start justify-center bg-gray-100 p-4 rounded-tl-xl rounded-br-xl rounded-bl-xl gap-2 text-gray-500 text-sm tracking-wide"
-                        >
-                          <h2 className="text-md font-bold uppercase">
-                            {userName}
-                          </h2>
-                          <p>Age: {userDetails[itemObject].age}</p>
-                          <p>Address: {userDetails[itemObject].address}</p>
-                          <p>email: {userDetails[itemObject].email}</p>
-                          <p>Specialty: {userDetails[itemObject].specialty}</p>
-                          <p className="text-gray-800 font-semibold cursor-pointer hover:border-b-1 pb-0.5 transition-all duration-100 ease-in">
-                            Settings
-                          </p>
-                        </div>
+                          button={button}
+                          onSelect={handleSelecting}
+                          isActive={button.name === selectedItem}
+                        />
                       );
-                    } else {
-                      <p>No data to display</p>;
-                    }
-                  })}
-              </div>
+                    })}
+                  </div>
+                );
+              })}
             </div>
           </section>
-          <section className="p-2">middle section</section>
-          <section className="p-2">bottom section</section>
+          <div className="grid grid-cols-1 flex-1 items-start justify-start">
+            <section className="bg-[rgba(46,132,100,0.2)] text-[#13521d] py-2 px-2 flex items-center justify-end">
+              <div className="flex gap-2 w-full items-center justify-end transition-all ease-in-out duration-200">
+                <div className="flex-1 relative flex items-center justify-start">
+                  <i className="ri-search-line absolute my-auto left-2 z-1000" />
+                  <input
+                    type="text"
+                    placeholder="Enter something..."
+                    onChange={(e) => setSearchKey(e)}
+                    className="w-100 text-sm tracking-wide border-1 border-gray-500 focus:outline-none focus:ring-1 py-2 pl-8 pr-5 z-1 rounded-md"
+                  />
+                </div>
+                <div className="flex w-fit gap-2 items-center justify-center text-sm text-[#13521d] tracking-wide font-lighter">
+                  <p>{current_date}</p>
+                  <p>{current_time}</p>
+                </div>
+                <div className="flex relative flex-row items-center justify-center gap-0.5 ml-auto">
+                  <img
+                    src="https://i.ibb.co/KxPQ4f9L/Secure-Appointment.jpg"
+                    alt=""
+                    className="object-cover h-8 w-8 border-1 border-[#569054] rounded-full"
+                  />
+                  <h2 className="text-xs font-semibold text-[#13521d]">
+                    {userName}
+                  </h2>
+                  <i
+                    onClick={handleExpandProfile}
+                    className={`transition-all text-lg text-[#13521d] hover:scale-[1.1] ease-in-out duration-200 ${
+                      profileExpand
+                        ? "ri-arrow-drop-up-line"
+                        : "ri-arrow-drop-down-line"
+                    }`}
+                  />
+                  {profileExpand &&
+                    users.map((itemObject, index) => {
+                      const currentDate =
+                        itemObject.date_of_birth.split("T")[0];
+                      const age = 2025 - currentDate.split("-")[0];
+                      if (
+                        itemObject.first_name + itemObject.last_name ===
+                        comparison
+                      ) {
+                        return (
+                          <div
+                            key={index}
+                            className="w-50 absolute top-full right-full flex flex-col items-start justify-center bg-gray-100 p-4 rounded-tl-xl rounded-br-xl rounded-bl-xl gap-2 text-gray-500 text-sm tracking-wide"
+                          >
+                            <h2 className="text-md font-bold uppercase">
+                              {userName}
+                            </h2>
+                            <p>Age: {age}</p>
+                            <p>Country: {itemObject.country}</p>
+                            <p>email: {itemObject.email}</p>
+                            <p>Specialty: {itemObject.specialty}</p>
+                            <p className="text-gray-800 font-semibold cursor-pointer hover:border-b-1 pb-0.5 transition-all duration-100 ease-in">
+                              Settings
+                            </p>
+                          </div>
+                        );
+                      } else {
+                        <p>No data to display</p>;
+                      }
+                    })}
+                </div>
+              </div>
+            </section>
+            <section className="p-2 border-1 flex flex-wrap items-start justify-start">
+              <div className="w-full h-110">middle</div>
+            </section>
+            <section className="p-2 border-1 h-30">bottom section</section>
+          </div>
         </div>
       </div>
       {/* mobile view */}

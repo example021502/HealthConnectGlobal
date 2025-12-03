@@ -4,6 +4,21 @@ import { AuthContext } from "./Context";
 function UserProvider({ children }) {
   const My_View_key = "myViewState";
   const My_userName_key = "myUserNameState";
+  const my_users_key = "myUsersState";
+
+  const [users, setUsers] = useState(() => {
+    const usersState = sessionStorage.getItem(my_users_key);
+    return usersState ? JSON.parse(usersState).users : "no data";
+  });
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(my_users_key, JSON.stringify({ users }));
+    } catch {
+      return console.log("Error, failed to load the users!!");
+    }
+  }, [users]);
+
   const [view, setView] = useState(() => {
     try {
       const ViewState = sessionStorage.getItem(My_View_key);
@@ -39,7 +54,9 @@ function UserProvider({ children }) {
   }, [userName]);
 
   return (
-    <AuthContext.Provider value={{ view, setView, userName, setUserName }}>
+    <AuthContext.Provider
+      value={{ view, setView, userName, setUserName, users, setUsers }}
+    >
       {children}
     </AuthContext.Provider>
   );

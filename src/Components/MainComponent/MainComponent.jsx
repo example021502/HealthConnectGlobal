@@ -1,5 +1,5 @@
 import { AuthContext } from "../Context/Context";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import Home from "../Home/Home";
 import Signin from "../Signin/Signin";
 import Signup from "../Signup/Signup";
@@ -13,7 +13,15 @@ import Messaging from "../Messaging/Messaging";
 import Support from "../Support/Support";
 
 function MainComponent() {
-  const { view } = useContext(AuthContext);
+  const { view, setUsers } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch("http://localhost:8081/patients_users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="w-full h-full">
       {view === "home" && <Home />}

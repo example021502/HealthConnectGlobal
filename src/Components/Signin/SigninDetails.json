@@ -1,36 +1,54 @@
-{
-  "patients": [
-    {
-      "username": "Patient Number1",
-      "email": "example@gmail.com",
-      "password": "patient"
-    },
-    {
-      "username": "Patient Number2",
-      "email": "example@gmail.com",
-      "password": "patient"
-    },
-    {
-      "username": "Patient Number3",
-      "email": "example@gmail.com",
-      "password": "patient"
-    }
-  ],
-  "specialists": [
-    {
-      "username": "Desire Musarafu",
-      "email": "example@gmail.com",
-      "password": "desire2"
-    },
-    {
-      "username": "Simon Musarafu",
-      "email": "example@gmail.com",
-      "password": "simon2"
-    },
-    {
-      "username": "Brian Musarafu",
-      "email": "example@gmail.com",
-      "password": "brian2"
-    }
-  ]
-}
+[
+  {
+    "patient_id": 1,
+    "first_name": "Patient",
+    "last_name": "Number1",
+    "date_of_birth": "1995-05-14T18:30:00.000Z",
+    "gender": "Male",
+    "country": "Zimbabwe",
+    "insurance_provider": "Health Assurance Ltd",
+    "emergency_contact": "+263 777 123 456",
+    "email": "patient1@example.com",
+    "password": "patient",
+    "created_at": "2025-11-30T16:56:10.000Z"
+  },
+  {
+    "patient_id": 2,
+    "first_name": "Patient",
+    "last_name": "Number2",
+    "date_of_birth": "1988-11-19T18:30:00.000Z",
+    "gender": "Female",
+    "country": "South Africa",
+    "insurance_provider": "Global Health Co",
+    "emergency_contact": "+27 82 987 6543",
+    "email": "patient2@example.com",
+    "password": "patient",
+    "created_at": "2025-11-30T16:57:00.000Z"
+  },
+  {
+    "patient_id": 3,
+    "first_name": "Patient",
+    "last_name": "Number3",
+    "date_of_birth": "2001-02-28T18:30:00.000Z",
+    "gender": "Male",
+    "country": "Botswana",
+    "insurance_provider": "AfricaCare",
+    "emergency_contact": "+267 71 555 123",
+    "email": "patient3@example.com",
+    "password": "patient",
+    "created_at": "2025-11-30T16:57:58.000Z"
+  },
+  {
+    "patient_id": 4,
+    "first_name": "Desire",
+    "last_name": "Musarafu",
+    "date_of_birth": "1975-08-24T18:30:00.000Z",
+    "gender": "Female",
+    "country": "United Kingdom",
+    "insurance_provider": "Self-Employed",
+    "emergency_contact": "+44 20 7946 0999",
+    "email": "desire2@example.com",
+    "password": "desire2",
+    "created_at": "2025-11-30T16:58:21.000Z"
+  }
+]

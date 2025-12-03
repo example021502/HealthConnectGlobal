@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
 import { Lock, Mail, LogIn, MoveLeft } from "lucide-react";
 import { AuthContext } from "../Context/Context";
-import signinDetails from "./SigninDetails.json";
+// import signinDetails from "./SigninDetails.json";
 import "./Signin.css";
 
 function Signin() {
-  const { setView, userName, setUserName } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { setView, users, setUserName } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
   const [sucessful, setSuccessfull] = useState("");
   const radialGradient =
     "[background:radial-gradient(125%_125%_at_50%_10%,rgba(16,77,94,0.8)_40%,rgba(84,144,86,0.3)_100%)]";
@@ -18,27 +20,21 @@ function Signin() {
     setError("");
     setSuccessfull("");
 
-    if (!email || !password) {
+    if (!values.email || !values.password) {
       setError("Please enter both email and password.");
       return;
     }
-    const from_patient = signinDetails.patients.find(
-      (user) => user.email === email && user.password === password
+
+    const from_patient = users.find(
+      (user) => user.email === values.email && user.password === values.password
     );
 
     if (from_patient) {
-      setView("patient");
-      setUserName(from_patient.username);
-      return;
-    }
-    const from_specialists = signinDetails.specialists.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (from_specialists) {
       setView("specialist");
-      setUserName(from_specialists.username);
+      setUserName(from_patient.first_name + " " + from_patient.last_name);
       return;
     }
+
     setError("Invalid credentials. Please check your email and password.");
   };
 
@@ -105,8 +101,8 @@ function Signin() {
                     type="email"
                     autoComplete="email"
                     required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={values.email}
+                    onChange={(e) => setValues.email(e.target.value)}
                     className={`appearance-none block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#549056] focus:border-[#549056] text-base`}
                     placeholder="you@health.com"
                   />
@@ -128,8 +124,8 @@ function Signin() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={values.password}
+                    onChange={(e) => setValues.password(e.target.value)}
                     className={`appearance-none block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#549056] focus:border-[#549056] text-base`}
                     placeholder="••••••••"
                   />
@@ -206,8 +202,8 @@ function Signin() {
                 type="email"
                 autoComplete="email"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={values.email}
+                onChange={(e) => setValues.email(e.target.value)}
                 className={`appearance-none text-gray-200 tracking-wide block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-200 text-base`}
                 placeholder="you@health.com"
               />
@@ -229,8 +225,8 @@ function Signin() {
                 type="password"
                 autoComplete="current-password"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={values.password}
+                onChange={(e) => setValues.password(e.target.value)}
                 className={`appearance-none tracking-wide text-gray-200 placeholder-gray-200 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-200 text-base`}
                 placeholder="••••••••"
               />
