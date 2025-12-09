@@ -3,22 +3,46 @@ import { AuthContext } from "./Context";
 
 function UserProvider({ children }) {
   const My_View_key = "myViewState";
-  const My_userName_key = "myUserNameState";
-  const my_users_key = "myUsersState";
 
-  const [users, setUsers] = useState(() => {
-    const usersState = sessionStorage.getItem(my_users_key);
-    return usersState ? JSON.parse(usersState).users : "no data";
+  const current_user_key = "currentUserState";
+
+  const patients_key = "patientsState";
+
+  const specialists_key = "specialistsState";
+
+  // specialists
+  const [specialists, setSpecialists] = useState(() => {
+    const usersState = sessionStorage.getItem(specialists_key);
+    return usersState ? JSON.parse(usersState).specialists : "no data";
   });
 
   useEffect(() => {
     try {
-      sessionStorage.setItem(my_users_key, JSON.stringify({ users }));
+      sessionStorage.setItem(specialists_key, JSON.stringify({ specialists }));
     } catch {
-      return console.log("Error, failed to load the users!!");
+      return console.log(
+        "Error, failed to save the specialists data to local storage!!"
+      );
     }
-  }, [users]);
+  }, [specialists]);
 
+  // patients
+  const [patients, setPatients] = useState(() => {
+    const usersState = sessionStorage.getItem(patients_key);
+    return usersState ? JSON.parse(usersState).patients : "no data";
+  });
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(patients_key, JSON.stringify({ patients }));
+    } catch {
+      return console.log(
+        "Error, failed to save the patients users data to local storage!!"
+      );
+    }
+  }, [patients]);
+
+  // view
   const [view, setView] = useState(() => {
     try {
       const ViewState = sessionStorage.getItem(My_View_key);
@@ -32,13 +56,14 @@ function UserProvider({ children }) {
     try {
       sessionStorage.setItem(My_View_key, JSON.stringify({ view }));
     } catch (error) {
-      console.error("Failed to save state to sessionStorage", error);
+      console.error("Error, failed to save state to sessionStorage", error);
     }
   }, [view]);
 
+  // userName
   const [userName, setUserName] = useState(() => {
     try {
-      const UserState = sessionStorage.getItem(My_userName_key);
+      const UserState = sessionStorage.getItem(current_user_key);
       return UserState ? JSON.parse(UserState).userName : "undefined";
     } catch {
       return "undefined";
@@ -47,7 +72,7 @@ function UserProvider({ children }) {
 
   useEffect(() => {
     try {
-      sessionStorage.setItem(My_userName_key, JSON.stringify({ userName }));
+      sessionStorage.setItem(current_user_key, JSON.stringify({ userName }));
     } catch (error) {
       console.error("Failed to save state to sessionStorage", error);
     }
@@ -55,7 +80,16 @@ function UserProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ view, setView, userName, setUserName, users, setUsers }}
+      value={{
+        view,
+        setView,
+        userName,
+        setUserName,
+        patients,
+        setPatients,
+        specialists,
+        setSpecialists,
+      }}
     >
       {children}
     </AuthContext.Provider>

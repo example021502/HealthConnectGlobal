@@ -5,33 +5,52 @@ import { AuthContext } from "../Context/Context";
 import "./Signin.css";
 
 function Signin() {
-  const { setView, users, setUserName } = useContext(AuthContext);
+  const [isTwoAccounts, setIsTwoAccounts] = useState(false);
+  const { setView, patients, specialists, setUserName } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-  const [sucessful, setSuccessfull] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const radialGradient =
     "[background:radial-gradient(125%_125%_at_50%_10%,rgba(16,77,94,0.8)_40%,rgba(84,144,86,0.3)_100%)]";
 
   const handleLogin = (e) => {
     e.preventDefault();
     setError("");
-    setSuccessfull("");
 
-    if (!values.email || !values.password) {
+    if (!email || !password) {
+      setIsTwoAccounts(false);
       setError("Please enter both email and password.");
       return;
     }
 
-    const from_patient = users.find(
-      (user) => user.email === values.email && user.password === values.password
+    const from_patients = patients.find(
+      (user) => user.email === email && user.password === password
     );
 
-    if (from_patient) {
+    const from_specialists = specialists.find(
+      (user) => user.email === email && user.user_password === password
+    );
+
+    if (from_patients && from_specialists) {
+      setError("Error: Maxmum accounts per User = 1");
+      setIsTwoAccounts(true);
+      return;
+    }
+    if (from_patients && !from_specialists) {
+      setView("patient");
+      setIsTwoAccounts(false);
+
+      setUserName(from_patients.first_name + " " + from_patients.last_name);
+      return;
+    }
+    if (from_specialists && !from_patients) {
       setView("specialist");
-      setUserName(from_patient.first_name + " " + from_patient.last_name);
+      setIsTwoAccounts(false);
+
+      setUserName(
+        from_specialists.first_name + " " + from_specialists.last_name
+      );
       return;
     }
 
@@ -82,6 +101,15 @@ function Signin() {
                 role="alert"
               >
                 {error}
+                {". "}
+                {isTwoAccounts && (
+                  <a
+                    href="/"
+                    className="hover:border-b-1 transition-all ease-in duration-100"
+                  >
+                    Send Email to <b>Resolve</b>
+                  </a>
+                )}
               </div>
             )}
             <form onSubmit={handleLogin} className="space-y-6">
@@ -101,10 +129,10 @@ function Signin() {
                     type="email"
                     autoComplete="email"
                     required
-                    value={values.email}
-                    onChange={(e) => setValues.email(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className={`appearance-none block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#549056] focus:border-[#549056] text-base`}
-                    placeholder="you@health.com"
+                    placeholder="eg. you@health.com"
                   />
                 </div>
               </div>
@@ -124,8 +152,8 @@ function Signin() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    value={values.password}
-                    onChange={(e) => setValues.password(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={`appearance-none block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#549056] focus:border-[#549056] text-base`}
                     placeholder="••••••••"
                   />
@@ -202,8 +230,8 @@ function Signin() {
                 type="email"
                 autoComplete="email"
                 required
-                value={values.email}
-                onChange={(e) => setValues.email(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className={`appearance-none text-gray-200 tracking-wide block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-200 text-base`}
                 placeholder="you@health.com"
               />
@@ -225,8 +253,8 @@ function Signin() {
                 type="password"
                 autoComplete="current-password"
                 required
-                value={values.password}
-                onChange={(e) => setValues.password(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className={`appearance-none tracking-wide text-gray-200 placeholder-gray-200 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-200 text-base`}
                 placeholder="••••••••"
               />

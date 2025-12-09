@@ -1,14 +1,46 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/Context";
 import { Users } from "lucide-react";
+import Charts from "../Charts/Charts";
 
 function DoctorDashboard() {
+  const { setView, view, specialists, userName } = useContext(AuthContext);
   const [exitOverlay, setExitOverlay] = useState(false);
   const [profileExpand, setProfileExpand] = useState(false);
   const [todayDate, setTodayDate] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState("Overview");
 
   const [searchKey, setSearchKey] = useState("");
+
+  const ProfileExpand = () => {
+    const user_D_O_B = user.date_of_birth.split("T")[0];
+    const age = 2025 - user_D_O_B.split("-")[0];
+    if (user) {
+      return (
+        <div className="w-50 absolute top-full right-full flex flex-col items-start justify-center bg-gray-100 p-4 rounded-tl-xl rounded-br-xl rounded-bl-xl gap-2 text-gray-500 text-sm tracking-wide">
+          <h2 className="text-md font-bold uppercase">{userName}</h2>
+          <p>Age: {age}</p>
+          <p>Country: {user.country}</p>
+          <p>email: {user.email}</p>
+          <p>Specialty: {user.specialty}</p>
+          <p className="text-gray-800 font-semibold cursor-pointer hover:border-b-1 pb-0.5 transition-all duration-100 ease-in">
+            Edit
+          </p>
+        </div>
+      );
+    } else {
+      <p>No data to display</p>;
+    }
+  };
+
+  let user = "";
+  if (view === "specialist") {
+    user = specialists.find(
+      (user) =>
+        user.first_name === userName.split(" ")[0] &&
+        user.last_name === userName.split(" ")[1]
+    );
+  }
 
   const current_time = todayDate.toLocaleDateString("en-US", {
     year: "numeric",
@@ -31,13 +63,9 @@ function DoctorDashboard() {
     setExitOverlay(false);
   };
 
-  const { setView, users, userName } = useContext(AuthContext);
-
   const handleExpandProfile = () => {
     setProfileExpand(!profileExpand);
   };
-
-  const comparison = userName.replace(" ", "");
 
   const navButtons = {
     dashboard: [
@@ -121,7 +149,7 @@ function DoctorDashboard() {
         ></div>
         <div className="w-full h-full z-10 flex flex-row">
           <section
-            className={`text-gray-700 bg-[rgba(46,132,100,0.4)] flex flex-col h-full w-2/11`}
+            className={`text-gray-700 bg-gray-100 flex flex-col h-full w-2/11`}
           >
             <div className="flex items-center justify-start mx-6 gap-1 my-2">
               <img
@@ -159,7 +187,7 @@ function DoctorDashboard() {
             </div>
           </section>
           <div className="grid grid-cols-1 flex-1 items-start justify-start">
-            <section className="bg-[rgba(46,132,100,0.2)] text-[#13521d] py-2 px-2 flex items-center justify-end">
+            <section className="bg-gray-300 text-[#13521d] py-2 px-2 flex items-center justify-end">
               <div className="flex gap-2 w-full items-center justify-end transition-all ease-in-out duration-200">
                 <div className="flex-1 relative flex items-center justify-start">
                   <i className="ri-search-line absolute my-auto left-2 z-1000" />
@@ -191,41 +219,14 @@ function DoctorDashboard() {
                         : "ri-arrow-drop-down-line"
                     }`}
                   />
-                  {profileExpand &&
-                    users.map((itemObject, index) => {
-                      const currentDate =
-                        itemObject.date_of_birth.split("T")[0];
-                      const age = 2025 - currentDate.split("-")[0];
-                      if (
-                        itemObject.first_name + itemObject.last_name ===
-                        comparison
-                      ) {
-                        return (
-                          <div
-                            key={index}
-                            className="w-50 absolute top-full right-full flex flex-col items-start justify-center bg-gray-100 p-4 rounded-tl-xl rounded-br-xl rounded-bl-xl gap-2 text-gray-500 text-sm tracking-wide"
-                          >
-                            <h2 className="text-md font-bold uppercase">
-                              {userName}
-                            </h2>
-                            <p>Age: {age}</p>
-                            <p>Country: {itemObject.country}</p>
-                            <p>email: {itemObject.email}</p>
-                            <p>Specialty: {itemObject.specialty}</p>
-                            <p className="text-gray-800 font-semibold cursor-pointer hover:border-b-1 pb-0.5 transition-all duration-100 ease-in">
-                              Settings
-                            </p>
-                          </div>
-                        );
-                      } else {
-                        <p>No data to display</p>;
-                      }
-                    })}
+                  {profileExpand && <ProfileExpand />}
                 </div>
               </div>
             </section>
             <section className="p-2 border-1 flex flex-wrap items-start justify-start">
-              <div className="w-full h-110">middle</div>
+              <div className="w-full h-110">
+                <Charts />
+              </div>
             </section>
             <section className="p-2 border-1 h-30">bottom section</section>
           </div>
