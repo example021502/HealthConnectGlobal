@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/Context";
-import { Users } from "lucide-react";
+import { Table, Users } from "lucide-react";
 import Charts from "../Charts/Charts";
+import { tr } from "@faker-js/faker";
 
 function DoctorDashboard() {
-  const { setView, view, specialists, userName } = useContext(AuthContext);
+  const { setView, view, specialists, userName, patients } =
+    useContext(AuthContext);
   const [exitOverlay, setExitOverlay] = useState(false);
   const [profileExpand, setProfileExpand] = useState(false);
   const [todayDate, setTodayDate] = useState(new Date());
@@ -41,6 +43,51 @@ function DoctorDashboard() {
         user.last_name === userName.split(" ")[1]
     );
   }
+
+  const PatientsTable = (serachKey) => {
+    if (patients) {
+      return (
+        <table>
+          <thead>
+            <tr className="text-sm text-gray-600 border-b-1 border-gray-400">
+              <th className="text-left p-2 w-12"></th>
+              <th className="text-left p-2 border-1">First name</th>
+              <th className="text-left p-2">Last name</th>
+              <th className="text-left p-2">Country</th>
+              <th className="text-left p-2">Work Address</th>
+              <th className="text-left p-2">Emergence Contact</th>
+              <th className="text-left p-2">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patients.map((patient, index) => (
+              <tr className="border-2">
+                <td>
+                  <img
+                    src={
+                      patient.image ||
+                      "https://i.ibb.co/7vDLJFb/Default-Profile-Pic.png"
+                    }
+                    alt=""
+                    className="h-10 w-10 rounded-full"
+                  />
+                </td>
+                <td className="px-2 text-sm">{patient.first_name}</td>
+                <td className="px-2 text-sm">{patient.last_name}</td>
+                <td className="px-2 text-sm">{patient.country}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    } else {
+      return (
+        <p className="text-gray-500 fornt-semibold text-xl">
+          No data to display
+        </p>
+      );
+    }
+  };
 
   const current_time = todayDate.toLocaleDateString("en-US", {
     year: "numeric",
@@ -143,11 +190,11 @@ function DoctorDashboard() {
         </div>
       )}
       {/* desktop view */}
-      <div className="hidden md:flex flex-row items-center justify-center gap-2 relative h-full w-full">
+      <div className="hidden md:flex flex-row items-center justify-center gap-2 relative h-full w-full overflow-hidden">
         <div
           className={`absolute inset-0 z-1 w-full [background:radial-gradient(125%_125%_at_50%_10%,rgba(84,144,86,0.2)_30%,rgba(46,132,100,0)_100%)]`}
         ></div>
-        <div className="w-full h-full z-10 flex flex-row">
+        <div className="w-full overflow-hidden h-full z-10 flex flex-row">
           <section
             className={`text-gray-700 bg-gray-100 flex flex-col h-full w-2/11`}
           >
@@ -186,8 +233,8 @@ function DoctorDashboard() {
               })}
             </div>
           </section>
-          <div className="grid grid-cols-1 flex-1 items-start justify-start">
-            <section className="bg-gray-300 text-[#13521d] py-2 px-2 flex items-center justify-end">
+          <div className="grid overflow-hidden border-1 grid-cols-1 flex-1 items-start justify-start overflow-y-auto">
+            <section className="bg-gray-50 text-[#13521d] py-2 px-2 flex items-center justify-end">
               <div className="flex gap-2 w-full items-center justify-end transition-all ease-in-out duration-200">
                 <div className="flex-1 relative flex items-center justify-start">
                   <i className="ri-search-line absolute my-auto left-2 z-1000" />
@@ -223,12 +270,35 @@ function DoctorDashboard() {
                 </div>
               </div>
             </section>
-            <section className="p-2 border-1 flex flex-wrap items-start justify-start">
-              <div className="w-full h-110">
+            <section className="p-5 xl:grid grid-cols-3 xl:gap-5 flex flex-wrap items-start justify-start">
+              <div className="w-full h-100 bg-gray-50 text-gray-700 rounded-2xl shadow-lg">
+                <Charts />
+              </div>
+              <div className="w-full h-100 bg-gray-50 text-gray-700 rounded-2xl shadow-lg">
+                <Charts />
+              </div>
+              <div className="w-full h-100 bg-gray-50 text-gray-700 rounded-2xl shadow-lg">
                 <Charts />
               </div>
             </section>
-            <section className="p-2 border-1 h-30">bottom section</section>
+            <section className="p-2 min-h-30">
+              <h2 className="text-lg tracking-wide flex justify-start items-center text-gray-700 w-full border-b-1 border-gray-400 pb-1">
+                Patients
+                <span className="flex items-center justify-center w-fit gap-4 px-2 rounded-sm text-sm ml-auto py-1">
+                  <span className="text-xs font-semibold text-green-700">
+                    Total: {patients.length}
+                  </span>
+                  <span className="relative flex items-center">
+                    <input
+                      type="text"
+                      className="min-w-80 pl-4 pr-10 py-1.5 rounded-full bg-gray-100"
+                    />
+                    <i className="ri-search-line absolute my-auto right-2 text-xl z-1000" />
+                  </span>
+                </span>
+              </h2>
+              <PatientsTable searchKey={searchKey} />
+            </section>
           </div>
         </div>
       </div>
