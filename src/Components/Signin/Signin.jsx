@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { Lock, Mail, LogIn, MoveLeft } from "lucide-react";
 import { AuthContext } from "../Context/Context";
-// import signinDetails from "./SigninDetails.json";
 import "./Signin.css";
 
 function Signin() {
@@ -124,7 +123,7 @@ function Signin() {
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
-                    id="email"
+                    id="logEmail"
                     name="email"
                     type="email"
                     autoComplete="email"
@@ -147,7 +146,7 @@ function Signin() {
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
-                    id="password"
+                    id="logPassword"
                     name="password"
                     type="password"
                     autoComplete="current-password"
@@ -161,7 +160,7 @@ function Signin() {
               </div>
               {/* Submit Button */}
               <button
-                id="login"
+                id="loginBtn"
                 type="submit"
                 className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-[#549056] hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#549056] transition duration-200 ease-in-out transform hover:scale-[1.01]`}
               >

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { AuthContext } from "./Context";
+import axios from "axios";
 
 function UserProvider({ children }) {
   const My_View_key = "myViewState";
@@ -9,6 +10,44 @@ function UserProvider({ children }) {
   const patients_key = "patientsState";
 
   const specialists_key = "specialistsState";
+  const status_key = "statusState";
+
+  const fetchData = useCallback(async () => {
+    try {
+      // Fetch patients data
+      const patientsData = await axios.get("http://localhost:8081/patients");
+      setPatients(patientsData.data);
+
+      // Fetch specialists data
+      const specialistsData = await axios.get(
+        "http://localhost:8081/specialists"
+      );
+
+      setSpecialists(specialistsData.data);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  // status
+  const [status, setStatus] = useState(() => {
+    const usersState = sessionStorage.getItem(status_key);
+    return usersState ? JSON.parse(usersState).status : "offline";
+  });
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(status_key, JSON.stringify({ status }));
+    } catch {
+      return console.log(
+        "Error, failed to save the the status data to local storage!!"
+      );
+    }
+  }, [status]);
 
   // specialists
   const [specialists, setSpecialists] = useState(() => {
@@ -81,6 +120,8 @@ function UserProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
+        status,
+        setStatus,
         view,
         setView,
         userName,

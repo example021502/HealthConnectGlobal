@@ -28,7 +28,6 @@ import {
 } from "lucide-react";
 
 function Signup() {
-  const [checkingAuthentication, setCheckAuthentication] = useState(false);
   const { setView } = useContext(AuthContext);
   const [errorColor, setErrorColor] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -54,7 +53,6 @@ function Signup() {
   const accentHoverBg = "hover:bg-green-700";
   const accentHoverText = "hover:text-green-700";
   const primaryBg = "bg-[#104d5e]";
-  const primaryLightText = "text-[#104d5e]/80";
   const focusRing = "focus:ring-[#549056]";
   const focusBorder = "focus:border-[#549056]";
 
@@ -122,7 +120,7 @@ function Signup() {
     try {
       fullE164Number = `+${phoneNumber}`;
       parsed = parsePhoneNumberFromString(fullE164Number);
-    } catch (error) {
+    } catch {
       setSignupError("Invalid phone number format or missing country code.");
       setErrorColor(true);
       return;

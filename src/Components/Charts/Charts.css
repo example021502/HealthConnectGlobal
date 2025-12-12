@@ -1,0 +1,56 @@
+.afterdisplayfats:hover::after {
+  content: "fats";
+  font-size: 0.8em;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  bottom: 110%;
+  right: 40%;
+  position: absolute;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+.afterdisplaycalories:hover::after {
+  content: "calories";
+  font-size: 0.8em;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  bottom: 120%;
+  right: 20%;
+  position: absolute;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+.afterdisplayproteins:hover::after {
+  content: "proteins";
+  font-size: 0.8em;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  top: 100%;
+  right: 0;
+  position: absolute;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+.afterdisplaycarbohydrates:hover::after {
+  content: "carbs";
+  font-size: 0.8em;
+  transition: all ease-in-out duration-300;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  top: 100%;
+  color: "#1CA71C";
+  right: 20%;
+  position: absolute;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
