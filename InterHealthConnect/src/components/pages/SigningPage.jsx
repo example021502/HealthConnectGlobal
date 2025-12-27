@@ -4,7 +4,7 @@ import Background from "../layouts/Background";
 import SigninForm from "../layouts/SigninForm";
 import SigninContent from "../layouts/SigninContent";
 
-function Signin() {
+function SigningPage() {
   return (
     <div className="absolute inset-0 bg-white flex items-center justify-center">
       <Background />
@@ -19,4 +19,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SigningPage;

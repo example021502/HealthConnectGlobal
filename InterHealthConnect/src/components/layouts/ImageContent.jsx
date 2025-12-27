@@ -35,7 +35,7 @@ function ImageContent() {
         className="w-full min-h-110 object-cover rounded-standard md:w-150"
       />
       <div className="w-full p-4 mb-4">
-        <h1 className="font-semibold text-primary mb-2">Objectives</h1>
+        <h1 className="font-bold text-primary mb-2">Objectives</h1>
         <ul className="flex items-start justify-center flex-col gap-4">
           {objectives.map((objective, index) => {
             return (
@@ -43,8 +43,10 @@ function ImageContent() {
                 key={index}
                 className="flex flex-col gap-1 items-start justify-center"
               >
-                <span className="font-lighter text-sm">{objective.head}</span>
-                <span className="font-light text-xs">
+                <span className="font-lighter text-sm tracking-wide">
+                  {objective.head}
+                </span>
+                <span className="font-light text-xs tracking-wide">
                   {objective.description}
                 </span>
               </li>
