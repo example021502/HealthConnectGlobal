@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@theme {
+  --background-image-gradient: linear-gradient(to right, #81b7e5, #375297);
+  --background-image-shape: linear-gradient(to right, #6175a4, ##21376c);
+  --background-image-button: linear-gradient(
+    to right,
+    rgba(33, 55, 108, 0.6),
+    rgba(33, 55, 108, 0.8)
+  );
+  --color-background-white: #f0f0f0;
+  --color-bg-light-white: rgba(255, 255, 255, 0.6);
+  --blur-standard: 4px;
+
+  --color-light-gray: rgba(229, 231, 235, 0.8);
+
+  --color-gradient-start: #81b7e5;
+  --color-gradient-end: #375297;
+  --color-hover-light-blue: rgba(128, 183, 229, 0.2);
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-blue-dark: #142550;
+  --color-blue-light: rgba(20, 37, 80, 0.7);
+  --font-poppins: "Poppins";
+  --font-primary: 18px;
+
+  --radius-round: 100px;
+  --radius-standard: 20px;
+
+  --shadow-large: 0 0 60px 10px rgba(0, 0, 0, 0.2);
+  --shadow-lighter: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+  --shadow-light: 0 0 6px 1px rgba(0, 0, 0, 0.08);
+}
