@@ -56,5 +56,15 @@
   --color-text-light: #A8B2C1;
   --color-text-white: #fff;
   --color-lightBorder:#BCC7D9;
-  
+
+/* final styles */
+  --color-b_white: #FFFFFF;
+  --color-b_green: #006837;
+  --color-green_light: #318854;
+  --color-b_light_white: rgba(255,255,255,0.2);
+
+  --shadow-inner1: inset 0 -20px 25px -5px rgb(0 0 0 / 0.1),
+     inset 0 -8px 10px -6px rgb(0 0 0 / 0.1);
+  --background-image-g_green1: linear-gradient(to right, rgba(49,136,84,1), rgba(49,136,84,1), rgba(255,255,255,0), rgba(255, 255, 255, 0));
+  --background-image-g_green2: linear-gradient(to bottom right, rgba(0,104,55,1), rgba(0, 104, 55, 1), rgba(255,255,255,0), rgba(255, 255, 255, 0));
 }

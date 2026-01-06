@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Icon from "../../common/Icon";
+import Image from "../../common/Image";
 import { expandingContext } from "../../contexts/ExpandingContext";
 
 function ImageContent() {
@@ -32,13 +33,12 @@ function ImageContent() {
 
   return (
     <div className="w-full grid grid-cols-1 md:flex flex-row items-center justify-center gap-4">
-      <img
-        src="https://i.ibb.co/nM5tkWVp/a-call-away.jpg"
+      <Image
+        imgLink="https://i.ibb.co/nM5tkWVp/a-call-away.jpg"
         alt=""
-        className="w-full min-h-110 object-cover rounded-standard md:w-150"
+        class_name="w-full min-h-80 object-cover rounded-standard md:w-150"
       />
       <div className="w-full p-4 mb-4">
-        <h1 className="font-bold text-primary mb-2 text-lg">Objectives</h1>
         <ul className="flex items-start justify-center flex-col gap-4">
           {objectives.map((objective, index) => {
             const [expand, setExpand] = useState(false);
