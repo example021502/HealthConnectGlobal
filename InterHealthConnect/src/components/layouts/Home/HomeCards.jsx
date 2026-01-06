@@ -29,12 +29,12 @@ function HomeCards() {
   ];
 
   return (
-    <div className="w-full h-full gap-8 flex flex-row justify-between items-center">
+    <div className="w-full h-full flex flex-row justify-center items-center">
       {cardsinfo.map((card, index) => {
         return (
           <div
             key={index}
-            className="w-56 h-60 p-2 shadow-light rounded-lg bg-white"
+            className="w-56 h-60 p-2 m-2 shadow-light rounded-lg bg-white"
           >
             <HomeCard id={index} card={card} />
           </div>

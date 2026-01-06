@@ -1,14 +1,29 @@
-import React from "react";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
 
-function PlainButton({ text }) {
+function PlainButton({ text, class_name }) {
+  const [hover, setHover] = useState(false);
   const handleOnClick = () => {
     alert(`The button ${text} cliked`);
   };
   return (
     <button
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       onClick={() => handleOnClick(text)}
-      className="rounded-lg w-full shadow-light hover:bg-hover-light-blue hover:border border-bg-light-white transition-all ease-in-out duration-100 py-1 px-4 text-dark-blue font-lighter hover:font-semibold text-md cursor-pointer"
+      className={`relative overflow-hidden z-1 ${class_name}`}
     >
+      <motion.span
+        animate={{
+          scale: hover ? 150 : 1,
+          transition: {
+            ease: "easeInOut",
+            type: "tween",
+            duration: 0.2,
+          },
+        }}
+        className={`m-auto -z-1 top-0 bottom-0 absolute left-0 right-0 rounded-full w-0.5 h-0.5 bg-b_green`}
+      />
       {text}
     </button>
   );
