@@ -1,12 +1,17 @@
 import React from "react";
 
-function Input({ type, onChange, placeholder }) {
+function Input({
+  type,
+  onChange,
+  placeholder,
+  class_name = "w-full py-1 px-4 focus:outline-none focus:ring-2 focus:ring-inputBorder rounded-standard border border-lightBorder bg-background-white placeholder:text-light text-primary tracking-wide",
+}) {
   return (
     <input
       type={type}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full py-1 px-4 focus:outline-none focus:ring-2 focus:ring-background-white rounded-standard bg-background-white placeholder:text-light text-primary tracking-wide"
+      className={class_name}
     />
   );
 }

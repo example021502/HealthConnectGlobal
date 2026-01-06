@@ -1,18 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-function Button({ type, text, bg = "" }) {
-  const handleButtonClick = () => {
-    if (type != "submit") {
-      useNavigate("/");
-    }
-  };
+
+function Button({
+  type,
+  text,
+  handleButtonClick,
+  class_name,
+  main_class_name = `${class_name} cursor-pointer transition-all ease-in-out duration-120 w-full py-1 rounded-standard tranition-all duration-100 ease-in-out font-lighter font-sans`,
+}) {
   return (
     <button
-      onClick={handleButtonClick}
+      onClick={() => handleButtonClick(text)}
       type={type}
-      className={`${
-        bg ? `${bg} text-white` : "border-2 border-light-gray"
-      } w-full py-1 rounded-standard tranition-all duration-100 cursor-pointer ease-in-out hover:bg-background-white font-lg font-semibold font-poppins text-blue-dark`}
+      className={`${main_class_name}`}
     >
       {text}
     </button>

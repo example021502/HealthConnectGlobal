@@ -6,7 +6,7 @@ function LogoMainContent() {
     <img
       src={hosted}
       alt=""
-      className={`w-full h-80 md:w-120 md:h-120 aspect-square rounded-full object-cover`}
+      className={`w-full h-60 md:w-110 md:h-110 aspect-square object-contain`}
     />
   );
 }

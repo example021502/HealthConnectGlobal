@@ -1,14 +1,16 @@
 @import "tailwindcss";
 @theme {
   --background-image-gradient: linear-gradient(to right, #81b7e5, #375297);
-  --background-image-shape: linear-gradient(to right, #6175a4, ##21376c);
+  --background-image-shape: linear-gradient(to right, #6175a4, #21376c);
   --background-image-button: linear-gradient(
     to right,
     rgba(33, 55, 108, 0.6),
     rgba(33, 55, 108, 0.8)
   );
-  --color-background-white: #f0f0f0;
-  --color-bg-light-white: rgba(255, 255, 255, 0.6);
+  --background-image-white-gradient: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,1));
+  --background-image-bg-gradient:  linear-gradient(to right top, #ffffff, rgba(188,201,235,0.4), #ffffff);
+  --color-background-white: #fff;
+  --color-bg-light-white: rgba(255, 255, 255, 0.5);
   --blur-standard: 4px;
 
   --color-light-gray: rgba(229, 231, 235, 0.8);
@@ -19,14 +21,40 @@
   --color-primary: #000000;
   --color-secondary: #ffffff;
   --color-blue-dark: #142550;
-  --color-blue-light: rgba(20, 37, 80, 0.7);
+  --color-blue-light: rgba(20, 37, 80, 0.5);
   --font-poppins: "Poppins";
   --font-primary: 18px;
+  --shadow-inner-light-blue: inset 0 0 0 2px rgba(20, 37, 80, 0.2);
+  
+  /* red color */
+  --color-red-dark: #b91c1c;
+  --color-red-light: rgba(185, 28, 28, 0.2);
+  --color-red-hover: rgba(185, 28, 28, 0.3);
+  
+  /* cards color */
+  --color-blue: #365195;
+  --color-green: #53a62a;
+  --color-appleGreen: #16aebb;
+  --color-purple: #663f9d;
+  --color-light-apple-green: #80B7E5;
 
   --radius-round: 100px;
-  --radius-standard: 20px;
+  --radius-standard: 8px;
+  
+  --color-green-light: rgba(83, 166, 42, 0.2);
+  --color-green-darker: rgba(83, 166, 42, 0.8);
 
   --shadow-large: 0 0 60px 10px rgba(0, 0, 0, 0.2);
   --shadow-lighter: 0 0 8px 2px rgba(0, 0, 0, 0.2);
   --shadow-light: 0 0 6px 1px rgba(0, 0, 0, 0.08);
+
+  
+  --color-overlay: rgba(0, 0, 0, 0.2);
+  /* white theme */
+  --color-inputBorder: #6b7280;
+  --color-text: #4b5563;
+  --color-text-light: #A8B2C1;
+  --color-text-white: #fff;
+  --color-lightBorder:#BCC7D9;
+  
 }
