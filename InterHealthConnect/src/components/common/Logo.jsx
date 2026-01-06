@@ -1,6 +1,6 @@
 import React from "react";
 
-function Logo({ dimensions = "w-10 h-10", zoom = false }) {
+function Logo({ dimensions = "w-10 h-10" }) {
   return (
     <div
       className={`flex items-center hover:scale-[1.02] justify-center ml-auto rounded-full ${dimensions}`}

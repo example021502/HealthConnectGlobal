@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
-import TopNavBar from "../layouts/TopNavBar";
-import MainHomeContent from "../layouts/MainHomeContent";
+import TopNavBar from "../layouts/Home/TopNavBar";
+import MainHomeContent from "../layouts/Home/MainHomeContent";
 import Shape from "../common/Shape";
-import HomeCards from "../layouts/HomeCards";
+import HomeCards from "../layouts/Home/HomeCards";
 import { Outlet, useLocation } from "react-router-dom";
-import ImageContent from "../layouts/ImageContent";
+import ImageContent from "../layouts/Home/ImageContent";
+
 function Home() {
   const BottomBoundaryRef = useRef(null);
   const [showFooter, setShowFooter] = useState(false);
@@ -30,7 +31,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient gap-10 p-10 overflow-y-auto w-full h-dvh">
+    <div className={`bg-gradient gap-10 p-10 overflow-y-auto w-full h-dvh`}>
       {isLandingpage ? (
         <>
           <div className="w-full h-fit rounded-lg m-auto backdrop:blur-standard after:absolute relative after:inset-0 after:rounded-lg after:bg-bg-light-white after:top-0 after:left-0 after:z-1 py-10 px-20 flex flex-col items-start justify-center gap-20">

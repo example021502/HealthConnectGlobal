@@ -1,6 +1,6 @@
 import React from "react";
 
-function Shape() {
+function Shape({}) {
   return (
     <img
       src="https://i.ibb.co/jv8S8Zb5/Polygon-2.png"

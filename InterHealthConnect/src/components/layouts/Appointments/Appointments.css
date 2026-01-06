@@ -1,0 +1,193 @@
+
+
+/* ---  Main Container Styles --- */
+.react-calendar {
+    border: none !important;
+    width: 100%;
+}
+
+/* --- Navigation Header --- */
+.react-calendar__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4em;
+    border-radius: 0.4em 0.4em 0 0;
+    background-color: var(--color-blue);
+    width: 100%;
+    margin: auto;
+    gap: 0.1em;
+    color: var(--color-white) !important
+}
+
+.react-calendar__navigation button {
+    font-size: 1.1em !important;
+    font-weight: 600;
+    display: flex;
+    margin: 0;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+    justify-content: center;
+    transition-property: all;
+    transition-duration: 3ms;
+}
+
+/* Navigation button hover state */
+.react-calendar__navigation button:hover:enabled {
+    background-color: var(--color-blue) !important;
+    color: white !important;
+    transform: scale(1.02);
+}
+
+/* Targets the label displaying the current month/year */
+.react-calendar__navigation__label {
+    text-transform: none;
+    background-color: var(--color-blue) !important;
+}
+
+.react-calendar__navigation__label:hover {
+    background-color: none !important;
+    transform: scale(1.06);
+}
+
+/* --- C. Day/Tile Styles --- */
+.react-calendar__tile {
+    height: 100%;
+    font-size: 100%;
+    transition-property: all;
+    transition-duration: 100ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Today's date */
+.react-calendar__tile--now {
+    color: var(--color-green) !important;
+    font-size: small !important;
+}
+.react-calendar__tile--now:hover {
+    color: var(--color-white) !important;
+}
+
+/* Selected date (Primary Selection) */
+.react-calendar__tile--active {
+    color: var(--color-green) !important;
+    font-weight: 800  !important;
+}
+.react-calendar__tile--active:hover {
+    color: var(--color-green) !important;
+    font-weight: 800  !important;
+    transition: all 3s ease-in-out;
+    animation: scaleout 3s ease-in-out;
+}
+
+/* Selected date (Range Selection Start/End) */
+.react-calendar__tile--rangeStart,
+.react-calendar__tile--rangeEnd {
+    background-color: #064e3b;
+    color: white;
+}
+
+/* Targets days that are part of a selected range but not the start/end */
+.react-calendar__tile--range {
+    background-color: var(--color-blue);
+    color: #1f2937;
+}
+
+/* Day hover effect (when the tile is enabled) */
+.react-calendar__tile:hover {
+    color: #076d3e;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600 !important;
+}
+
+.react-calendar__tile:enabled {
+    background-color: var(--color-white) !important;
+}
+
+/* Targets days belonging to the previous or next month */
+.react-calendar__tile--neighboringMonth {
+    color: #9ca3af;
+}
+
+.react-calendar__month-view {
+    background-color: var(--color-white);
+    border-radius: 0 0 0.5em 0.5em;
+    padding: 0.2em;
+}
+
+.react-calendar__month-view__weekdays {
+    color: var(--color-blue);
+    font-size: medium;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    text-align: center;
+    text-decoration: none;
+
+    font-size: 0.8em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* year view */
+.react-calendar__year-view {
+    background-color: var(--color-white) !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.react-calendar__year-view .react-calendar__tile {
+    font-weight: 500;
+    padding: 0.8em !important;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-custom-calendar .react-calendar__year-view button.react-calendar__tile:enabled:hover {
+    background-color: var(--color-blue) !important;
+    color: var(--color-white);
+}
+
+.my-custom-calendar .react-calendar__year-view .react-calendar__tile--selected {
+    background-color: var(--color-blue) !important;
+}
+
+/* decade view */
+.react-calendar__decade-view {
+    background-color: var(--color-white) !important;
+}
+
+.react-calendar__decade-view .react-calendar__tile:enabled:hover {
+    background-color: var(--color-blue) !important;
+    color: white;
+}
+
+.react-calendar__decade-view .react-calendar__tile {
+    font-weight: 500;
+    padding: 1em !important;
+    font-size: 0.8em;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Century section */
+.react-calendar__century-view {
+    background-color: var(--color-white);
+}
+
+.react-calendar__century-view .react-calendar__tile:enabled:hover {
+    background-color: var(--color-blue) !important;
+    color: var(--color-white);
+}
+
+.react-calendar__century-view .react-calendar__tile {
+    font-weight: 500 !important;
+    font-size: small;
+    padding: 1em !important;
+}
